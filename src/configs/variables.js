@@ -3,7 +3,7 @@ const isProd = () => process.env.NODE_ENV === 'production';
 const configs = {
   credentials: {
     google: {
-      clientId: '830601201956-ggqc86gjm10ha6g6tbdmorh48cd1jdod.apps.googleusercontent.com'
+      clientId: '335642806033-84755oo8q5bgurnq79rtog88njbatobd.apps.googleusercontent.com'
     }
   },
   services: {
