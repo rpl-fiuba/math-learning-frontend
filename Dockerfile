@@ -10,5 +10,5 @@ RUN npm run build
 FROM node:10.15.3
 COPY --from=build /app/build /usr/app
 RUN npm config set unsafe-perm true
-RUN npm install -g serve
+RUN npm install -g serve@13.0.0
 CMD ["serve", "-s", "/usr/app"]
