@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
   TextField, Radio, FormControl, FormLabel, RadioGroup, FormControlLabel
 } from '@material-ui/core';
-import { GoogleLogin } from 'react-google-login';
+import { GoogleLogin } from '@react-oauth/google';
 import Button from '@material-ui/core/Button';
 import classNames from 'classnames';
 import Modal from '../Modal';
@@ -59,14 +59,19 @@ class LoginModal extends Component {
 
     return (
       <Modal className={styles.modal} onClose={onClose}>
-        <GoogleLogin
-          className={styles.button}
-          clientId={googleClientId}
-          buttonText="Log in con Google"
-          onSuccess={(result) => this.onClickLogin(result)}
-          onFailure={(error) => console.log('google login error', error)}
-          cookiePolicy="single_host_origin"
-        />
+        <div style={{ justifyContent: 'center' }}>
+          <GoogleLogin
+            className={styles.button}
+            clientId={googleClientId}
+            text="signin_with"
+            useOneTap={false}
+            shape="circle"
+            width={100}
+            onSuccess={(result) => this.onClickLogin(result)}
+            onFailure={(error) => console.log('google login error', error)}
+            cookiePolicy="single_host_origin"
+          />
+        </div>
         <p className={styles.divider}>ó</p>
         <TextField
           id="signup-name"
@@ -99,26 +104,33 @@ class LoginModal extends Component {
           </RadioGroup>
         </FormControl>
 
-        <GoogleLogin
-          clientId={googleClientId}
-          onSuccess={this.onClickSignUp}
-          cookiePolicy="single_host_origin"
-          onFailure={(error) => console.log('google login error', error)}
-          render={(renderProps) => (
-            <Button
-              id="create-account-button"
-              onClick={renderProps.onClick}
-              size="large"
-              disabled={createAccountDisabled || renderProps.disabled}
-              className={classNames(
-                styles.createAccount,
-                createAccountDisabled ? styles.createAccountDisabled : styles.createAccountEnabled
-              )}
-            >
+        <div style={{ justifyContent: 'center' }}>
+          <GoogleLogin
+            clientId={googleClientId}
+            onSuccess={this.onClickSignUp}
+            cookiePolicy="single_host_origin"
+            onFailure={(error) => console.log('google login error', error)}
+            text="signup_with"
+            shape="circle"
+            theme="filled_black"
+            width={100}
+            useOneTap={false}
+            render={(renderProps) => (
+              <Button
+                id="create-account-button"
+                onClick={renderProps.onClick}
+                size="large"
+                disabled={createAccountDisabled || renderProps.disabled}
+                className={classNames(
+                  styles.createAccount,
+                  createAccountDisabled ? styles.createAccountDisabled : styles.createAccountEnabled
+                )}
+              >
               Crear cuenta
-            </Button>
-          )}
-        />
+              </Button>
+            )}
+          />
+        </div>
       </Modal>
     );
   }

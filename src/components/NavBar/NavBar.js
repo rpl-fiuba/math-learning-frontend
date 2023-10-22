@@ -7,7 +7,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import CollectionsBookmarkRoundedIcon from '@material-ui/icons/CollectionsBookmarkRounded';
 import { ThemeProvider } from '@material-ui/styles';
-import { GoogleLogin } from 'react-google-login';
+import { GoogleLogin } from '@react-oauth/google';
 import { Link } from 'react-router-dom';
 
 import theme from '../../themes/defaultTheme';
@@ -83,7 +83,7 @@ class NavBar extends Component {
     }
 
     return (
-      <div>
+      <div style={{ display: 'flex' }}>
         <SignUpButton
           size="small"
           onClick={onSignUp}
@@ -94,6 +94,11 @@ class NavBar extends Component {
           onSuccess={onGoogleLogin}
           onFailure={(error) => console.log('google login error', error)}
           cookiePolicy="single_host_origin"
+          text="signin_with"
+          shape="circle"
+          width={5}
+          theme="filled_black"
+          useOneTap={false}
           render={(renderProps) => (
             <Button onClick={renderProps.onClick} color="inherit">
               Login

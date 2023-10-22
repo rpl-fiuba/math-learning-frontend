@@ -1,5 +1,5 @@
 import React from 'react';
-import { GoogleLogin } from 'react-google-login';
+import { GoogleLogin } from '@react-oauth/google';
 import Button from '@material-ui/core/Button';
 import ConfirmActionModal from '../ConfirmActionModal/ConfirmActionModal';
 import styles from './SessionExpiredModal.module.sass';
