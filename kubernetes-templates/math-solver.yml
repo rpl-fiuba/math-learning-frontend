@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: math-learning-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: math-learning-frontend
+  template:
+    metadata:
+      labels:
+        app: math-learning-frontend
+    spec:
+      containers:
+        - image: lorenzogl/math-learning-frontend:GIT_SHA_SECRET
+          imagePullPolicy: Always
+          name: math-learning-frontend
+          env:
+            - name: ENV_VAR_1
+              value: ENV_VAR_1_VALUE
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: math-learning-frontend
+  annotations:
+    dev.okteto.com/auto-ingress: "true"
+spec:
+  type: ClusterIP
+  ports:
+    - name: "math-learning-frontend"
+      port: 5000
+      targetPort: 5000
+  selector:
+    app: math-learning-frontend
