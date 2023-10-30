@@ -9,13 +9,13 @@ const configs = {
   services: {
     // TODO: take urls from ENV vars
     users: {
-      url: isProd() ? 'https://users-service-fiuba-lorenzolgz.cloud.okteto.net/' : 'http://0.0.0.0:7000'
+      url: isProd() ? 'https://users-service-fiuba-lorenzolgz.cloud.okteto.net' : 'http://0.0.0.0:7000'
     },
     courses: {
-      url: isProd() ? 'https://courses-service-fiuba-lorenzolgz.cloud.okteto.net/' : 'http://0.0.0.0:5001'
+      url: isProd() ? 'https://courses-service-fiuba-lorenzolgz.cloud.okteto.net' : 'http://0.0.0.0:5001'
     },
     exercises: {
-      url: isProd() ? 'https://exercises-service-fiuba-lorenzolgz.cloud.okteto.net/' : 'http://0.0.0.0:9000'
+      url: isProd() ? 'https://exercises-service-fiuba-lorenzolgz.cloud.okteto.net' : 'http://0.0.0.0:9000'
     }
   },
   paths: {
