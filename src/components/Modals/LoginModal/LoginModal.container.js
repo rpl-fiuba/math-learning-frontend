@@ -28,7 +28,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     },
     onClose: () => dispatch(modalActions.hideModal()),
     onGoogleSignUp: (googleUserProfile, userMetadata) => {
-      dispatch(commonActions.onGoogleLogin(googleUserProfile));
+      dispatch(commonActions.onGoogleLogin({ accessToken: googleUserProfile.credential }));
       dispatch(commonActions.signUp(userMetadata));
     }
   };

@@ -107,7 +107,9 @@ class LoginModal extends Component {
         <div style={{ justifyContent: 'center' }}>
           <GoogleLogin
             clientId={googleClientId}
-            onSuccess={this.onClickSignUp}
+            onSuccess={(credentialResponse) => {
+              this.onClickSignUp(credentialResponse);
+            }}
             cookiePolicy="single_host_origin"
             onFailure={(error) => console.log('google login error', error)}
             text="signup_with"
