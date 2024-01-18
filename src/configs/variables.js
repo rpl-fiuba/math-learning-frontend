@@ -9,13 +9,13 @@ const configs = {
   services: {
     // TODO: take urls from ENV vars
     users: {
-      url: isProd() ? 'http://34.120.200.151/users-service' : 'http://0.0.0.0:7001'
+      url: isProd() ? 'http://learning.net.ar/users-service' : 'http://0.0.0.0:7001'
     },
     courses: {
-      url: isProd() ? 'http://34.120.200.151/courses-service' : 'http://0.0.0.0:5001'
+      url: isProd() ? 'http://learning.net.ar/courses-service' : 'http://0.0.0.0:5001'
     },
     exercises: {
-      url: isProd() ? 'http://34.120.200.151/exercises-service' : 'http://0.0.0.0:9000'
+      url: isProd() ? 'http://learning.net.ar/exercises-service' : 'http://0.0.0.0:9000'
     }
   },
   paths: {
