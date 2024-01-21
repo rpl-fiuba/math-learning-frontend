@@ -6,7 +6,7 @@
   "scripts": {
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "start": "react-scripts start",
-    "build": "react-scripts build && mkdir build/math-learning-frontend && mv build/static build/math-learning-frontend/static",
+    "build": "react-scripts build",
     "lint": "eslint src test",
     "lint:fix": "eslint --fix src test",
     "eject": "react-scripts eject",
