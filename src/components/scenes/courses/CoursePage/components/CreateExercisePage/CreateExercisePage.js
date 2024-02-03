@@ -241,7 +241,7 @@ class CreateExercisePage extends Component {
               <Typography color="textSecondary" variant="body2">
                 Escriba el ejercicio
               </Typography>
-              <BootstrapTooltip title="Solo escribir el contenido la integral o la derivada" placement="top-start">
+              <BootstrapTooltip title="Solo escribir el contenido la integral, la derivada, o el polinomio a factorizar" placement="top-start">
                 <InfoIcon id="info-icon" fontSize="small" className={styles.icon} />
               </BootstrapTooltip>
             </div>
