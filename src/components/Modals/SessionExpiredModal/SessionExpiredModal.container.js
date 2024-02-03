@@ -24,7 +24,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
     ...ownProps,
     ...stateProps,
     onGoogleLogin: (googleUserProfile) => {
-      dispatch(commonActions.onGoogleLogin(googleUserProfile));
+      dispatch(commonActions.onGoogleLogin({ accessToken: googleUserProfile.credential }));
       dispatch(commonActions.login({ nextPath }));
     },
     onClose: async () => {

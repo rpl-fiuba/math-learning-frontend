@@ -13,7 +13,7 @@ const currentState = (state) => ({
 
 const currentActions = (dispatch) => ({
   onGoogleLogin: (googleUserProfile) => {
-    dispatch(commonActions.onGoogleLogin(googleUserProfile));
+    dispatch(commonActions.onGoogleLogin({ accessToken: googleUserProfile.credential }));
     dispatch(commonActions.login());
   },
   onSignUp: () => dispatch(actions.loadModal(modalTypes.LOGIN_MODAL)),
