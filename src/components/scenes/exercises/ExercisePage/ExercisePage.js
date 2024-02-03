@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { CircularProgress } from '@material-ui/core';
 import Derivative from '../Derivative';
 import Integrate from '../Integrate';
+import Factorisable from '../Factorisable';
 import styles from './ExercisePage.module.sass';
 
 export default class ExercisePage extends Component {
@@ -50,6 +51,17 @@ export default class ExercisePage extends Component {
     if (exercise.type === 'integral') {
       return (
         <Integrate
+          exercise={exercise}
+          userId={userId}
+          isProfessor={isProfessor}
+          allResolutions={allResolutions}
+          onReturnToCourse={onReturnToCourse}
+        />
+      );
+    }
+    if (exercise.type === 'factorisable') {
+      return (
+        <Factorisable
           exercise={exercise}
           userId={userId}
           isProfessor={isProfessor}

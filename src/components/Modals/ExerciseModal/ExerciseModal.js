@@ -101,6 +101,7 @@ class ExerciseModal extends Component {
           >
             <MenuItem value="derivative">Derivada</MenuItem>
             <MenuItem value="integral">Integral</MenuItem>
+            <MenuItem value="factorisable">Factoreo</MenuItem>
           </Select>
         </FormControl>
 

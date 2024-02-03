@@ -16,6 +16,9 @@ const typeMap = {
   },
   integral: {
     text: 'Integral'
+  },
+  factorisable: {
+    text: 'Factoreo'
   }
 };
 
