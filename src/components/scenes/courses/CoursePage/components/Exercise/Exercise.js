@@ -19,6 +19,9 @@ const typeMap = {
   },
   factorisable: {
     text: 'Factoreo'
+  },
+  domain_and_image: {
+    text: 'Dominio e Imagen'
   }
 };
 

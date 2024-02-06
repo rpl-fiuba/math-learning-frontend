@@ -4,6 +4,7 @@ import Derivative from '../Derivative';
 import Integrate from '../Integrate';
 import Factorisable from '../Factorisable';
 import styles from './ExercisePage.module.sass';
+import DomainAndImage from '../DomainAndImage';
 
 export default class ExercisePage extends Component {
   componentDidMount() {
@@ -70,6 +71,18 @@ export default class ExercisePage extends Component {
         />
       );
     }
+    if (exercise.type === 'domain_and_image') {
+      return (
+        <DomainAndImage
+          exercise={exercise}
+          userId={userId}
+          isProfessor={isProfessor}
+          allResolutions={allResolutions}
+          onReturnToCourse={onReturnToCourse}
+        />
+      );
+    }
+
     return (
       <span>
         Ejercicio cargado
