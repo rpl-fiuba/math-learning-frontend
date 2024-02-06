@@ -94,9 +94,8 @@ class NavBar extends Component {
           onSuccess={onGoogleLogin}
           onFailure={(error) => console.log('google login error', error)}
           cookiePolicy="single_host_origin"
-          text="signin_with"
-          shape="circle"
-          width={5}
+          text="signin"
+          size="medium"
           theme="filled_black"
           useOneTap={false}
           render={(renderProps) => (
