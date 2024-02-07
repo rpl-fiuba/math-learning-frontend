@@ -22,6 +22,9 @@ const typeMap = {
   },
   domain_and_image: {
     text: 'Dominio e Imagen'
+  },
+    inequality: {
+    text: 'Inecuaciones'
   }
 };
 
