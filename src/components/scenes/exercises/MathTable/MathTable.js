@@ -5,7 +5,8 @@ import { Grid, FormControlLabel, Switch } from '@material-ui/core';
 import SymbolButton from '../SymbolButton';
 import styles from './MathTable.module.sass';
 
-const symbols = [
+const numberSymbols = [
+  { label: '0', value: '0' },
   { label: '1', value: '1' },
   { label: '2', value: '2' },
   { label: '3', value: '3' },
@@ -14,8 +15,10 @@ const symbols = [
   { label: '6', value: '6' },
   { label: '7', value: '7' },
   { label: '8', value: '8' },
-  { label: '9', value: '9' },
+  { label: '9', value: '9' }
+];
 
+const operationSymbols = [
   { label: '+', value: '+' },
   { label: '-', value: '-' },
   { label: '*', value: '*', latexValue: '\\cdot' },
@@ -23,28 +26,43 @@ const symbols = [
   { label: '(', latexValue: '(' },
   { label: ')', latexValue: ')' },
   { label: '()', value: '(', latexValue: '()' },
+  { label: '[', latexValue: '[' },
+  { label: ']', latexValue: ']' },
+  { label: '[]', value: '[', latexValue: '[]' },
+];
 
-  { label: 'a^{()}', value: '^' },
-  { label: '\\sqrt{()}', value: '\\sqrt(', latexValue: '\\sqrt {}' },
-
-  { label: 'x', value: 'x' },
-  { label: 'x^{a}', value: 'x^' },
-  { label: '\\sqrt{x}', latexValue: '\\sqrt x' },
-
+const trigonometrySymbols = [
   { label: 'sen', latexValue: '\\sin()' },
   { label: 'cos', latexValue: '\\cos()' },
-  { label: 'tg', value: 'tan()' },
-  { label: 'e^x', value: 'e^x' },
-  { label: '\\log_2 x', latexValue: '\\log_2 x' },
-  { label: '\\ln{x}', latexValue: '\\ln x' },
+  { label: 'tg', value: 'tan()' }
+];
 
+const exponentialSymbols = [
+  { label: '|a|', value: '|', latexValue: '||' },
+  { label: 'a^{()}', value: '^' },
+  { label: '\\sqrt{()}', value: '\\sqrt(', latexValue: '\\sqrt {}' },
+  { label: 'x', value: 'x' },
+  { label: 'x^{a}', value: 'x^' },
+  { label: 'a^b', latexValue: '{}^{}' },
+  { label: '\\sqrt{x}', latexValue: '\\sqrt x' },
+  { label: '\\sqrt[a]{b}', latexValue: '\\sqrt[]{}' },
+  { label: 'e^x', value: 'e^x' },
+  { label: '\\ln{x}', latexValue: '\\ln x' },
+  { label: '\\log_2 x', latexValue: '\\log_2 x' },
+  { label: '\\log_b a', latexValue: '\\log_{} {}' }
+];
+
+const complexSymbols = [
   { label: 'dx', value: 'dx' },
   { label: '\\frac{d()}{dx}', value: 'd()/dx', latexValue: '\\frac{d()}{dx}' },
   { label: '\\int dx', latexValue: '(\\int_{\\ }^{\\ }\\ dx)' }, // TODO: Mathquill issue: https://github.com/mathquill/mathquill/issues/784
+];
 
-  { label: '\\log_b a', latexValue: '\\log_{} {}' },
-  { label: 'a^b', latexValue: '{}^{}' },
-  { label: '\\sqrt[a]{b}', latexValue: '\\sqrt[]{}' }
+const rangeSymbols = [
+  { label: '\\cup', latexValue: '\\cup' },
+  { label: '\\infty', latexValue: '\\infty' },
+  { label: 'Dom', latexValue: 'Dom()' },
+  { label: 'Img', latexValue: 'Img()' }
 ];
 
 export default class MathTable extends Component {
@@ -115,12 +133,53 @@ export default class MathTable extends Component {
           }
         />
         <Grid container spacing={1} className={styles.mathTableActions}>
-          {symbols.map((symbol) => (
+          {numberSymbols.map((symbol) => (
             <Grid item key={symbol.label}>
               <SymbolButton symbol={symbol} onClick={onClickSymbol} />
             </Grid>
           ))}
         </Grid>
+
+        <Grid container spacing={1} className={styles.mathTableActions}>
+          {operationSymbols.map((symbol) => (
+            <Grid item key={symbol.label}>
+              <SymbolButton symbol={symbol} onClick={onClickSymbol} />
+            </Grid>
+          ))}
+        </Grid>
+
+        <Grid container spacing={1} className={styles.mathTableActions}>
+          {trigonometrySymbols.map((symbol) => (
+            <Grid item key={symbol.label}>
+              <SymbolButton symbol={symbol} onClick={onClickSymbol} />
+            </Grid>
+          ))}
+        </Grid>
+
+        <Grid container spacing={2} className={styles.mathTableActions}>
+          {exponentialSymbols.map((symbol) => (
+            <Grid item key={symbol.label}>
+              <SymbolButton symbol={symbol} onClick={onClickSymbol} />
+            </Grid>
+          ))}
+        </Grid>
+
+        <Grid container spacing={1} className={styles.mathTableActions}>
+          {complexSymbols.map((symbol) => (
+            <Grid item key={symbol.label}>
+              <SymbolButton symbol={symbol} onClick={onClickSymbol} />
+            </Grid>
+          ))}
+        </Grid>
+
+        <Grid container spacing={1} className={styles.mathTableActions}>
+          {rangeSymbols.map((symbol) => (
+            <Grid item key={symbol.label}>
+              <SymbolButton symbol={symbol} onClick={onClickSymbol} />
+            </Grid>
+          ))}
+        </Grid>
+
       </div>
     );
   };
