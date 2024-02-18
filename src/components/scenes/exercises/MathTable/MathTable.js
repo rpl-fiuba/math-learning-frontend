@@ -61,8 +61,8 @@ const complexSymbols = [
 const rangeSymbols = [
   { label: '\\cup', latexValue: '\\cup' },
   { label: '\\infty', latexValue: '\\infty' },
-  { label: 'Dom', latexValue: 'Dom()' },
-  { label: 'Img', latexValue: 'Img()' }
+  { label: 'Dom', latexValue: 'Dom' },
+  { label: 'Img', latexValue: 'Img' }
 ];
 
 export default class MathTable extends Component {
