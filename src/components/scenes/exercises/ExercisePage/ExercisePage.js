@@ -72,7 +72,7 @@ export default class ExercisePage extends Component {
         />
       );
     }
-    if (exercise.type === 'domain_and_image') {
+    if (exercise.type === 'domain') {
       return (
         <DomainAndImage
           exercise={exercise}
