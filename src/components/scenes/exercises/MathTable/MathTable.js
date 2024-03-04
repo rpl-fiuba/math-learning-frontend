@@ -59,6 +59,9 @@ const complexSymbols = [
 ];
 
 const rangeSymbols = [
+  { label: '\\R', latexValue: '\\R' },
+  { label: '\\Z', latexValue: '\\Z' },
+  { label: '\\o', latexValue: '\\o' },
   { label: '\\cup', latexValue: '\\cup' },
   { label: '\\infty', latexValue: '\\infty' },
   { label: 'Dom', latexValue: 'Dom' },
