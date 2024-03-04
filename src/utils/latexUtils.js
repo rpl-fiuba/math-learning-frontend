@@ -26,6 +26,8 @@ const cleanExpression = (expression, isMathQuill) => {
   let cleanedExpression;
   if (isMathQuill) {
     cleanedExpression = replaceAll(expression, '\\int', '\\int_{\\ }^{\\ }');
+    cleanedExpression = replaceAll(cleanedExpression, '\\mathbb{R}', '\\R');
+    cleanedExpression = replaceAll(cleanedExpression, '\\mathbb{Z}', '\\Z');
   } else {
     cleanedExpression = replaceAll(expression, '\\int_{\\ }^{\\ }', '\\int ');
   }
