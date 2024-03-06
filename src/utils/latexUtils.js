@@ -28,6 +28,9 @@ const cleanExpression = (expression, isMathQuill) => {
     cleanedExpression = replaceAll(expression, '\\int', '\\int_{\\ }^{\\ }');
     cleanedExpression = replaceAll(cleanedExpression, '\\mathbb{R}', '\\R');
     cleanedExpression = replaceAll(cleanedExpression, '\\mathbb{Z}', '\\Z');
+    cleanedExpression = replaceAll(cleanedExpression, '\\;', ' ');
+    cleanedExpression = replaceAll(cleanedExpression, '|', '\\mid');
+    cleanedExpression = replaceAll(cleanedExpression, '\\setminus', '-');
   } else {
     cleanedExpression = replaceAll(expression, '\\int_{\\ }^{\\ }', '\\int ');
   }
