@@ -195,6 +195,7 @@ class CreateExercisePage extends Component {
             <MenuItem value="integral">Integral</MenuItem>
             <MenuItem value="factorisable">Factoreo</MenuItem>
             <MenuItem value="domain">Dominio</MenuItem>
+            <MenuItem value="image">Imagen</MenuItem>
             <MenuItem value="inequality">Inecuaciones</MenuItem>
           </Select>
         </FormControl>

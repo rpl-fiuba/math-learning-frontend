@@ -23,7 +23,10 @@ const typeMap = {
   domain: {
     text: 'Dominio'
   },
-    inequality: {
+  image: {
+    text: 'Imagen'
+  },
+  inequality: {
     text: 'Inecuaciones'
   }
 };

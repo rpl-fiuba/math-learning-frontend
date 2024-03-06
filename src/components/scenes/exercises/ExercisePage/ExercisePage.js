@@ -6,6 +6,7 @@ import Factorisable from '../Factorisable';
 import Inequality from '../Inequality';
 import styles from './ExercisePage.module.sass';
 import Domain from '../Domain';
+import Image from '../Image';
 
 export default class ExercisePage extends Component {
   componentDidMount() {
@@ -81,6 +82,17 @@ export default class ExercisePage extends Component {
           allResolutions={allResolutions}
           onReturnToCourse={onReturnToCourse}
         />
+      );
+    }
+    if (exercise.type === 'image') {
+      return (
+          <Image
+              exercise={exercise}
+              userId={userId}
+              isProfessor={isProfessor}
+              allResolutions={allResolutions}
+              onReturnToCourse={onReturnToCourse}
+          />
       );
     }
     if (exercise.type === 'inequality') {
