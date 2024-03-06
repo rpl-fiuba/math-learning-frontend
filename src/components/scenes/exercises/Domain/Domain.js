@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import MathTextBox from '../../../common/math/MathTextBox';
 import ExerciseByStepsInterface from '../ExerciseByStepsInterface';
 
-import styles from './DomainAndImage.module.sass';
+import styles from './Domain.module.sass';
 
-class DomainAndImage extends ExerciseByStepsInterface {
+class Domain extends ExerciseByStepsInterface {
   constructor(props) {
     super(props);
 
@@ -70,11 +70,11 @@ class DomainAndImage extends ExerciseByStepsInterface {
   }
 }
 
-DomainAndImage.propTypes = {
+Domain.propTypes = {
   isProcessing: PropTypes.bool,
   currentExpression: PropTypes.object,
   onValidateStep: PropTypes.func,
   onContentChange: PropTypes.func
 };
 
-export default DomainAndImage;
+export default Domain;

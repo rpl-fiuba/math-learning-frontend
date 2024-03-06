@@ -5,7 +5,7 @@ import * as selectors from '../../../../state/exercises/selectors';
 import * as modalTypes from '../../../../state/modals/modalTypes';
 import * as modalActions from '../../../../state/modals/actions';
 
-import DomainAndImage from './DomainAndImage';
+import Domain from './Domain';
 
 const currentState = (state, { exercise }) => {
   const currentExpression = selectors.currentExpression(state, { ...exercise });
@@ -77,4 +77,4 @@ const currentActions = (dispatch, { exercise, userId }) => ({
 export default withRouter(connect(
   currentState,
   currentActions,
-)(DomainAndImage));
+)(Domain));

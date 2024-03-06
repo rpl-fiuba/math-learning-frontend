@@ -5,7 +5,7 @@ import Integrate from '../Integrate';
 import Factorisable from '../Factorisable';
 import Inequality from '../Inequality';
 import styles from './ExercisePage.module.sass';
-import DomainAndImage from '../DomainAndImage';
+import Domain from '../Domain';
 
 export default class ExercisePage extends Component {
   componentDidMount() {
@@ -74,7 +74,7 @@ export default class ExercisePage extends Component {
     }
     if (exercise.type === 'domain') {
       return (
-        <DomainAndImage
+        <Domain
           exercise={exercise}
           userId={userId}
           isProfessor={isProfessor}
