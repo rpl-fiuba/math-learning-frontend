@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import {
-  TextField, Typography, FormControl, InputLabel, Button, Select, MenuItem, CircularProgress
+  TextField,
+  Typography,
+  FormControl,
+  InputLabel,
+  Button,
+  Select,
+  MenuItem,
+  CircularProgress,
 } from '@material-ui/core';
 import InfoIcon from '@material-ui/icons/Info';
 import BootstrapTooltip from '../../../../../../bootstrap/Tooltip';
@@ -9,6 +16,7 @@ import BootstrapDropdownInput from '../../../../../../bootstrap/dropdownInput';
 import MathText from '../../../../../common/math/MathText';
 import MathTextBox from '../../../../../common/math/MathTextBox';
 import styles from './CreateExercisePage.module.sass';
+import TrigonometryCreation from "../../../../exercises/Trigonometry/TrigonometryCreation";
 
 class CreateExercisePage extends Component {
   constructor(props) {
@@ -17,7 +25,7 @@ class CreateExercisePage extends Component {
     this.state = {
       name: null,
       initialHint: null,
-      type: 'derivative',
+      type: 'trigonometry',
       problemInput: null,
       difficulty: 'easy',
       description: null,
@@ -124,7 +132,7 @@ class CreateExercisePage extends Component {
   onChangeType = (event) => {
     const newType = event.target.value;
 
-    this.setState({ type: newType });
+    this.setState({ type: newType, problemInput: null });
     this.chechIfActionDisabled({ ...this.state, type: newType });
     this.onResetExerciseError();
   };
@@ -141,6 +149,8 @@ class CreateExercisePage extends Component {
     const { problemInput } = this.state;
     const newExercise = event.target.value;
 
+    console.log("New exercise is", newExercise)
+
     if (problemInput !== newExercise) {
       this.setState({ problemInput: newExercise });
       this.chechIfActionDisabled({ ...this.state, problemInput: newExercise });
@@ -148,6 +158,10 @@ class CreateExercisePage extends Component {
       this.onResetSolvedExercise();
     }
   };
+
+  shouldShowEvaluate = (type) => {
+    return type !== 'trigonometry';
+  }
 
   render() {
     const {
@@ -197,6 +211,7 @@ class CreateExercisePage extends Component {
             <MenuItem value="domain">Dominio</MenuItem>
             <MenuItem value="image">Imagen</MenuItem>
             <MenuItem value="inequality">Inecuaciones</MenuItem>
+            <MenuItem value="trigonometry">Trigonometria</MenuItem>
           </Select>
         </FormControl>
 
@@ -239,7 +254,12 @@ class CreateExercisePage extends Component {
         />
 
         <div className={styles.exerciseRow}>
-          <div className={styles.exerciseContainer}>
+
+          {type === 'trigonometry' && <TrigonometryCreation
+              onContentChange={(context) => this.onChangeExercise({ target: { value: context } })}
+          />}
+
+          {type !== 'trigonometry' && <div className={styles.exerciseContainer}>
             <div className={styles.writeExerciseTitle}>
               <Typography color="textSecondary" variant="body2">
                 Escriba el ejercicio
@@ -256,35 +276,36 @@ class CreateExercisePage extends Component {
               onContentChange={(context) => this.onChangeExercise({ target: { value: context } })}
             />
           </div>
+          }
 
-          <div className={styles.solvedContainer}>
+          {this.shouldShowEvaluate(type) && <div className={styles.solvedContainer}>
             <Button
-              id="evaluate-exercise"
-              onClick={this.handleEvaluateExercise}
-              disabled={!problemInput || isEvaluatingExercise}
-              variant="contained"
-              color="primary"
+                id="evaluate-exercise"
+                onClick={this.handleEvaluateExercise}
+                disabled={!problemInput || isEvaluatingExercise}
+                variant="contained"
+                color="primary"
             >
               Evaluar ejercicio
             </Button>
             {isEvaluatingExercise && (
-              <div className={styles.loading}>
-                <CircularProgress disableShrink size="25px" />
-              </div>
+                <div className={styles.loading}>
+                  <CircularProgress disableShrink size="25px"/>
+                </div>
             )}
             {solvedCreatingExercise && (
-              <div className={styles.solvedExericeContainer}>
-                <Typography color="textSecondary" variant="h6">
-                  Solución:
-                </Typography>
-                <MathText
-                  id="solved-exercise"
-                  className={styles.solvedExerice}
-                  content={solvedCreatingExercise.expression}
-                />
-              </div>
+                <div className={styles.solvedExericeContainer}>
+                  <Typography color="textSecondary" variant="h6">
+                    Solución:
+                  </Typography>
+                  <MathText
+                      id="solved-exercise"
+                      className={styles.solvedExerice}
+                      content={solvedCreatingExercise.expression}
+                  />
+                </div>
             )}
-          </div>
+          </div>}
         </div>
 
         {creatingExerciseError && (

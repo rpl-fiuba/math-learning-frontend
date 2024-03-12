@@ -1,4 +1,4 @@
-const isProd = () => process.env.NODE_ENV === 'production';
+const isProd = () => true;
 
 const configs = {
   credentials: {
@@ -9,13 +9,13 @@ const configs = {
   services: {
     // TODO: take urls from ENV vars
     users: {
-      url: isProd() ? 'https://learning.net.ar/users-service' : 'http://0.0.0.0:7001'
+      url: isProd() ? 'https://learning.net.ar/users-service' : 'localhost:7001'
     },
     courses: {
-      url: isProd() ? 'https://learning.net.ar/courses-service' : 'http://0.0.0.0:5001'
+      url: isProd() ? 'https://learning.net.ar/courses-service' : 'localhost:5001'
     },
     exercises: {
-      url: isProd() ? 'https://learning.net.ar/exercises-service' : 'http://0.0.0.0:9000'
+      url: isProd() ? 'https://learning.net.ar/exercises-service' : 'localhost:9000'
     }
   },
   paths: {

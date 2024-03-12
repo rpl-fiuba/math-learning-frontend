@@ -7,6 +7,7 @@ import Inequality from '../Inequality';
 import styles from './ExercisePage.module.sass';
 import Domain from '../Domain';
 import Image from '../Image';
+import Trigonometry from "../Trigonometry";
 
 export default class ExercisePage extends Component {
   componentDidMount() {
@@ -104,6 +105,17 @@ export default class ExercisePage extends Component {
           allResolutions={allResolutions}
           onReturnToCourse={onReturnToCourse}
         />
+      );
+    }
+    if (exercise.type === 'trigonometry') {
+      return (
+          <Trigonometry
+              exercise={exercise}
+              userId={userId}
+              isProfessor={isProfessor}
+              allResolutions={allResolutions}
+              onReturnToCourse={onReturnToCourse}
+          />
       );
     }
 

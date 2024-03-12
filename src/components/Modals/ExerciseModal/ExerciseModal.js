@@ -105,6 +105,7 @@ class ExerciseModal extends Component {
             <MenuItem value="domain">Dominio</MenuItem>
             <MenuItem value="image">Imagen</MenuItem>
             <MenuItem value="inequality">Inecuaciones</MenuItem>
+            <MenuItem value="trigonometry">Trigonometria</MenuItem>
           </Select>
         </FormControl>
 

@@ -28,6 +28,9 @@ const typeMap = {
   },
   inequality: {
     text: 'Inecuaciones'
+  },
+  trigonometry: {
+    text: 'Trigonometria'
   }
 };
 
