@@ -51,16 +51,15 @@ class TrigonometryCreation extends Component {
         const leftAngle = this.state.leftInterval
         const rightAngle = this.state.rightInterval - this.state.leftInterval
         const topAngle = 180 - this.state.rightInterval
-
-        const [leftSide, rightSide, bottomSide] = this.getSideLengths()
+        const [bottomSide, rightSide, leftSide] = this.getSideLengths()
 
         const exercise = {
             angles : [{label: "leftAngle", value: leftAngle, provided: false},
                 {label: "rightAngle", value: rightAngle, provided: false},
                 {label: "topAngle", value: topAngle, provided: false}],
-            sides: [{label: "leftSide", value: leftSide, provided: false},
+            sides: [{label: "bottomSide", value: bottomSide, provided: false},
                 {label: "rightSide", value: rightSide, provided: false},
-                {label: "bottomSide", value: bottomSide, provided: false}]
+                {label: "leftSide", value: leftSide, provided: false}]
         }
 
         this.state.checkedAngles.forEach((name, index) => {
@@ -204,7 +203,7 @@ class TrigonometryCreation extends Component {
 
                     <Grid item xs={3}>
                         <Typography id="creation-label" color="textPrimary" variant="subtitle1" className={styles.title}>
-                            Ajustar Hipotenusa
+                            Ajustar Base
                         </Typography>
                         <Slider
                             value={this.state.scale}
