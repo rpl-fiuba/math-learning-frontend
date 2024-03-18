@@ -75,7 +75,7 @@ class TrigonometryCreation extends Component {
 
     onChangeAngleInterval = (event, value) => {
         const [left, right] = value
-        if (right - left >= 10 && left > 0 && right > 0 && left < 90 && right - left < 90) {
+        if (right - left >= 10 && left > 0 && right > 0 && right - left > 0 && 180 - right > 0 && left <= 90 && right - left <= 90) {
             this.setState({leftInterval: left, rightInterval: right}, this.updateExerciseIfValid);
 
         }
