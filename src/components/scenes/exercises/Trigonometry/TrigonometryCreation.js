@@ -5,7 +5,7 @@ import CompassCalibrationIcon from '@material-ui/icons/CompassCalibration';
 import {
     List,
     ListItem,
-    ListItemText, ListItemIcon, Checkbox, Typography, Tooltip, Switch
+    ListItemText, ListItemIcon, Typography, Tooltip, Switch
 } from '@material-ui/core';
 import { Slider } from '@material-ui/core';
 import Grid from "@material-ui/core/Grid";

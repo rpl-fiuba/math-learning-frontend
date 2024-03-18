@@ -18,6 +18,7 @@ import LeftPanelLink from '../../../common/containers/LeftPanel/LeftPanelLink';
 
 import styles from './ExerciseByStepsInterface.module.sass';
 import MathTable from '../MathTable';
+import Triangle, {ChallengeTriangle} from "../Trigonometry/Triangle";
 
 class ExerciseByStepsInterface extends Component {
   constructor(props) {
@@ -25,7 +26,8 @@ class ExerciseByStepsInterface extends Component {
 
     this.state = {
       latexModeOn: false, // eslint-disable-line react/no-unused-state
-      currentQualification: 10
+      currentQualification: 10,
+      showExerciseInput: this.props.exercise.type !== 'trigonometry'
     };
   }
 
@@ -48,6 +50,12 @@ class ExerciseByStepsInterface extends Component {
 
     this.setState({ latexModeOn }); // eslint-disable-line react/no-unused-state
   }
+
+  handleOnChangeShowInput = (showInput) => {
+    const { showExerciseInput } = showInput;
+    this.setState({ showExerciseInput }); // eslint-disable-line react/no-unused-state
+  }
+
 
   handleQualificate = () => {
     const { currentQualification } = this.state;
@@ -183,27 +191,34 @@ class ExerciseByStepsInterface extends Component {
             <Typography variant="body2" className={styles.exerciseDescription}>
               {exercise.description}
             </Typography>
-            <MathText
-              id="problem-input"
-              className={styles.problemInput}
-              content={exercise.problemInput}
-            />
-            <div className={styles.content}>
+            {exercise.type === "trigonometry" && <ChallengeTriangle
+                problemInput={JSON.parse(exercise.problemInput)}
+                showInput={() => {
+                  console.log("Got call from showInput, will set handleShowInput to true")
+                  this.setState({ showExerciseInput: true })
+                }}
+            />}
+            {exercise.type !== "trigonometry" && <MathText
+                id="problem-input"
+                className={styles.problemInput}
+                content={exercise.problemInput}
+            />}
+            {this.state.showExerciseInput && <div className={styles.content}>
               {/* if the exercise has been resolved, all the resolutions are shown */}
               {isDelivered && allResolutions && allResolutions.length > 1 ? (
-                <Carousel arrows>
-                  {allResolutions.map((or, index) => (
-                    <div key={`resolution-${index}`}>
-                      {this.getStepList(or, true)}
-                    </div>
-                  ))}
-                </Carousel>
+                  <Carousel arrows>
+                    {allResolutions.map((or, index) => (
+                        <div key={`resolution-${index}`}>
+                          {this.getStepList(or, true)}
+                        </div>
+                    ))}
+                  </Carousel>
               ) : (
-                this.getStepList(exercise, isDelivered)
+                  this.getStepList(exercise, isDelivered)
               )}
 
               {!shouldStopEditing && this.getCurrentStep()}
-            </div>
+            </div>}
           </div>
 
           {shouldStopEditing
