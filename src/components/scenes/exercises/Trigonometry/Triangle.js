@@ -67,25 +67,25 @@ export const ChallengeTriangle = ({problemInput, showInput}) => {
     const providedElements = elements.filter(element => !!element.provided)
     const missingElements = elements.filter(element => !element.provided)
 
-    // State to track which vertex is currently hovered over
-    const [clickedAngle, setClickedAngle] = useState(null);
-    const [completedFields, setCompletedFields] = useState(providedElements.map(element => element.tag));
-    const [isCompleted, setCompleted] = useState(false);
+    const [clickedElement, setClickedElement] = useState(null);
+    const [completedElement, setCompletedElement] = useState(providedElements.map(element => element.tag));
+    const [completedExercise, setCompletedExercise] = useState(false);
 
     useEffect(() => {
-        console.log("Called useEffect on completed fields, completedFields is", completedFields)
-        if(completedFields.length >= 6){
-            console.log("Calling showInput")
+        if(completedElement.length >= 6){
             showInput()
-            setCompleted(true)
+            setCompletedExercise(true)
         }
-    }, [completedFields]);
+    }, [completedElement]);
 
     return (<>
         <Grid container spacing={10} style={{marginTop: "5px"}}>
             <Grid item xs={4}>
                 <Typography id="creation-label" color="textPrimary" variant="h6" className={styles.sectionTitle}>
                     Gráfico
+                </Typography>
+                <Typography id="creation-label" color="textPrimary" variant="subtitle2" className={styles.sectionTitle}>
+                    Clickeá un lado o ángulo para identificarlo en los paneles de la derecha
                 </Typography>
                 <XYPlot width={axisResolution.x} height={axisResolution.y} xDomain={axisRange} yDomain={axisRange}>
                     {
@@ -94,19 +94,24 @@ export const ChallengeTriangle = ({problemInput, showInput}) => {
                                 key = {index}
                                 data={[vertex]}
                                 size={20}
-                                color={clickedAngle === vertex.angle ? "#3ab6b2" : "#858585"} // Change color when hovered
+                                color={clickedElement === vertex.angle ? "#3ab6b2" : "#858585"} // Change color when hovered
                                 opacity={0.5}
-                                onValueClick={(datapoint) => setClickedAngle(vertex.angle)}
+                                onValueClick={(datapoint) => setClickedElement(vertex.angle)}
                             />)
                     }
                     <XAxis />
                     <YAxis />
-                    <LineSeries data={vertices} strokeWidth={5} color={"#4abdce"}/>
+                    <LineSeries data={vertices.slice(0,2)} strokeWidth={8} color={clickedElement === "bottomSide" ? "#3ab6b2" : "#858585"} onSeriesClick={() => setClickedElement("bottomSide")}/>
+                    <LineSeries data={vertices.slice(1,3)} strokeWidth={8} color={clickedElement === "rightSide" ? "#3ab6b2" : "#858585"} onSeriesClick={() => setClickedElement("rightSide")}/>
+                    <LineSeries data={vertices.slice(2,4)} strokeWidth={8} color={clickedElement === "leftSide" ? "#3ab6b2" : "#858585"} onSeriesClick={() => setClickedElement("leftSide")}/>
                 </XYPlot>
             </Grid>
             <Grid item xs={3}>
                 <Typography id="creation-label" color="textPrimary" variant="h6" className={styles.title}>
                     Datos
+                </Typography>
+                <Typography id="creation-label" color="textPrimary" variant="subtitle2" className={styles.title}>
+                    Usá estos valores para calcular los faltantes
                 </Typography>
                 {
                     providedElements.map(element => {
@@ -115,8 +120,8 @@ export const ChallengeTriangle = ({problemInput, showInput}) => {
                             itemName={element.tag}
                             itemValue={element.value}
                             provided={true}
-                            setCompletedFields={setCompletedFields}
-                            selected={clickedAngle === element.label}
+                            setCompletedFields={setCompletedElement}
+                            selected={clickedElement === element.label}
                         />
                     })
                 }
@@ -125,6 +130,9 @@ export const ChallengeTriangle = ({problemInput, showInput}) => {
                 <Typography id="creation-label" color="textPrimary" variant="h6" className={styles.title}>
                     Incógnitas
                 </Typography>
+                <Typography id="creation-label" color="textPrimary" variant="subtitle2" className={styles.title}>
+                    Completá los datos faltantes, podes validarlos individualmente
+                </Typography>
                 {
                     missingElements.map(element => {
                         return <Item
@@ -132,15 +140,15 @@ export const ChallengeTriangle = ({problemInput, showInput}) => {
                             itemName={element.tag}
                             itemValue={element.value}
                             provided={false}
-                            setCompletedFields={setCompletedFields}
-                            selected={clickedAngle === element.label}
+                            setCompletedFields={setCompletedElement}
+                            selected={clickedElement === element.label}
                         />
                     })
                 }
             </Grid>
         </Grid>
             {<div style={{display: "flex", padding: "20px", alignItems: "center"}}>
-                {!isCompleted ? <>
+                {!completedExercise ? <>
                     <WarningIcon style={{marginRight: "15px"}}/>
                     <Typography id="creation-label" color="textPrimary" variant="h6">
                     Una vez completados los datos faltantes del triangulo, podrás terminar el ejercicio ingresando su
