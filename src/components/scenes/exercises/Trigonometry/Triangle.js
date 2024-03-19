@@ -3,33 +3,31 @@ import {XYPlot, LineSeries, XAxis, YAxis, HorizontalGridLines, VerticalGridLines
 import Grid from "@material-ui/core/Grid";
 import {
     Button,
-    Checkbox,
     Input,
     ListItem,
     ListItemIcon,
     ListItemText,
-    Switch,
-    Tooltip,
     Typography
 } from "@material-ui/core";
 import CompassCalibrationIcon from "@material-ui/icons/CompassCalibration";
 import SettingsEthernetIcon from "@material-ui/icons/SettingsEthernet";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import styles from "../../courses/CoursePage/components/CreateExercisePage/CreateExercisePage.module.sass";
 import {Check} from "@material-ui/icons";
 import WarningIcon from "@material-ui/icons/Warning";
+
+function calculateAxisRange(vertices) {
+    const minX = Math.min(...vertices.map(point => point.x));
+    const minY = Math.min(...vertices.map(point => point.y));
+    const maxX = Math.max(...vertices.map(point => point.x));
+    const maxY = Math.max(...vertices.map(point => point.y));
+    return [Math.min(minX, minY), Math.max(maxX, maxY)];
+}
 
 const TriangleGraph = ({ angle1, angle2, baseLength }) => {
 
     // Calculate coordinates of the triangle vertices
     const triangleData = calculateTriangle(angle1, angle2, baseLength);
-
-    const vertices = triangleData.vertices
-    const minX = Math.min(...vertices.map(point => point.x));
-    const minY = Math.min(...vertices.map(point => point.y));
-    const maxX = Math.max(...vertices.map(point => point.x));
-    const maxY = Math.max(...vertices.map(point => point.y));
-    const axisRange = [Math.min(minX, minY), Math.max(maxX, maxY)]
+    const axisRange = calculateAxisRange(triangleData.vertices);
 
     return (
         <XYPlot width={350} height={350} xDomain={axisRange} yDomain={axisRange}>
@@ -37,7 +35,7 @@ const TriangleGraph = ({ angle1, angle2, baseLength }) => {
             <HorizontalGridLines />
             <XAxis />
             <YAxis />
-            <LineSeries data={vertices} strokeWidth={5}/>
+            <LineSeries data={triangleData.vertices} strokeWidth={5}/>
         </XYPlot>
     );
 };
@@ -53,12 +51,8 @@ export const ChallengeTriangle = ({problemInput, showInput}) => {
     vertices[0]["angle"] = "leftAngle"
     vertices[1]["angle"] = "rightAngle"
     vertices[2]["angle"] = "topAngle"
-
-    const minX = Math.min(...vertices.map(point => point.x));
-    const minY = Math.min(...vertices.map(point => point.y));
-    const maxX = Math.max(...vertices.map(point => point.x));
-    const maxY = Math.max(...vertices.map(point => point.y));
-    const axisRange = [Math.min(minX - 0.20 * maxX , minY), Math.max(maxX, maxY * 1.1)]
+    const [min, max] = calculateAxisRange(vertices);
+    const axisRange = [-0.25 * max, 1.25 * max]
     const axisResolution = {x: 400, y: 400}
 
     const angles = problemInput.angles.map((element, index) => ({...element, kind: "angle", tag: `Ángulo ${index+1}`}))
@@ -170,7 +164,7 @@ const Item = ({itemKind, itemName, itemValue, provided, setCompletedFields, sele
     const secondaryText = itemKind === 'angle' ? itemValue.toString() + "°" : (itemValue.toFixed(2) + ` (${itemValue.toFixed(6)})`)
 
     const handleValidate = () => {
-        if(!!userInput && !!parseFloat(userInput) && !isNaN(parseFloat(userInput)) && itemValue.toFixed(2) == parseFloat(userInput).toFixed(2)){
+        if(!!userInput && !!parseFloat(userInput) && !isNaN(parseFloat(userInput)) && itemValue.toFixed(2) === parseFloat(userInput).toFixed(2)){
             setIsCompleted(true)
             setUserInput(itemValue)
             setCompletedFields((prev) => [...prev, itemName])

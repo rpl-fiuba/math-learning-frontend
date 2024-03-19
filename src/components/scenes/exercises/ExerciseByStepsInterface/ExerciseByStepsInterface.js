@@ -18,7 +18,7 @@ import LeftPanelLink from '../../../common/containers/LeftPanel/LeftPanelLink';
 
 import styles from './ExerciseByStepsInterface.module.sass';
 import MathTable from '../MathTable';
-import Triangle, {ChallengeTriangle} from "../Trigonometry/Triangle";
+import {ChallengeTriangle} from "../Trigonometry/Triangle";
 
 class ExerciseByStepsInterface extends Component {
   constructor(props) {
