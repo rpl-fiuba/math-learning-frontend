@@ -125,6 +125,13 @@ export default class Exercise extends Component {
     );
   }
 
+  getProvidedItems = (problemInput) => {
+    const data = JSON.parse(problemInput)
+    const providedAngles = data.angles.filter(angle => !!angle.provided).length
+    const providedSides = data.sides.filter(side => !!side.provided).length
+    return ["Datos:", `Ángulos= ${providedAngles}`,`Lados= ${providedSides}`]
+  }
+
   render() {
     const { exercise, onDeleteExercise, onEditExercise, isProfessor } = this.props;
 
@@ -140,7 +147,8 @@ export default class Exercise extends Component {
           </Grid>
 
           <Grid item xs={6}>
-            <MathText content={exercise.problemInput} className={styles.exercise} />
+            {exercise.type !== "trigonometry" && <MathText content={exercise.problemInput} className={styles.exercise}/>}
+            {exercise.type === "trigonometry" && this.getProvidedItems(exercise.problemInput).map(item => <MathText content={item} className={styles.exercise}/>)}
           </Grid>
 
           <Grid item xs={2}>
