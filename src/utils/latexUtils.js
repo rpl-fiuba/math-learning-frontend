@@ -12,9 +12,8 @@ const cleanLatex = (latex) => {
 
   let clean = replaceAll(latex, '\\left(', '(');
   clean = replaceAll(clean, '\\right)', ')');
-  //clean = replaceAll(clean, '\\left[', '[');
- // clean = replaceAll(clean, '\\right]', ']');
-  // clean = replaceAll(clean, 'left(', '(');
+  clean = replaceAll(clean, '\\left[', '[');
+  clean = replaceAll(clean, '\\right]', ']');
   // clean = replaceAll(clean, '\\cdot ', '*');
   // clean = replaceAll(clean, 'cdot ', '*');
   // clean = replaceAll(clean, 'sen', '\\sin');
