@@ -193,8 +193,8 @@ class ExerciseByStepsInterface extends Component {
             </Typography>
             {exercise.type === "trigonometry" && <ChallengeTriangle
                 problemInput={JSON.parse(exercise.problemInput)}
+                showAllData={!!isDelivered}
                 showInput={() => {
-                  console.log("Got call from showInput, will set handleShowInput to true")
                   this.setState({ showExerciseInput: true })
                 }}
             />}

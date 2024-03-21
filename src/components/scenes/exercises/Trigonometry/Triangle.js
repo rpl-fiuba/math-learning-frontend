@@ -40,7 +40,7 @@ const TriangleGraph = ({ angle1, angle2, baseLength }) => {
     );
 };
 
-export const ChallengeTriangle = ({problemInput, showInput}) => {
+export const ChallengeTriangle = ({problemInput, showInput, showAllData}) => {
 
     const leftAngle = problemInput.angles.find(angle => angle.label === "leftAngle")
     const rightAngle = problemInput.angles.find(angle => angle.label === "rightAngle")
@@ -63,12 +63,12 @@ export const ChallengeTriangle = ({problemInput, showInput}) => {
 
     const [clickedElement, setClickedElement] = useState(null);
     const [completedElement, setCompletedElement] = useState(providedElements.map(element => element.tag));
-    const [completedExercise, setCompletedExercise] = useState(false);
+    const [completedExercise, setCompletedExercise] = useState(showAllData);
 
     useEffect(() => {
         if(completedElement.length >= 6){
             showInput()
-            setCompletedExercise(true)
+            setCompletedExercise(showAllData)
         }
     }, [completedElement]);
 
@@ -133,7 +133,7 @@ export const ChallengeTriangle = ({problemInput, showInput}) => {
                             itemKind={element.kind}
                             itemName={element.tag}
                             itemValue={element.value}
-                            provided={false}
+                            provided={showAllData}
                             setCompletedFields={setCompletedElement}
                             selected={clickedElement === element.label}
                         />
