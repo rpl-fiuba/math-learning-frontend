@@ -99,8 +99,6 @@ class ExerciseModal extends Component {
             onChange={this.onChangeType}
             input={<BootstrapDropdownInput />}
           >
-            <MenuItem value="derivative">Derivada</MenuItem>
-            <MenuItem value="integral">Integral</MenuItem>
             <MenuItem value="factorisable">Factoreo</MenuItem>
             <MenuItem value="domain">Dominio</MenuItem>
             <MenuItem value="image">Imagen</MenuItem>
