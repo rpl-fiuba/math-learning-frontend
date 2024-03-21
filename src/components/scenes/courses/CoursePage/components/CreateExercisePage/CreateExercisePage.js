@@ -149,8 +149,6 @@ class CreateExercisePage extends Component {
     const { problemInput } = this.state;
     const newExercise = event.target.value;
 
-    console.log("New exercise is", newExercise)
-
     if (problemInput !== newExercise) {
       this.setState({ problemInput: newExercise });
       this.chechIfActionDisabled({ ...this.state, problemInput: newExercise });
