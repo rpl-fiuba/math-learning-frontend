@@ -19,6 +19,7 @@ import LeftPanelLink from '../../../common/containers/LeftPanel/LeftPanelLink';
 import styles from './ExerciseByStepsInterface.module.sass';
 import MathTable from '../MathTable';
 import {ChallengeTriangle} from "../Trigonometry/Triangle";
+import {cleanProblemInput} from "../../../../utils/latexUtils";
 
 class ExerciseByStepsInterface extends Component {
   constructor(props) {
@@ -91,7 +92,7 @@ class ExerciseByStepsInterface extends Component {
             <div className={styles.stepContent}>
               <MathText
                 id={`step-${index}`}
-                content={step.expression}
+                content={cleanProblemInput(step.expression)}
                 className={styles.mathText}
               />
               {(step.variables).map((variable, varIndx) => (
@@ -201,7 +202,7 @@ class ExerciseByStepsInterface extends Component {
             {exercise.type !== "trigonometry" && <MathText
                 id="problem-input"
                 className={styles.problemInput}
-                content={exercise.problemInput}
+                content={cleanProblemInput(exercise.problemInput)}
             />}
             {this.state.showExerciseInput && <div className={styles.content}>
               {/* if the exercise has been resolved, all the resolutions are shown */}

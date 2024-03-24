@@ -5,6 +5,13 @@ const replaceAll = (expression, search, replacement) => {
   return expression;
 };
 
+const cleanProblemInput = (problemInput) => {
+  let cleanedInput = replaceAll(problemInput, "\\left|", "\\mid ")
+  cleanedInput = replaceAll(cleanedInput, "\\right|", "\\mid ")
+  console.log("ProblemInput is", problemInput, "cleaned is", cleanedInput)
+  return cleanedInput
+}
+
 const cleanLatex = (latex) => {
   if (!latex) {
     return latex;
@@ -45,5 +52,6 @@ const cleanExpression = (expression, isMathQuill) => {
 module.exports = {
   cleanExpression,
   cleanLatex,
-  replaceAll
+  replaceAll,
+  cleanProblemInput
 };
