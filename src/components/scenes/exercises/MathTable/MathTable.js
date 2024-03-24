@@ -39,7 +39,7 @@ const trigonometrySymbols = [
 ];
 
 const exponentialSymbols = [
-  { label: '|a|', value: '|', latexValue: '||' },
+  { label: '\\mid a \\mid', value: '|', latexValue: '|' },
   { label: 'a^{()}', value: '^' },
   { label: '\\sqrt{()}', value: '\\sqrt(', latexValue: '\\sqrt {}' },
   { label: 'x', value: 'x' },

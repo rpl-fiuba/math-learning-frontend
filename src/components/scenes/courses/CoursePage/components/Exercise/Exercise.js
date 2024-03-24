@@ -9,6 +9,7 @@ import MathText from '../../../../../common/math/MathText';
 import BootstrapTooltip from '../../../../../../bootstrap/Tooltip';
 import styles from './Exercise.module.sass';
 import MoreVertOptions from '../Options';
+import {replaceAll} from "../../../../../../utils/latexUtils";
 
 const typeMap = {
   derivative: {
@@ -132,6 +133,13 @@ export default class Exercise extends Component {
     return ["Datos:", `Ángulos= ${providedAngles}`,`Lados= ${providedSides}`]
   }
 
+  cleanProblemInput = (problemInput) => {
+    let cleanedInput = replaceAll(problemInput, "\\left|", "\\mid ")
+    cleanedInput = replaceAll(cleanedInput, "\\right|", "\\mid ")
+    console.log("ProblemInput is", problemInput, "cleaned is", cleanedInput)
+    return cleanedInput
+  }
+
   render() {
     const { exercise, onDeleteExercise, onEditExercise, isProfessor } = this.props;
 
@@ -147,7 +155,7 @@ export default class Exercise extends Component {
           </Grid>
 
           <Grid item xs={6}>
-            {exercise.type !== "trigonometry" && <MathText content={exercise.problemInput} className={styles.exercise}/>}
+            {exercise.type !== "trigonometry" && <MathText content={this.cleanProblemInput(exercise.problemInput)} className={styles.exercise}/>}
             {exercise.type === "trigonometry" && this.getProvidedItems(exercise.problemInput).map(item => <MathText content={item} className={styles.exercise}/>)}
           </Grid>
 
