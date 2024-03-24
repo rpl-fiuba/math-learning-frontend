@@ -23,13 +23,14 @@ const operationSymbols = [
   { label: '-', value: '-' },
   { label: '*', value: '*', latexValue: '\\cdot' },
   { label: '/', value: '/', latexValue: '\\frac{ }{ }' },
+];
+
+const separatorSymbols = [
   { label: '(', latexValue: '(' },
   { label: ')', latexValue: ')' },
-  { label: '()', value: '(', latexValue: '()' },
   { label: '[', latexValue: '[' },
   { label: ']', latexValue: ']' },
-  { label: '[]', value: '[', latexValue: '[]' },
-];
+]
 
 const trigonometrySymbols = [
   { label: 'sen', latexValue: '\\sin()' },
@@ -148,6 +149,14 @@ export default class MathTable extends Component {
             <Grid item key={symbol.label}>
               <SymbolButton symbol={symbol} onClick={onClickSymbol} />
             </Grid>
+          ))}
+        </Grid>
+
+        <Grid container spacing={1} className={styles.mathTableActions}>
+          {separatorSymbols.map((symbol) => (
+              <Grid item key={symbol.label}>
+                <SymbolButton symbol={symbol} onClick={onClickSymbol} />
+              </Grid>
           ))}
         </Grid>
 

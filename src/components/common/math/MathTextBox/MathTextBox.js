@@ -17,6 +17,7 @@ class MathTextBox extends Component {
 
     this.mathQuillEl = null;
     this.latexEl = null;
+    this.forbiddenSymbolsFromKeyboard = ["[", "]", "(", ")"]
   }
 
   // eslint-disable-next-line camelcase
@@ -57,6 +58,9 @@ class MathTextBox extends Component {
 
     if (event.key === 'Enter') {
       onEnter(content);
+    } else if (this.forbiddenSymbolsFromKeyboard.includes(event.key)) {
+      console.log("Preventing Input for", event.key)
+      event.preventDefault()
     }
   }
 
