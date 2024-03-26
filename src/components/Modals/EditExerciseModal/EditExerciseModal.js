@@ -8,7 +8,6 @@ import BootstrapDropdownInput from '../../../bootstrap/dropdownInput';
 import styles from './EditExerciseModal.module.sass';
 import Modal from '../Modal';
 import {cleanProblemInput} from "../../../utils/latexUtils";
-import {getTrigonometryProvidedData} from "../../scenes/exercises/Trigonometry/Trigonometry";
 
 class EditExerciseModal extends Component {
   constructor(props) {
@@ -68,7 +67,7 @@ class EditExerciseModal extends Component {
   };
 
   render() {
-    const { onClose, currentExercise: { problemInput, type } } = this.props;
+    const { onClose, currentExercise: { problemInput } } = this.props;
     const { actionDisabled, difficulty, name, description, initialHint } = this.state;
 
     return (
@@ -86,8 +85,7 @@ class EditExerciseModal extends Component {
           className={styles.name}
         />
 
-        {type === "trigonometry" ? <div style={{color: "black"}}>{getTrigonometryProvidedData(problemInput)}</div> :
-            <MathText id="problem-input" className={styles.solvedExerice} content={cleanProblemInput(problemInput)}/>}
+        <MathText id="problem-input" className={styles.solvedExerice} content={cleanProblemInput(problemInput)} />
 
         <FormControl className={styles.dropdownContainer}>
           <InputLabel id="dropdown-input-label">Dificultad</InputLabel>
