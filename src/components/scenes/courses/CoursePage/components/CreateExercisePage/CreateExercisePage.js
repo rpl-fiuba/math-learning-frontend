@@ -17,10 +17,13 @@ import MathText from '../../../../../common/math/MathText';
 import MathTextBox from '../../../../../common/math/MathTextBox';
 import styles from './CreateExercisePage.module.sass';
 import TrigonometryCreation from "../../../../exercises/Trigonometry/TrigonometryCreation";
+import MathTable from "../../../../exercises/MathTable";
 
 class CreateExercisePage extends Component {
   constructor(props) {
     super(props);
+
+    this.MathBoxRef = React.createRef();
 
     this.state = {
       name: null,
@@ -79,6 +82,14 @@ class CreateExercisePage extends Component {
       }
     });
   };
+
+  handleClickSymbol = (symbol) => {
+    if (!this.MathBoxRef.current) {
+      return;
+    }
+
+    this.MathBoxRef.current.insertSymbol(symbol);
+  }
 
   handleEvaluateExercise = () => {
     const { type, problemInput } = this.state;
@@ -265,11 +276,16 @@ class CreateExercisePage extends Component {
               </BootstrapTooltip>
             </div>
             <MathTextBox
+              ref={this.MathBoxRef}
               id="exercise-math-textbox"
               content={problemInput}
               className={styles.exercise}
               onEnter={() => {}}
               onContentChange={(context) => this.onChangeExercise({ target: { value: context } })}
+            />
+            <MathTable
+                onClickSymbol={this.handleClickSymbol}
+                creationMode
             />
           </div>
           }

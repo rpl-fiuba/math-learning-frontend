@@ -70,6 +70,9 @@ const rangeSymbols = [
 ];
 
 export default class MathTable extends Component {
+
+  creationMode = this.props.creationMode;
+
   constructor(props) {
     super(props);
 
@@ -129,44 +132,44 @@ export default class MathTable extends Component {
       <div className={styles.mathTable}>
         {this.renderColapseHeader()}
 
-        <FormControlLabel
-          className={styles.latexSwitch}
-          label="Modo Latex"
-          control={
-            <Switch size="small" checked={latexModeOn} onChange={this.handleLatexMode} color="primary" />
-          }
-        />
-        <Grid container spacing={1} className={styles.mathTableActions}>
+        {!this.creationMode && <FormControlLabel
+            className={styles.latexSwitch}
+            label="Modo Latex"
+            control={
+              <Switch size="small" checked={latexModeOn} onChange={this.handleLatexMode} color="primary"/>
+            }
+        />}
+        {!this.creationMode && <Grid container spacing={1} className={styles.mathTableActions}>
           {numberSymbols.map((symbol) => (
-            <Grid item key={symbol.label}>
-              <SymbolButton symbol={symbol} onClick={onClickSymbol} />
-            </Grid>
-          ))}
-        </Grid>
-
-        <Grid container spacing={1} className={styles.mathTableActions}>
-          {operationSymbols.map((symbol) => (
-            <Grid item key={symbol.label}>
-              <SymbolButton symbol={symbol} onClick={onClickSymbol} />
-            </Grid>
-          ))}
-        </Grid>
-
-        <Grid container spacing={1} className={styles.mathTableActions}>
-          {separatorSymbols.map((symbol) => (
               <Grid item key={symbol.label}>
-                <SymbolButton symbol={symbol} onClick={onClickSymbol} />
+                <SymbolButton symbol={symbol} onClick={onClickSymbol}/>
               </Grid>
           ))}
-        </Grid>
+        </Grid>}
 
-        <Grid container spacing={1} className={styles.mathTableActions}>
-          {trigonometrySymbols.map((symbol) => (
-            <Grid item key={symbol.label}>
-              <SymbolButton symbol={symbol} onClick={onClickSymbol} />
-            </Grid>
+        {!this.creationMode && <Grid container spacing={1} className={styles.mathTableActions}>
+          {operationSymbols.map((symbol) => (
+              <Grid item key={symbol.label}>
+                <SymbolButton symbol={symbol} onClick={onClickSymbol}/>
+              </Grid>
           ))}
-        </Grid>
+        </Grid>}
+
+        {!this.creationMode && <Grid container spacing={1} className={styles.mathTableActions}>
+          {separatorSymbols.map((symbol) => (
+              <Grid item key={symbol.label}>
+                <SymbolButton symbol={symbol} onClick={onClickSymbol}/>
+              </Grid>
+          ))}
+        </Grid>}
+
+        {!this.creationMode && <Grid container spacing={1} className={styles.mathTableActions}>
+          {trigonometrySymbols.map((symbol) => (
+              <Grid item key={symbol.label}>
+                <SymbolButton symbol={symbol} onClick={onClickSymbol}/>
+              </Grid>
+          ))}
+        </Grid>}
 
         <Grid container spacing={2} className={styles.mathTableActions}>
           {exponentialSymbols.map((symbol) => (
@@ -176,21 +179,21 @@ export default class MathTable extends Component {
           ))}
         </Grid>
 
-        <Grid container spacing={1} className={styles.mathTableActions}>
+        {!this.creationMode && <Grid container spacing={1} className={styles.mathTableActions}>
           {complexSymbols.map((symbol) => (
-            <Grid item key={symbol.label}>
-              <SymbolButton symbol={symbol} onClick={onClickSymbol} />
-            </Grid>
+              <Grid item key={symbol.label}>
+                <SymbolButton symbol={symbol} onClick={onClickSymbol}/>
+              </Grid>
           ))}
-        </Grid>
+        </Grid>}
 
-        <Grid container spacing={1} className={styles.mathTableActions}>
+        {!this.creationMode && <Grid container spacing={1} className={styles.mathTableActions}>
           {rangeSymbols.map((symbol) => (
-            <Grid item key={symbol.label}>
-              <SymbolButton symbol={symbol} onClick={onClickSymbol} />
-            </Grid>
+              <Grid item key={symbol.label}>
+                <SymbolButton symbol={symbol} onClick={onClickSymbol}/>
+              </Grid>
           ))}
-        </Grid>
+        </Grid>}
 
       </div>
     );
