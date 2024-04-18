@@ -28,7 +28,7 @@ class CreateExercisePage extends Component {
     this.state = {
       name: null,
       initialHint: null,
-      type: 'trigonometry',
+      type: 'domain',
       problemInput: null,
       difficulty: 'easy',
       description: null,

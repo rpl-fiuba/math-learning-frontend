@@ -69,6 +69,8 @@ const rangeSymbols = [
   { label: 'Img', latexValue: 'Img' }
 ];
 
+const creationModeSymbols = [...exponentialSymbols, ...separatorSymbols]
+
 export default class MathTable extends Component {
 
   creationMode = this.props.creationMode;
@@ -124,78 +126,94 @@ export default class MathTable extends Component {
     );
   }
 
+
+
   render = () => {
     const { onClickSymbol } = this.props;
     const { latexModeOn } = this.state;
 
-    return (
-      <div className={styles.mathTable}>
+    if (this.creationMode) {
+      return (<div className={styles.mathTable}>
         {this.renderColapseHeader()}
-
-        {!this.creationMode && <FormControlLabel
-            className={styles.latexSwitch}
-            label="Modo Latex"
-            control={
-              <Switch size="small" checked={latexModeOn} onChange={this.handleLatexMode} color="primary"/>
-            }
-        />}
-        {!this.creationMode && <Grid container spacing={1} className={styles.mathTableActions}>
-          {numberSymbols.map((symbol) => (
-              <Grid item key={symbol.label}>
-                <SymbolButton symbol={symbol} onClick={onClickSymbol}/>
-              </Grid>
-          ))}
-        </Grid>}
-
-        {!this.creationMode && <Grid container spacing={1} className={styles.mathTableActions}>
-          {operationSymbols.map((symbol) => (
-              <Grid item key={symbol.label}>
-                <SymbolButton symbol={symbol} onClick={onClickSymbol}/>
-              </Grid>
-          ))}
-        </Grid>}
-
-        {!this.creationMode && <Grid container spacing={1} className={styles.mathTableActions}>
-          {separatorSymbols.map((symbol) => (
-              <Grid item key={symbol.label}>
-                <SymbolButton symbol={symbol} onClick={onClickSymbol}/>
-              </Grid>
-          ))}
-        </Grid>}
-
-        {!this.creationMode && <Grid container spacing={1} className={styles.mathTableActions}>
-          {trigonometrySymbols.map((symbol) => (
-              <Grid item key={symbol.label}>
-                <SymbolButton symbol={symbol} onClick={onClickSymbol}/>
-              </Grid>
-          ))}
-        </Grid>}
-
         <Grid container spacing={2} className={styles.mathTableActions}>
-          {exponentialSymbols.map((symbol) => (
-            <Grid item key={symbol.label}>
-              <SymbolButton symbol={symbol} onClick={onClickSymbol} />
-            </Grid>
+          {creationModeSymbols.map((symbol) => (
+              <Grid item key={symbol.label}>
+                <SymbolButton symbol={symbol} onClick={onClickSymbol} />
+              </Grid>
           ))}
         </Grid>
+      </div>)
 
-        {!this.creationMode && <Grid container spacing={1} className={styles.mathTableActions}>
-          {complexSymbols.map((symbol) => (
-              <Grid item key={symbol.label}>
-                <SymbolButton symbol={symbol} onClick={onClickSymbol}/>
-              </Grid>
-          ))}
-        </Grid>}
+    } else {
+      return (
+          <div className={styles.mathTable}>
+            {this.renderColapseHeader()}
 
-        {!this.creationMode && <Grid container spacing={1} className={styles.mathTableActions}>
-          {rangeSymbols.map((symbol) => (
-              <Grid item key={symbol.label}>
-                <SymbolButton symbol={symbol} onClick={onClickSymbol}/>
-              </Grid>
-          ))}
-        </Grid>}
+            <FormControlLabel
+                className={styles.latexSwitch}
+                label="Modo Latex"
+                control={
+                  <Switch size="small" checked={latexModeOn} onChange={this.handleLatexMode} color="primary"/>
+                }
+            />
+            <Grid container spacing={1} className={styles.mathTableActions}>
+              {numberSymbols.map((symbol) => (
+                  <Grid item key={symbol.label}>
+                    <SymbolButton symbol={symbol} onClick={onClickSymbol}/>
+                  </Grid>
+              ))}
+            </Grid>
 
-      </div>
-    );
+             <Grid container spacing={1} className={styles.mathTableActions}>
+              {operationSymbols.map((symbol) => (
+                  <Grid item key={symbol.label}>
+                    <SymbolButton symbol={symbol} onClick={onClickSymbol}/>
+                  </Grid>
+              ))}
+            </Grid>
+
+            <Grid container spacing={1} className={styles.mathTableActions}>
+              {separatorSymbols.map((symbol) => (
+                  <Grid item key={symbol.label}>
+                    <SymbolButton symbol={symbol} onClick={onClickSymbol}/>
+                  </Grid>
+              ))}
+            </Grid>
+
+            <Grid container spacing={1} className={styles.mathTableActions}>
+              {trigonometrySymbols.map((symbol) => (
+                  <Grid item key={symbol.label}>
+                    <SymbolButton symbol={symbol} onClick={onClickSymbol}/>
+                  </Grid>
+              ))}
+            </Grid>
+
+            <Grid container spacing={2} className={styles.mathTableActions}>
+              {exponentialSymbols.map((symbol) => (
+                  <Grid item key={symbol.label}>
+                    <SymbolButton symbol={symbol} onClick={onClickSymbol} />
+                  </Grid>
+              ))}
+            </Grid>
+
+            <Grid container spacing={1} className={styles.mathTableActions}>
+              {complexSymbols.map((symbol) => (
+                  <Grid item key={symbol.label}>
+                    <SymbolButton symbol={symbol} onClick={onClickSymbol}/>
+                  </Grid>
+              ))}
+            </Grid>
+
+            <Grid container spacing={1} className={styles.mathTableActions}>
+              {rangeSymbols.map((symbol) => (
+                  <Grid item key={symbol.label}>
+                    <SymbolButton symbol={symbol} onClick={onClickSymbol}/>
+                  </Grid>
+              ))}
+            </Grid>
+
+          </div>
+      );
+    }
   };
 }
