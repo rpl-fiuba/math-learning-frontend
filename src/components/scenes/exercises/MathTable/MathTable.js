@@ -64,6 +64,7 @@ const rangeSymbols = [
   { label: '\\Z', latexValue: '\\Z' },
   { label: '\\o', latexValue: '\\o' },
   { label: '\\cup', latexValue: '\\cup' },
+  { label: '\\cap', latexValue: '\\cap' },
   { label: '\\infty', latexValue: '\\infty' },
   { label: 'Dom', latexValue: 'Dom' },
   { label: 'Img', latexValue: 'Img' }
