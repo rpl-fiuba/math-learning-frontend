@@ -8,6 +8,7 @@ import styles from './ExercisePage.module.sass';
 import Domain from '../Domain';
 import Image from '../Image';
 import Trigonometry from "../Trigonometry";
+import Exponential from "../Exponential";
 
 export default class ExercisePage extends Component {
   componentDidMount() {
@@ -110,6 +111,17 @@ export default class ExercisePage extends Component {
     if (exercise.type === 'trigonometry') {
       return (
           <Trigonometry
+              exercise={exercise}
+              userId={userId}
+              isProfessor={isProfessor}
+              allResolutions={allResolutions}
+              onReturnToCourse={onReturnToCourse}
+          />
+      );
+    }
+    if (exercise.type === 'exponential') {
+      return (
+          <Exponential
               exercise={exercise}
               userId={userId}
               isProfessor={isProfessor}

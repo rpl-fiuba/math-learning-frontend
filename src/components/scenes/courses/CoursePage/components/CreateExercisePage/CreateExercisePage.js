@@ -219,6 +219,7 @@ class CreateExercisePage extends Component {
             <MenuItem value="image">Imagen</MenuItem>
             <MenuItem value="inequality">Inecuaciones</MenuItem>
             <MenuItem value="trigonometry">Trigonometria</MenuItem>
+            <MenuItem value="exponential">Ecuaciones exponenciales y logaritmicas</MenuItem>
           </Select>
         </FormControl>
 

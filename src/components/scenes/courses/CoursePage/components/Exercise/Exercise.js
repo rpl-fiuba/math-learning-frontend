@@ -33,7 +33,10 @@ const typeMap = {
   },
   trigonometry: {
     text: 'Trigonometria'
-  }
+  },
+  exponential: {
+      text: 'Ecuaciones exponenciales y logaritmicas'
+    }
 };
 
 const difficultyMap = {
