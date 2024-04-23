@@ -9,7 +9,7 @@ export default function Footer() {
         <Typography variant="body2" align="center" color="textSecondary" component="p">
           Pricing ⋅ Contact ⋅ Blog ⋅ Docs ⋅ Terms and Privacy ⋅ Public GitHub
           <br />
-          Copyright © Math Learning. 2019. All Rights Reserved
+          Copyright © Math Learning. 2024. All Rights Reserved
         </Typography>
       </Container>
     </footer>
