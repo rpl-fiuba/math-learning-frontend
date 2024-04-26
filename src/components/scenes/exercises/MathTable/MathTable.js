@@ -54,9 +54,9 @@ const exponentialSymbols = [
 ];
 
 const complexSymbols = [
-  { label: 'dx', value: 'dx' },
-  { label: '\\frac{d()}{dx}', value: 'd()/dx', latexValue: '\\frac{d()}{dx}' },
-  { label: '\\int dx', latexValue: '(\\int_{\\ }^{\\ }\\ dx)' }, // TODO: Mathquill issue: https://github.com/mathquill/mathquill/issues/784
+  //{ label: 'dx', value: 'dx' },
+  //{ label: '\\frac{d()}{dx}', value: 'd()/dx', latexValue: '\\frac{d()}{dx}' },
+  //{ label: '\\int dx', latexValue: '(\\int_{\\ }^{\\ }\\ dx)' }, // TODO: Mathquill issue: https://github.com/mathquill/mathquill/issues/784
 ];
 
 const rangeSymbols = [
@@ -67,7 +67,9 @@ const rangeSymbols = [
   { label: '\\cap', latexValue: '\\cap' },
   { label: '\\infty', latexValue: '\\infty' },
   { label: 'Dom', latexValue: 'Dom' },
-  { label: 'Img', latexValue: 'Img' }
+  { label: 'Img', latexValue: 'Img' },
+  { label: '\\vee', latexValue: '\\vee' },
+  { label: '\\wedge', latexValue: '\\wedge' }
 ];
 
 const creationModeSymbols = [...exponentialSymbols, ...separatorSymbols]
@@ -205,7 +207,7 @@ export default class MathTable extends Component {
               ))}
             </Grid>
 
-            <Grid container spacing={1} className={styles.mathTableActions}>
+            <Grid container spacing={3} className={styles.mathTableActions}>
               {rangeSymbols.map((symbol) => (
                   <Grid item key={symbol.label}>
                     <SymbolButton symbol={symbol} onClick={onClickSymbol}/>
