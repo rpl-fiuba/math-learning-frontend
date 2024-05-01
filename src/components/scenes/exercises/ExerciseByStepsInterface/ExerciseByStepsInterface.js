@@ -20,6 +20,8 @@ import styles from './ExerciseByStepsInterface.module.sass';
 import MathTable from '../MathTable';
 import {ChallengeTriangle} from "../Trigonometry/Triangle";
 import {cleanProblemInput} from "../../../../utils/latexUtils";
+import {Close} from "@material-ui/icons";
+import {typeMap} from "../../courses/CoursePage/components/Exercise/TypeMap";
 
 class ExerciseByStepsInterface extends Component {
   constructor(props) {
@@ -28,6 +30,7 @@ class ExerciseByStepsInterface extends Component {
     this.state = {
       latexModeOn: false, // eslint-disable-line react/no-unused-state
       currentQualification: 10,
+      showHelpAlert: true,
       showExerciseInput: this.props.exercise.type !== 'trigonometry'
     };
   }
@@ -161,10 +164,11 @@ class ExerciseByStepsInterface extends Component {
       allResolutions,
       onOpenHelpModal
     } = this.props;
-    const { currentQualification } = this.state;
+    const {currentQualification, showHelpAlert} = this.state;
 
     const shouldStopEditing = isResolved || isDelivered;
     const canQualificate = isProfessor && isDelivered && !exercise.calification && userId;
+    const alertText = `Clickeá el ícono de ayuda para conocer cómo ingresar correctamente las respuestas a los ejercicios del tipo \"${typeMap[exercise.type]?.text || "actual"}\", o hace click en la cruz de la derecha para cerrar este mensaje`
 
     return (
       <div className={styles.exercise}>
@@ -180,10 +184,18 @@ class ExerciseByStepsInterface extends Component {
         </LeftPanel>
 
         <div className={styles.exercisePerimeter}>
-          {onOpenHelpModal && (
-            <div className={styles.helpModalIcon} onClick={onOpenHelpModal}>
-              <HelpIcon />
-            </div>
+          {onOpenHelpModal && showHelpAlert &&  (
+              <div className={styles.helpBar}>
+                <div className={styles.helpLeftContainer}>
+                  <div onClick={onOpenHelpModal}>
+                    <HelpIcon className={styles.helpModalIcon}/>
+                  </div>
+                  <span className={styles.helpTitle}> {alertText} </span>
+                </div>
+                <div onClick={() => this.setState({showHelpAlert: false})}>
+                  <Close className={styles.helpCloseAlertIcon}/>
+                </div>
+              </div>
           )}
           <div className={styles.container}>
             <Typography variant="h5" className={styles.exerciseName}>

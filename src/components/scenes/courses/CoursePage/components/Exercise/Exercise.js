@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import classNames from 'classnames';
-import { Card, Typography } from '@material-ui/core';
+import {Card, Typography} from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import WrongGenerationIcon from '@material-ui/icons/BatteryAlert';
 import WaitingGeneratedIcon from '@material-ui/icons/BatteryCharging60';
@@ -11,33 +11,7 @@ import styles from './Exercise.module.sass';
 import MoreVertOptions from '../Options';
 import {cleanProblemInput} from "../../../../../../utils/latexUtils";
 import {getTrigonometryProvidedData} from "../../../../exercises/Trigonometry/Trigonometry";
-
-const typeMap = {
-  derivative: {
-    text: 'Derivada'
-  },
-  integral: {
-    text: 'Integral'
-  },
-  factorisable: {
-    text: 'Factoreo'
-  },
-  domain: {
-    text: 'Dominio'
-  },
-  image: {
-    text: 'Imagen'
-  },
-  inequality: {
-    text: 'Inecuaciones'
-  },
-  trigonometry: {
-    text: 'Trigonometria'
-  },
-  exponential: {
-      text: 'Ecuaciones exponenciales y logaritmicas'
-    }
-};
+import {typeMap} from "./TypeMap";
 
 const difficultyMap = {
   easy: {
