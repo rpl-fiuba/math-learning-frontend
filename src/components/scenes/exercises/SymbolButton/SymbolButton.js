@@ -12,10 +12,10 @@ export default class SymbolButton extends Component {
   }
 
   render = () => {
-    const { symbol } = this.props;
+    const { symbol, big } = this.props;
 
     return (
-      <Button onClick={this.onClickMathFormula} size="small" variant="contained" className={styles.mathExpression}>
+      <Button onClick={this.onClickMathFormula} variant="contained" className={big ? styles.mathExpressionBig : styles.mathExpression}>
         <MathText
           content={symbol.label}
           className={styles.singleMathText}

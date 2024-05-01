@@ -4,19 +4,25 @@
   z-index: -1
   margin: 0
   padding: 2px !important
+  height: 100% !important
+  font-stretch: ultra-expanded
 
   span
-    font-size: 13px
+    font-size: 22px
   var
-    font-size: 13px
+    font-size: 22px
 
 .mathExpression
   z-index: 0
   text-transform: none !important
+  align-content: center
+  justify-content: center
+  display: flex
   padding: 0 !important
   width: 40px !important
   height: 40px !important
   min-width: 0px !important
 
-  span
-    padding: 0 !important
+.mathExpressionBig
+  @extend .mathExpression
+  width: 75px !important
