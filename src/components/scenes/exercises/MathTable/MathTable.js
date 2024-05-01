@@ -53,11 +53,11 @@ const exponentialSymbols = [
   { label: '\\ln{x}', latexValue: '\\ln x' },
   { label: '\\log_2 x', latexValue: '\\log_2 x' },
   { label: '\\log_b a', latexValue: '\\log_{} {}' },
-  { label: 'Dom', latexValue: 'Dom(\\ \\ )' },
-  { label: 'Img', latexValue: 'Img(\\ \\ )' },
 ];
 
 const complexSymbols = [
+  { label: 'Dom', latexValue: 'Dom(\\ \\ )' },
+  { label: 'Img', latexValue: 'Img(\\ \\ )' },
   //{ label: 'dx', value: 'dx' },
   //{ label: '\\frac{d()}{dx}', value: 'd()/dx', latexValue: '\\frac{d()}{dx}' },
   //{ label: '\\int dx', latexValue: '(\\int_{\\ }^{\\ }\\ dx)' }, // TODO: Mathquill issue: https://github.com/mathquill/mathquill/issues/784
@@ -86,7 +86,11 @@ const rangeSymbols = [
   { label: '-\\infty', latexValue: '-\\infty' },
 ];
 
-const creationModeSymbols = [...exponentialSymbols, ...separatorSymbols]
+const creationModeSymbols = [...exponentialSymbols, ...separatorSymbols, ...rangeSymbols]
+
+const firstRow = [...operationSymbols, ...separatorSymbols, ...inequalitySymbols]
+const secondRow = [...rangeSets, ...rangeSymbols]
+const thirdRow = [...exponentialSymbols, ...complexSymbols]
 
 export default class MathTable extends Component {
 
@@ -155,7 +159,7 @@ export default class MathTable extends Component {
         <Grid container spacing={1} className={styles.mathTableActions}>
           {creationModeSymbols.map((symbol) => (
               <Grid item key={symbol.label}>
-                <SymbolButton symbol={symbol} onClick={onClickSymbol} />
+                <SymbolButton symbol={symbol} big onClick={onClickSymbol} />
               </Grid>
           ))}
         </Grid>
@@ -174,15 +178,7 @@ export default class MathTable extends Component {
                 }
             />
             <Grid container spacing={1} className={styles.mathTableActions}>
-              {numberSymbols.map((symbol) => (
-                  <Grid item key={symbol.label}>
-                    <SymbolButton symbol={symbol} onClick={onClickSymbol}/>
-                  </Grid>
-              ))}
-            </Grid>
-
-             <Grid container spacing={1} className={styles.mathTableActions}>
-              {operationSymbols.map((symbol) => (
+              {firstRow.map((symbol) => (
                   <Grid item key={symbol.label}>
                     <SymbolButton symbol={symbol} onClick={onClickSymbol}/>
                   </Grid>
@@ -190,23 +186,7 @@ export default class MathTable extends Component {
             </Grid>
 
             <Grid container spacing={1} className={styles.mathTableActions}>
-              {separatorSymbols.map((symbol) => (
-                  <Grid item key={symbol.label}>
-                    <SymbolButton symbol={symbol} onClick={onClickSymbol}/>
-                  </Grid>
-              ))}
-            </Grid>
-
-            <Grid container spacing={1} className={styles.mathTableActions}>
-              {inequalitySymbols.map((symbol) => (
-                  <Grid item key={symbol.label}>
-                    <SymbolButton symbol={symbol} onClick={onClickSymbol}/>
-                  </Grid>
-              ))}
-            </Grid>
-
-            <Grid container spacing={1} className={styles.mathTableActions}>
-              {rangeSets.map((symbol) => (
+              {secondRow.map((symbol) => (
                   <Grid item key={symbol.label}>
                     <SymbolButton symbol={symbol} big onClick={onClickSymbol}/>
                   </Grid>
@@ -214,34 +194,9 @@ export default class MathTable extends Component {
             </Grid>
 
             <Grid container spacing={1} className={styles.mathTableActions}>
-              {rangeSymbols.map((symbol) => (
+              {thirdRow.map((symbol) => (
                   <Grid item key={symbol.label}>
                     <SymbolButton symbol={symbol} big onClick={onClickSymbol}/>
-                  </Grid>
-              ))}
-            </Grid>
-
-
-            <Grid container spacing={1} className={styles.mathTableActions}>
-              {trigonometrySymbols.map((symbol) => (
-                  <Grid item key={symbol.label}>
-                    <SymbolButton symbol={symbol} big onClick={onClickSymbol}/>
-                  </Grid>
-              ))}
-            </Grid>
-
-            <Grid container spacing={1} className={styles.mathTableActions}>
-              {exponentialSymbols.map((symbol) => (
-                  <Grid item key={symbol.label}>
-                    <SymbolButton symbol={symbol} big onClick={onClickSymbol} />
-                  </Grid>
-              ))}
-            </Grid>
-
-            <Grid container spacing={1} className={styles.mathTableActions}>
-              {complexSymbols.map((symbol) => (
-                  <Grid item key={symbol.label}>
-                    <SymbolButton symbol={symbol} onClick={onClickSymbol}/>
                   </Grid>
               ))}
             </Grid>
