@@ -8,7 +8,6 @@ const replaceAll = (expression, search, replacement) => {
 const cleanProblemInput = (problemInput) => {
   let cleanedInput = replaceAll(problemInput, "\\left|", "\\mid ")
   cleanedInput = replaceAll(cleanedInput, "\\right|", "\\mid ")
-  console.log("ProblemInput is", problemInput, "cleaned is", cleanedInput)
   return cleanedInput
 }
 

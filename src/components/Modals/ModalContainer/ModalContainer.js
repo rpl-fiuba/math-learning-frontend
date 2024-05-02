@@ -13,6 +13,7 @@ import EditExerciseModal from '../EditExerciseModal';
 import SessionExpiredModal from '../SessionExpiredModal';
 import CopyCourseModal from '../CopyCourseModal';
 import StepsExerciseHelpModal from '../StepsExerciseHelpModal';
+import BaseStepsExerciseHelpModal from "../BaseStepsExerciseHelpModal";
 
 /** Modal Type Constants */
 import {
@@ -24,7 +25,8 @@ import {
   EDIT_EXERCISE_MODAL,
   SESSION_EXPIRED_MODAL,
   COPY_COURSE_MODAL,
-  STEPS_EXERCISE_HELP_MODAL
+  STEPS_EXERCISE_HELP_MODAL,
+  CUSTOMIZABLE_STEPS_EXERCISE_HELP_MODAL
 } from '../../../state/modals/modalTypes';
 
 const MODAL_COMPONENTS = {
@@ -36,7 +38,8 @@ const MODAL_COMPONENTS = {
   [EDIT_EXERCISE_MODAL]: EditExerciseModal,
   [SESSION_EXPIRED_MODAL]: SessionExpiredModal,
   [COPY_COURSE_MODAL]: CopyCourseModal,
-  [STEPS_EXERCISE_HELP_MODAL]: StepsExerciseHelpModal
+  [STEPS_EXERCISE_HELP_MODAL]: StepsExerciseHelpModal,
+  [CUSTOMIZABLE_STEPS_EXERCISE_HELP_MODAL]: BaseStepsExerciseHelpModal
 };
 
 const ModalContainer = (props) => {
@@ -52,7 +55,8 @@ const ModalContainer = (props) => {
 };
 
 const currentState = (state) => ({
-  modalType: selectors.modalType(state)
+  modalType: selectors.modalType(state),
+  modalParams: selectors.modalParams(state)
 });
 
 export default connect(currentState)(ModalContainer);

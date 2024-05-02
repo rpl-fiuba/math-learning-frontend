@@ -6,6 +6,14 @@ import * as modalTypes from '../../../../state/modals/modalTypes';
 import * as modalActions from '../../../../state/modals/actions';
 
 import Inequality from './Inequality';
+import {
+  AND_OR_FOR_INEQUATIONS,
+  FRACTION_WRITING, INEQUALITY_EXPLANATION,
+  MULTIPLY_SYMBOL_REQUIRED
+} from "../../../Modals/BaseStepsExerciseHelpModal/CommonModalScreens";
+
+
+const modalScreens = [INEQUALITY_EXPLANATION, AND_OR_FOR_INEQUATIONS, MULTIPLY_SYMBOL_REQUIRED]
 
 const currentState = (state, { exercise }) => {
   const currentExpression = selectors.currentExpression(state, { ...exercise });
@@ -70,7 +78,7 @@ const currentActions = (dispatch, { exercise, userId }) => ({
     }));
   },
   onOpenHelpModal: () => {
-    dispatch(modalActions.loadModal(modalTypes.STEPS_EXERCISE_HELP_MODAL));
+    dispatch(modalActions.loadModal(modalTypes.CUSTOMIZABLE_STEPS_EXERCISE_HELP_MODAL, {screens: modalScreens}));
   },
 });
 

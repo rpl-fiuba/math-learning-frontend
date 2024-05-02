@@ -6,6 +6,10 @@ import * as modalTypes from '../../../../state/modals/modalTypes';
 import * as modalActions from '../../../../state/modals/actions';
 
 import Trigonometry from './Trigonometry';
+import {TRIANGLE_EXPLANATION} from "../../../Modals/BaseStepsExerciseHelpModal/CommonModalScreens";
+
+
+const modalScreens = [TRIANGLE_EXPLANATION]
 
 const currentState = (state, { exercise }) => {
   const currentExpression = selectors.currentExpression(state, { ...exercise });
@@ -70,7 +74,7 @@ const currentActions = (dispatch, { exercise, userId }) => ({
     }));
   },
   onOpenHelpModal: () => {
-    dispatch(modalActions.loadModal(modalTypes.STEPS_EXERCISE_HELP_MODAL));
+    dispatch(modalActions.loadModal(modalTypes.CUSTOMIZABLE_STEPS_EXERCISE_HELP_MODAL, {screens: modalScreens}));
   },
 });
 
