@@ -86,7 +86,7 @@ const rangeSymbols = [
   { label: '-\\infty', latexValue: '-\\infty' },
 ];
 
-const creationModeSymbols = [...exponentialSymbols, ...separatorSymbols, ...rangeSymbols]
+const creationModeSymbols = [...exponentialSymbols, ...separatorSymbols, ...rangeSymbols, ...inequalitySymbols]
 
 const firstRow = [...operationSymbols, ...separatorSymbols, ...inequalitySymbols]
 const secondRow = [...rangeSets, ...rangeSymbols]
