@@ -50,7 +50,7 @@ const exponentialSymbols = [
   { label: '\\sqrt{x}', latexValue: '\\sqrt x' },
   { label: '\\sqrt[a]{b}', latexValue: '\\sqrt[]{}' },
   { label: 'e^x', value: 'e^x' },
-  { label: '\\ln{x}', latexValue: '\\ln x' },
+  { label: '\\ln', latexValue: '\\ln()' },
   { label: '\\log_2 x', latexValue: '\\log_2 x' },
   { label: '\\log_b a', latexValue: '\\log_{} {}' },
 ];
