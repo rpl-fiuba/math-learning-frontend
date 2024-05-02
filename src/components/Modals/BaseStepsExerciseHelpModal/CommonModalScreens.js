@@ -41,3 +41,9 @@ export const INTERVAL_REAL_EXCEPTION =   {
     bottomText: "Ambas representaciones son válidas para la plataforma",
     image: "interval-representation.png"
 }
+
+export const EXPONENTIAL_EXPLANATION =   {
+    topText: "En estos ejercicios debemos ir resolviendo paso a paso la ecuación exponencial o logarítmica hasta llegar a los valores de x posibles.",
+    bottomText: "Tener en cuenta que si hay más de un valor de x posible, se deben colocar todos separados por operadores OR.",
+    image: "exercise_ln.png"
+}

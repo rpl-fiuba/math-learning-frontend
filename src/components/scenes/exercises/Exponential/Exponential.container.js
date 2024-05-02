@@ -6,6 +6,13 @@ import * as modalTypes from '../../../../state/modals/modalTypes';
 import * as modalActions from '../../../../state/modals/actions';
 
 import Exponential from './Exponential';
+import {
+  EXPONENTIAL_EXPLANATION,
+  FRACTION_WRITING,
+  MULTIPLY_SYMBOL_REQUIRED
+} from "../../../Modals/BaseStepsExerciseHelpModal/CommonModalScreens";
+
+const modalScreens = [EXPONENTIAL_EXPLANATION, FRACTION_WRITING, MULTIPLY_SYMBOL_REQUIRED]
 
 const currentState = (state, { exercise }) => {
   const currentExpression = selectors.currentExpression(state, { ...exercise });
@@ -70,7 +77,7 @@ const currentActions = (dispatch, { exercise, userId }) => ({
     }));
   },
   onOpenHelpModal: () => {
-    dispatch(modalActions.loadModal(modalTypes.STEPS_EXERCISE_HELP_MODAL));
+    dispatch(modalActions.loadModal(modalTypes.CUSTOMIZABLE_STEPS_EXERCISE_HELP_MODAL, {screens: modalScreens}));
   },
 });
 
