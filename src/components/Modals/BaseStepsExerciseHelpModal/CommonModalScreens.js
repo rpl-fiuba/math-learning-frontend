@@ -26,7 +26,7 @@ export const INEQUALITY_EXPLANATION =   {
 
 export const TRIANGLE_EXPLANATION =   {
     topText: "Para resolver el triángulo debes ingresar todos los valores de sus lados y angulos faltantes",
-    bottomText: "Al finalizar, vas a poder ingresar el area del mismo para entregar el ejercicio, para esto debes usar punto decimal \".\" en lugar de coma \",\" para los decimales (ej: 30.1249)",
+    bottomText: "Al finalizar debés ingresar el area del mismo para poder entregar el ejercicio, recordá usar punto decimal \".\" en lugar de coma \",\" para los decimales (ej: 251.03)",
     image: "triangle-solved.png"
 }
 
