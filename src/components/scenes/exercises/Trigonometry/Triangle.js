@@ -40,6 +40,15 @@ const TriangleGraph = ({ angle1, angle2, baseLength }) => {
     );
 };
 
+export const tagFromLabel = {
+    "leftAngle": "Ang. Izquierdo",
+    "rightAngle": "Ang. Derecho",
+    "topAngle": "Ang. Superior",
+    "bottomSide": "Lado Inferior",
+    "rightSide": "Lado Derecho",
+    "leftSide": "Lado Izquierdo"
+}
+
 export const ChallengeTriangle = ({problemInput, showInput, showAllData}) => {
 
     const leftAngle = problemInput.angles.find(angle => angle.label === "leftAngle")
@@ -55,8 +64,8 @@ export const ChallengeTriangle = ({problemInput, showInput, showAllData}) => {
     const axisRange = [-0.25 * max, 1.25 * max]
     const axisResolution = {x: 400, y: 400}
 
-    const angles = problemInput.angles.map((element, index) => ({...element, kind: "angle", tag: `Ángulo ${index+1}`}))
-    const sides =  problemInput.sides.map((element, index) => ({...element, kind: "side", tag: `Lado ${index+1}`}))
+    const angles = problemInput.angles.map((element, index) => ({...element, kind: "angle", tag: tagFromLabel[element.label]}))
+    const sides =  problemInput.sides.map((element, index) => ({...element, kind: "side", tag: tagFromLabel[element.label]}))
     const elements = angles.concat(sides)
     const providedElements = elements.filter(element => !!element.provided)
     const missingElements = elements.filter(element => !element.provided)

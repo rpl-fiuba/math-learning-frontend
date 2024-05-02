@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core';
 import { Slider } from '@material-ui/core';
 import Grid from "@material-ui/core/Grid";
-import TriangleGraph, {calculateTriangle, calculateTriangleSideLengths} from "./Triangle";
+import TriangleGraph, {calculateTriangle, calculateTriangleSideLengths, tagFromLabel} from "./Triangle";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import styles from "../../courses/CoursePage/components/CreateExercisePage/CreateExercisePage.module.sass";
 import WarningIcon from "@material-ui/icons/Warning";
@@ -62,12 +62,18 @@ class TrigonometryCreation extends Component {
                 {label: "leftSide", value: leftSide, provided: false}]
         }
 
-        this.state.checkedAngles.forEach((name, index) => {
-            exercise.angles[index].provided = true
+        this.state.checkedAngles.forEach((tag) => {
+            const index = exercise.angles.findIndex(angle => tagFromLabel[angle.label] === tag)
+            if (index !== -1){
+                exercise.angles[index].provided = true
+            }
         })
 
-        this.state.checkedSides.forEach((name, index) => {
-            exercise.sides[index].provided = true
+        this.state.checkedSides.forEach((tag) => {
+            const index = exercise.sides.findIndex(side => tagFromLabel[side.label] === tag)
+            if (index !== -1){
+                exercise.sides[index].provided = true
+            }
         })
 
         return exercise
@@ -195,9 +201,9 @@ class TrigonometryCreation extends Component {
                             marks={this.angleMarks}
                         />
                         <List >
-                            {this.buildItem("angle", "Angulo A", this.state.leftInterval)}
-                            {this.buildItem("angle","Angulo B", this.state.rightInterval - this.state.leftInterval)}
-                            {this.buildItem("angle","Angulo C", 180 - this.state.rightInterval)}
+                            {this.buildItem("angle", tagFromLabel["leftAngle"], this.state.leftInterval)}
+                            {this.buildItem("angle", tagFromLabel["rightAngle"], this.state.rightInterval - this.state.leftInterval)}
+                            {this.buildItem("angle", tagFromLabel["topAngle"], 180 - this.state.rightInterval)}
                         </List>
                     </Grid>
 
@@ -215,9 +221,9 @@ class TrigonometryCreation extends Component {
                             marks={this.sideMarks}
                         />
                         <List >
-                            {this.buildItem("side","Lado X", this.getSideLengths()[0])}
-                            {this.buildItem("side","Lado Y", this.getSideLengths()[1])}
-                            {this.buildItem("side","Lado Z", this.getSideLengths()[2])}
+                            {this.buildItem("side", tagFromLabel["leftSide"], this.getSideLengths()[2])}
+                            {this.buildItem("side", tagFromLabel["rightSide"], this.getSideLengths()[1])}
+                            {this.buildItem("side",tagFromLabel["bottomSide"], this.getSideLengths()[0])}
                         </List>
                     </Grid>
                     <Grid item xs={6}>
