@@ -7,11 +7,12 @@ import * as modalActions from '../../../../state/modals/actions';
 
 import Factorisable from './Factorisable';
 import {
+  FACTOR_EXPLANATION,
   FRACTION_WRITING,
   MULTIPLY_SYMBOL_REQUIRED
 } from "../../../Modals/BaseStepsExerciseHelpModal/CommonModalScreens";
 
-const modalScreens = [MULTIPLY_SYMBOL_REQUIRED, FRACTION_WRITING]
+const modalScreens = [FACTOR_EXPLANATION, MULTIPLY_SYMBOL_REQUIRED, FRACTION_WRITING]
 
 const currentState = (state, { exercise }) => {
   const currentExpression = selectors.currentExpression(state, { ...exercise });

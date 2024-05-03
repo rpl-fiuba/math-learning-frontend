@@ -47,3 +47,9 @@ export const EXPONENTIAL_EXPLANATION =   {
     bottomText: "Tener en cuenta que si hay más de un valor de x posible, se deben colocar todos separados por operadores OR.",
     image: "exercise_ln.png"
 }
+
+export const FACTOR_EXPLANATION =   {
+    topText: "En estos ejercicios debemos ir factorizando paso a paso hasta llegar a la mínima expresión posible.",
+    bottomText: "En este caso observamos un ejemplo de una diferencia de cuadrados.",
+    image: "factor-exercise.png"
+}
