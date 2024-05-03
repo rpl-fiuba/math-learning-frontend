@@ -70,11 +70,11 @@ class LoginModal extends Component {
     return (
         <Modal className={styles.modal} onClose={onClose}>
           <div style={{justifyContent: 'center'}}>
-            <Typography className={styles.modalTitle} variant="body1" align="center" color="textSecondary"
+            <Typography className={styles.modalTitle} variant="subtitle2" align="center" color="textSecondary"
                         component="p">
-              Si ya tenés una cuenta creada, solo iniciá sesión con Google
+              Si ya tenés una cuenta creada en Math Learning, solo iniciá sesión con Google
             </Typography>
-            <div style={{justifyContent: 'center', display: 'flex'}}>
+              <div style={{justifyContent: 'center', display: 'flex'}}>
               <GoogleLogin
                   className={styles.button}
                   clientId={googleClientId}
@@ -89,8 +89,8 @@ class LoginModal extends Component {
             </div>
           </div>
           <Divider className={styles.divider} variant="middle"/>
-          <Typography className={styles.modalTitle} variant="body1" align="center" color="textSecondary" component="p">
-            Si todavía no tenés una cuenta, ingresa tu nombre, tipo de usuario y registrate con Google para crearla
+          <Typography className={styles.modalTitle} variant="subtitle2" align="center" color="textSecondary" component="p">
+            Si todavía no tenés una cuenta en Math Learning, ingresa tu nombre, tipo de usuario y registrate con Google para crearla
           </Typography>
           <TextField
               id="signup-name"

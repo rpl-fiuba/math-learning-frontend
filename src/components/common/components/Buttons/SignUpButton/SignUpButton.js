@@ -13,7 +13,7 @@ export default function SignUpButton(props) {
       size={size || 'large'}
       className={classNames(styles.button, className)}
     >
-      Crear Cuenta
+      Crear Cuenta o Iniciar Sesion
     </Button>
   );
 }

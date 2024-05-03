@@ -89,21 +89,6 @@ class NavBar extends Component {
           onClick={onSignUp}
           className={styles.signUpButton}
         />
-        <GoogleLogin
-          clientId={googleClientId}
-          onSuccess={onGoogleLogin}
-          onFailure={(error) => console.log('google login error', error)}
-          cookiePolicy="single_host_origin"
-          text="signin"
-          size="medium"
-          theme="filled_black"
-          useOneTap={false}
-          render={(renderProps) => (
-            <Button onClick={renderProps.onClick} color="inherit">
-              Login
-            </Button>
-          )}
-        />
       </div>
     );
   }
