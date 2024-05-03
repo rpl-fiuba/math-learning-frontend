@@ -21,9 +21,9 @@ class Main extends Component {
         <div className={styles.imageContent}>
           <div className={styles.imageText}>
             <p id="main-content" className={styles.imageContentText}>
-              Aprender matemática
+              Tu herramienta para practicar
               <br />
-              nunca fue tan fácil ...
+                análisis matemático
             </p>
             <SignUpButton onClick={onSignUp} size="large" />
           </div>
