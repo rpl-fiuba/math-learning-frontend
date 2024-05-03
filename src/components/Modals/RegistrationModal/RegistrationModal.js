@@ -50,7 +50,7 @@ class RegistrationModal extends Component {
 
         <TextField
           id="course-password"
-          label="Ingrese la contraseña del curso o haga clic en MATRICULARSE si el curso no posee contraseña"
+          label="Ingrese la contraseña del curso o haga clic en MATRICULARSE si no posee"
           onChange={this.onChangePassword}
           onEnter={this.onJoinCourse}
           className={styles.textField}
