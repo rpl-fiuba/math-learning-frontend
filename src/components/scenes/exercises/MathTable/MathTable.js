@@ -170,13 +170,6 @@ export default class MathTable extends Component {
           <div className={styles.mathTable}>
             {this.renderColapseHeader()}
 
-            <FormControlLabel
-                className={styles.latexSwitch}
-                label="Modo Latex"
-                control={
-                  <Switch size="small" checked={latexModeOn} onChange={this.handleLatexMode} color="primary"/>
-                }
-            />
             <Grid container spacing={1} className={styles.mathTableActions}>
               {firstRow.map((symbol) => (
                   <Grid item key={symbol.label}>
