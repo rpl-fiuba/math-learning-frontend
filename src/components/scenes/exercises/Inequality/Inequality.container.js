@@ -8,12 +8,12 @@ import * as modalActions from '../../../../state/modals/actions';
 import Inequality from './Inequality';
 import {
   AND_OR_FOR_INEQUATIONS,
-  FRACTION_WRITING, INEQUALITY_EXPLANATION,
+  FRACTION_WRITING, INEQUALITY_EXPLANATION, INTERVAL_WITH_COMMA,
   MULTIPLY_SYMBOL_REQUIRED
 } from "../../../Modals/BaseStepsExerciseHelpModal/CommonModalScreens";
 
 
-const modalScreens = [INEQUALITY_EXPLANATION, AND_OR_FOR_INEQUATIONS, MULTIPLY_SYMBOL_REQUIRED]
+const modalScreens = [INEQUALITY_EXPLANATION, AND_OR_FOR_INEQUATIONS, INTERVAL_WITH_COMMA, MULTIPLY_SYMBOL_REQUIRED]
 
 const currentState = (state, { exercise }) => {
   const currentExpression = selectors.currentExpression(state, { ...exercise });

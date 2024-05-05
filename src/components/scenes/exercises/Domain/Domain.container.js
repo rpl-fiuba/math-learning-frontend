@@ -8,12 +8,12 @@ import * as modalActions from '../../../../state/modals/actions';
 import Domain from './Domain';
 import {
   DOMAIN_EXPLANATION,
-  FRACTION_WRITING, INTERVAL_REAL_EXCEPTION,
+  FRACTION_WRITING, INTERVAL_REAL_EXCEPTION, INTERVAL_WITH_COMMA,
   MULTIPLY_SYMBOL_REQUIRED
 } from "../../../Modals/BaseStepsExerciseHelpModal/CommonModalScreens";
 
 
-const modalScreens = [DOMAIN_EXPLANATION, INTERVAL_REAL_EXCEPTION, FRACTION_WRITING, MULTIPLY_SYMBOL_REQUIRED]
+const modalScreens = [DOMAIN_EXPLANATION, INTERVAL_WITH_COMMA, INTERVAL_REAL_EXCEPTION, FRACTION_WRITING, MULTIPLY_SYMBOL_REQUIRED]
 
 const currentState = (state, { exercise }) => {
   const currentExpression = selectors.currentExpression(state, { ...exercise });

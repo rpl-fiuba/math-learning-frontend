@@ -6,6 +6,13 @@ export const MULTIPLY_SYMBOL_REQUIRED = {
     image: "product-symbol.png"
 }
 
+export const INTERVAL_WITH_COMMA = {
+    topText: "Cuando ingreses un intervalo en la plataforma, debés separar los extremos con coma \",\" en lugar de punto y coma \";\"",
+    bottomText: "Por ejemplo, si querés ingresar el intervalo [1;3] en la plataforma debes escribirlo como [1,3]",
+    image: "interval-with-comma.png"
+}
+
+
 export const FRACTION_WRITING =   {
     topText: "Si necesitas escribir una fracción, podes primero escribir el numerador, seleccionarlo con el mouse, y finalizar marcando la barra con tu teclado con la combinación de teclas Shift+7",
     bottomText: "Como alternativa también podes primero escribir el símbolo de dividir \"/\" para luego escribir el numerador y denominador dentro de la fracción creada",
