@@ -56,7 +56,7 @@ export default class CoursePage extends Component {
       return <CourseUsersPage course={course} />;
     }
     if (isStatisticsPath) {
-      return <StatisticsPage course={course} />;
+      return <StatisticsPage course={course} guideId={guideId}/>;
     }
     if (isCreateExercisePath) {
       return <CreateExercisePage courseId={courseId} guideId={guideId} />;

@@ -37,6 +37,16 @@ export function getCourseExerciseStepCountSuccess({ courseId, statistics }) {
   };
 }
 
+export function getStudentProgressForGuide({ courseId, guideId, statistics }) {
+  return {
+    type: types.GET_GUIDE_STUDENT_PROGRESS_SUCCESS,
+    courseId,
+    guideId,
+    statistics
+  };
+}
+
+
 export function getUsersQualificationsSuccess({ courseId, statistics }) {
   return {
     type: types.GET_USERS_QUALIFICATIONS_SUCCESS,
@@ -64,6 +74,16 @@ export function getCourseExerciseStepCount({ courseId }) {
     dispatch(getCourseExerciseStepCountSuccess({ courseId, statistics }));
   };
 }
+
+export function getStudentProgress({ courseId, guideId }) {
+  return async (dispatch, getState) => {
+    const state = getState();
+    const context = commonSelectors.context(state);
+    const statistics = await exercisesClient.getStudentProgress({ context, courseId, guideId });
+    dispatch(getStudentProgressForGuide({ courseId, guideId, statistics }));
+  };
+}
+
 
 export function getUsersQualifications({ courseId }) {
   return async (dispatch, getState) => {

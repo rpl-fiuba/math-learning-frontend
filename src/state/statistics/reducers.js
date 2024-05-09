@@ -57,6 +57,26 @@ export default function reducers(state = initialState, action) {
       };
     }
 
+    case types.GET_GUIDE_STUDENT_PROGRESS_SUCCESS: {
+      try {
+        const newState = {
+          ...state,
+          data: {
+            ...state.data,
+            guides: {
+              ...state.data.guides || {},
+              [action.guideId]: {
+                    progress: action.statistics
+              }
+            }
+          }
+        };
+        return newState
+      } catch (e) {
+        console.log('Error: ', e);
+      }
+    }
+
     case types.GET_USERS_QUALIFICATIONS_SUCCESS: {
       return {
         ...state,

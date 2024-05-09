@@ -2,6 +2,7 @@ import _ from 'lodash';
 import fetch from 'node-fetch';
 import requestUtils from './requestUtils';
 import confs from '../configs/variables';
+import guide from "../components/scenes/courses/CoursePage/components/Guide";
 
 const { url } = confs.services.exercises;
 
@@ -237,6 +238,38 @@ const getExerciseErrors = async ({ context, courseId }) => {
   return requestUtils.processResponse(response);
 };
 
+const getStudentProgress = async ({ context, courseId, guideId }) => {
+  const courseIdEncoded = encodeURIComponent(courseId);
+  const guideIdEncoded = encodeURIComponent(guideId);
+  const failedUrl = `${url}/courses/${courseIdEncoded}/guides/${guideIdEncoded}/statistics/failed`;
+  const initiatedUrl = `${url}/courses/${courseIdEncoded}/guides/${guideIdEncoded}/statistics/initiated`;
+  const resolvedUrl = `${url}/courses/${courseIdEncoded}/guides/${guideIdEncoded}/statistics/resolved`;
+  const resolvedResponse = await fetch(resolvedUrl, {
+    headers: {
+      authorization: context.accessToken,
+      'Content-Type': 'application/json'
+    }
+  });
+  const initiatedResponse = await fetch(initiatedUrl, {
+    headers: {
+      authorization: context.accessToken,
+      'Content-Type': 'application/json'
+    }
+  });
+  const failedResponse = await fetch(failedUrl, {
+    headers: {
+      authorization: context.accessToken,
+      'Content-Type': 'application/json'
+    }
+  });
+  const resolvedData = await requestUtils.processResponse(resolvedResponse)
+  const initiatedData = await requestUtils.processResponse(initiatedResponse)
+  const failedData = await requestUtils.processResponse(failedResponse)
+
+  return {resolved: resolvedData, initiated: initiatedData, failed: failedData}
+};
+
+
 const getExerciseStepCount = async ({ context, courseId }) => {
   const exerciseUrl = `${url}/courses/${courseId}/steps/statistics`;
   const response = await fetch(exerciseUrl, {
@@ -321,4 +354,5 @@ export default {
   resolveExercise,
   deleteExercise,
   updateExerciseAsProfessor,
+  getStudentProgress
 };

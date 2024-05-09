@@ -3,27 +3,29 @@ import { Tabs, Tab } from '@material-ui/core';
 import ActivityPage from './ActivityPage';
 import ExerciseErrorsPage from './ExerciseErrorsPage';
 import ExerciseStepCountPage from './ExerciseStepCountPage';
+import StudentProgressPage from "./StudentProgressPage";
+
+const statisticsTabs = [
+  { label: 'Progreso de estudiantes', class: StudentProgressPage },
+  { label: 'Actividad de estudiantes', class:  ActivityPage},
+  { label: 'Errores por ejercicio', class: ExerciseErrorsPage },
+  { label: 'Promedio de pasos por ejercicio', class: ExerciseStepCountPage }
+];
 
 export default class StatisticsPage extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      selectedStatistic: 0
+      selectedStatistic: statisticsTabs[0].label
     };
   }
 
   renderStatisticPage = () => {
-    const { course } = this.props;
+    const { course, guideId } = this.props;
     const { selectedStatistic } = this.state;
-
-    if (selectedStatistic === 0) {
-      return <ActivityPage course={course} />;
-    }
-    if (selectedStatistic === 1) {
-      return <ExerciseErrorsPage course={course} />;
-    }
-    return <ExerciseStepCountPage course={course} />;
+    const SelectedTab = statisticsTabs.find((tab) => tab.label === selectedStatistic).class;
+    return <SelectedTab course={course} guideId={guideId}/>;
   }
 
   handleChange = (event, newValue) => {
@@ -42,9 +44,9 @@ export default class StatisticsPage extends Component {
           onChange={this.handleChange}
           aria-label="disabled tabs example"
         >
-          <Tab label="Actividad de usuarios" />
-          <Tab label="Errores por ejercicio" />
-          <Tab label="Promedio de pasos por ejercicio" />
+          {
+            statisticsTabs.map((tab) => <Tab key={tab.label} label={tab.label} value={tab.label}></Tab>)
+          }
         </Tabs>
 
         {this.renderStatisticPage()}
