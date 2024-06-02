@@ -25,3 +25,4 @@
 ## Linting
 - Run `npm run lint`
 - Launches the linter test runner to check the code syntaxis.
+
