@@ -4,12 +4,14 @@ import ListItemText from '@material-ui/core/ListItemText';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import React from 'react';
 import styles from './ProfileLinkListItem.module.sass';
+import SectionTitleItem from "../../common/components/SectionTitleItem";
 
 export default function ProfileLinkListItem(props) {
   const { profile } = props;
 
   return (
     <div className={styles.profileAvatar}>
+      <SectionTitleItem text={"Usuario"}/>
       <ListItem key="Account">
         <ListItemAvatar>
           <Avatar>

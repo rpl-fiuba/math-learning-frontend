@@ -18,6 +18,7 @@ import MathTextBox from '../../../../../common/math/MathTextBox';
 import styles from './CreateExercisePage.module.sass';
 import TrigonometryCreation from "../../../../exercises/Trigonometry/TrigonometryCreation";
 import MathTable from "../../../../exercises/MathTable";
+import ExerciseTypeSelector from "../../../../../common/components/Selectors/ExerciseTypeSelector";
 
 class CreateExercisePage extends Component {
   constructor(props) {
@@ -207,20 +208,7 @@ class CreateExercisePage extends Component {
         />
 
         <FormControl className={styles.dropdownContainer}>
-          <InputLabel id="dropdown-input-label">Tipo de ejercicio</InputLabel>
-          <Select
-            id="exercise-type-selector"
-            value={type}
-            onChange={this.onChangeType}
-            input={<BootstrapDropdownInput />}
-          >
-            <MenuItem value="factorisable">Factoreo</MenuItem>
-            <MenuItem value="domain">Dominio</MenuItem>
-            <MenuItem value="image">Imagen</MenuItem>
-            <MenuItem value="inequality">Inecuaciones</MenuItem>
-            <MenuItem value="trigonometry">Trigonometria</MenuItem>
-            <MenuItem value="exponential">Ecuaciones exponenciales y logaritmicas</MenuItem>
-          </Select>
+          <ExerciseTypeSelector onChangeType={this.onChangeType} type={type}/>
         </FormControl>
 
         <FormControl className={styles.dropdownContainer}>

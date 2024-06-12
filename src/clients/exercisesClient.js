@@ -26,6 +26,23 @@ const createExercise = async ({
   return requestUtils.processResponse(response);
 };
 
+const generatePlaygroundExercise = async ({
+                             context,
+                             exercise
+                           }) => {
+  const exerciseUrl = `${url}/playground/exercises`
+  const response = await fetch(exerciseUrl, {
+    method: 'post',
+    body: JSON.stringify(exercise),
+    headers: {
+      authorization: context.accessToken,
+      'Content-Type': 'application/json'
+    }
+  });
+  return requestUtils.processResponse(response);
+};
+
+
 const getExercise = async ({
   context,
   courseId,
@@ -76,6 +93,27 @@ const resolveExercise = async ({
   const profileUrl = `${url}/courses/${courseId}/guides/${guideId}/exercises/${exerciseId}/resolve`;
 
   const response = await fetch(profileUrl, {
+    method: 'post',
+    body: JSON.stringify({
+      currentExpression
+    }),
+    headers: {
+      authorization: context.accessToken,
+      'Content-Type': 'application/json'
+    }
+  });
+
+  return requestUtils.processResponse(response);
+};
+
+const resolvePlaygroundExercise = async ({
+                                 context,
+                                 exerciseId,
+                                 currentExpression
+                               }) => {
+  const exerciseUrl = `${url}/playground/exercises/${exerciseId}/resolve`;
+
+  const response = await fetch(exerciseUrl, {
     method: 'post',
     body: JSON.stringify({
       currentExpression
@@ -188,6 +226,17 @@ const updateExerciseAsProfessor = async ({
     }
   });
 
+  return requestUtils.processResponse(response);
+};
+
+const getPlaygroundExercise = async ({ context, exerciseId }) => {
+  const exerciseUrl = `${url}/playground/exercises/${exerciseId}`;
+  const response = await fetch(exerciseUrl, {
+    headers: {
+      authorization: context.accessToken,
+      'Content-Type': 'application/json'
+    }
+  });
   return requestUtils.processResponse(response);
 };
 
@@ -354,5 +403,8 @@ export default {
   resolveExercise,
   deleteExercise,
   updateExerciseAsProfessor,
-  getStudentProgress
+  getStudentProgress,
+  generatePlaygroundExercise,
+  getPlaygroundExercise,
+  resolvePlaygroundExercise
 };

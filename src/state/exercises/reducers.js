@@ -24,19 +24,36 @@ const exerciseDetailToReset = {
   hints: []
 };
 
-function updateExerciseDetail({ state: currentState, courseId, guideId, exerciseId, exerciseProps = {} }) {
-  const courseGuideId = idUtils.courseGuideId({ courseId, guideId });
-  const exercises = currentState.data.detail[courseGuideId] || {};
+function getExerciseList(isPlayground, currentState, courseId, guideId) {
+  if (isPlayground) {
+    return currentState.data.detail.playground || {};
+  } else {
+    const courseGuideId = idUtils.courseGuideId({courseId, guideId});
+    return currentState.data.detail[courseGuideId] || {};
+  }
+}
+
+function getCurrentExercise({isPlayground, currentState, courseId, guideId, exerciseId}) {
+  if (isPlayground) {
+    return currentState.data.detail.playground[exerciseId].exercise || {};
+  } else {
+    const courseGuideId = idUtils.courseGuideId({courseId, guideId});
+    return currentState.data.detail[courseGuideId][exerciseId].exercise || {};
+  }
+}
+
+
+function updateExerciseDetail({ state: currentState, courseId, guideId, exerciseId, exerciseProps = {}, isPlayground = false }) {
+  let newExercise;
+  const exercises = getExerciseList(isPlayground, currentState, courseId, guideId);
 
   if (!exercises[exerciseId]) {
     // nothing to update since it does not exist
     return exercises;
   }
-
   // updating exercise
   // intentional (to prevent re render the components)
   const currentExerciseDetail = exercises[exerciseId];
-  let newExercise;
   if (!currentExerciseDetail.exercise) {
     newExercise = { ...exerciseProps.exercise };
   } else {
@@ -59,9 +76,17 @@ function updateExerciseDetail({ state: currentState, courseId, guideId, exercise
   return newDetailExercises;
 }
 
-function updateExerciseList({ state: currentState, courseId, guideId, exerciseId, exerciseProps = {} }) {
+function updateExerciseList({ state: currentState, courseId, guideId, exerciseId, exerciseProps = {}, isPlayground = false }) {
   const courseGuideId = idUtils.courseGuideId({ courseId, guideId });
-  const currentCourseGuideList = currentState.data.list[courseGuideId];
+  let currentCourseGuideList;
+
+  if (isPlayground) {
+    // TODO - implement playground list
+    // currentCourseGuideList = currentState.data.list.playground
+    return null
+  } else {
+    currentCourseGuideList = currentState.data.list[courseGuideId];
+  }
 
   if (!currentCourseGuideList) {
     return null;
@@ -87,16 +112,16 @@ function updateExerciseList({ state: currentState, courseId, guideId, exerciseId
 }
 
 function updateExerciseState({
-  state: currentState, courseId, guideId, exerciseId, exerciseProps = {}
+  state: currentState, courseId, guideId, exerciseId, exerciseProps = {}, isPlayground = false
 }) {
   const courseGuideId = idUtils.courseGuideId({ courseId, guideId });
 
   // making the new detail and list objects
   const newDetailExercises = updateExerciseDetail({
-    state: currentState, courseId, guideId, exerciseId, exerciseProps
+    state: currentState, courseId, guideId, exerciseId, exerciseProps, isPlayground
   });
   const newCourseGuideList = updateExerciseList({
-    state: currentState, courseId, guideId, exerciseId, exerciseProps
+    state: currentState, courseId, guideId, exerciseId, exerciseProps, isPlayground
   });
 
   const { list } = currentState.data;
@@ -106,7 +131,11 @@ function updateExerciseState({
     list[courseGuideId] = [...newCourseGuideList]; // intentional (to re render the components)
   }
   if (newDetailExercises) {
-    detail[courseGuideId] = newDetailExercises;
+    if (isPlayground) {
+      detail.playground = newDetailExercises;
+    } else {
+      detail[courseGuideId] = newDetailExercises;
+    }
   }
 
   return {
@@ -407,6 +436,31 @@ export default function reducers(state = initialState, action) {
       };
     }
 
+    case types.FETCH_PLAYGROUND_EXERCISE_SUCCESS: {
+      const exercises = state.data.detail["playground"] || {};
+      const newExercisesState = {
+        ...exercises,
+        [action.exercise.exerciseId]: {
+          exercise: {...action.exercise, isPlayground: true},
+          isLoading: false,
+          currentExpression: { expression: '', variables: [] },
+          isPlayground: true
+        }
+      };
+
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          detail: {
+            ...state.data.detail,
+            "playground": newExercisesState
+          }
+        }
+      };
+    }
+
+
     case types.GET_USER_EXERCISE_SUCCESS: {
       const courseGuideId = idUtils.courseGuideId(_.pick(action, 'courseId', 'guideId'));
 
@@ -447,7 +501,8 @@ export default function reducers(state = initialState, action) {
         courseId: action.courseId,
         guideId: action.guideId,
         exerciseId: action.exerciseId,
-        exerciseProps: { exerciseStatus: 'processing' }
+        exerciseProps: { exerciseStatus: 'processing' },
+        isPlayground: action.isPlayground
       });
     }
 
@@ -477,8 +532,13 @@ export default function reducers(state = initialState, action) {
     }
 
     case types.EXERCISE_STEP_IS_VALID: {
-      const courseGuideId = idUtils.courseGuideId(_.pick(action, 'courseId', 'guideId'));
-      const currentExercise = state.data.detail[courseGuideId][action.exerciseId].exercise;
+      const currentExercise = getCurrentExercise({
+        courseId: action.courseId,
+        currentState: state,
+        exerciseId: action.exerciseId,
+        guideId: action.guideId,
+        isPlayground: action.isPlayground
+      })
 
       return updateExerciseState({
         state,
@@ -495,13 +555,19 @@ export default function reducers(state = initialState, action) {
               action.currentExpression
             ]
           },
-        }
+        },
+        isPlayground: action.isPlayground
       });
     }
 
     case types.EXERCISE_STEP_IS_INVALID: {
-      const courseGuideId = idUtils.courseGuideId(_.pick(action, 'courseId', 'guideId'));
-      const currentExercise = state.data.detail[courseGuideId][action.exerciseId].exercise;
+      const currentExercise = getCurrentExercise({
+        courseId: action.courseId,
+        currentState: state,
+        exerciseId: action.exerciseId,
+        guideId: action.guideId,
+        isPlayground: action.isPlayground
+      })
 
       return updateExerciseState({
         state,
@@ -514,7 +580,8 @@ export default function reducers(state = initialState, action) {
             ...currentExercise,
             hints: action.result.hints || []
           },
-        }
+        },
+        isPlayground: action.isPlayground
       });
     }
 
@@ -524,6 +591,7 @@ export default function reducers(state = initialState, action) {
         courseId: action.courseId,
         guideId: action.guideId,
         exerciseId: action.exerciseId,
+        isPlayground: action.isPlayground,
         exerciseProps: {
           exerciseStatus: 'editing',
           currentExpression: action.currentExpression

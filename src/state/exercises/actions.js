@@ -7,6 +7,7 @@ import * as logger from '../../utils/logger';
 import configs from '../../configs/variables';
 import constants from '../../utils/constants';
 import exercisesClient from '../../clients/exercisesClient';
+import {FETCH_PLAYGROUND_EXERCISE_SUCCESS, GENERATE_PLAYGROUND_EXERCISE_SUCCESS} from "./actionTypes";
 
 export function getExercisesSuccess({
   courseId, guideId, userId, exercises
@@ -66,12 +67,13 @@ export function getallResolutionsSuccess({
   };
 }
 
-export function resolveExerciseRequest({ courseId, guideId, exerciseId }) {
+export function resolveExerciseRequest({ courseId, guideId, exerciseId, isPlayground }) {
   return {
     type: types.RESOLVE_EXERCISE_REQUEST,
     courseId,
     guideId,
-    exerciseId
+    exerciseId,
+    isPlayground
   };
 }
 
@@ -118,24 +120,26 @@ export function removeExerciseDetail({
 }
 
 export function exerciseStepValid({
-  courseId, guideId, exerciseId, currentExpression
+  courseId, guideId, exerciseId, currentExpression, isPlayground
 }) {
   return {
     type: types.EXERCISE_STEP_IS_VALID,
     courseId,
     guideId,
     exerciseId,
-    currentExpression
+    currentExpression,
+    isPlayground
   };
 }
 
-export function exerciseStepIsValid({ courseId, guideId, exerciseId, result }) {
+export function exerciseStepIsValid({ courseId, guideId, exerciseId, result, isPlayground }) {
   return {
     type: types.EXERCISE_STEP_IS_INVALID,
     courseId,
     guideId,
     exerciseId,
-    result
+    result,
+    isPlayground
   };
 }
 
@@ -172,14 +176,16 @@ export function changeCurrentExpression({
   courseId,
   guideId,
   exerciseId,
-  currentExpression
+  currentExpression,
+  isPlayground
 }) {
   return {
     type: types.EXPRESSION_CHANGE_SUCCESSFULLY,
     courseId,
     guideId,
     exerciseId,
-    currentExpression
+    currentExpression,
+    isPlayground
   };
 }
 
@@ -208,6 +214,22 @@ export function createExerciseSuccess({ courseId, guideId, exercise }) {
     exercise
   };
 }
+
+export function generatePlaygroundExerciseSuccess({ exercise, exerciseId }) {
+  return {
+    type: types.GENERATE_PLAYGROUND_EXERCISE_SUCCESS,
+    exercise,
+    exerciseId
+  };
+}
+
+export function fetchPlaygroundExerciseSuccess({ exercise }) {
+  return {
+    type: types.FETCH_PLAYGROUND_EXERCISE_SUCCESS,
+    exercise,
+  };
+}
+
 
 export function updateStudentExerciseSuccess({ courseId, guideId, exerciseId, userId, exerciseProps }) {
   return {
@@ -273,6 +295,48 @@ export function resetExerciseError() {
 export function resetSolvedExercise() {
   return async (dispatch) => {
     dispatch({ type: types.RESET_SOLVED_EXERCISE });
+  };
+}
+
+export function createPlaygroundExercise({ exercise }) {
+  return async (dispatch, getState) => {
+    const state = getState();
+    const context = commonSelectors.context(state);
+
+    try {
+      const createdExercise = await exercisesClient.generatePlaygroundExercise({ context, exercise });
+      dispatch(generatePlaygroundExerciseSuccess({
+        exerciseId: createdExercise.exerciseId,
+        exercise: createdExercise,
+      }));
+
+      await dispatch(push(configs.pathGenerators.playgroundExercise({exerciseId: createdExercise.exerciseId})));
+    } catch (err) {
+      if (err.status === 401) {
+        throw err;
+      }
+      logger.onError('Error while trying to create playground exercise', err);
+      //dispatch(createExerciseFail({ courseId, guideId, error: err.message }));
+    }
+  };
+}
+
+export function getPlaygroundExercise({ exerciseId }) {
+  return async (dispatch, getState) => {
+    const state = getState();
+    const context = commonSelectors.context(state);
+
+    try {
+      const exercise = await exercisesClient.getPlaygroundExercise({ context, exerciseId })
+      dispatch(fetchPlaygroundExerciseSuccess({ exercise: {...exercise, exerciseId, stepList: exercise.stepList || []} }));
+      //await dispatch(push(configs.pathGenerators.playgroundExercise({exerciseId: createdExercise.exerciseId})));
+    } catch (err) {
+      if (err.status === 401) {
+        throw err;
+      }
+      logger.onError('Error while trying to get playground exercise', err);
+      //dispatch(createExerciseFail({ courseId, guideId, error: err.message }));
+    }
   };
 }
 
@@ -466,32 +530,42 @@ export function resolveExercise({
   courseId,
   guideId,
   exerciseId,
-  currentExpression
+  currentExpression,
+  isPlayground = false
 }) {
   return async (dispatch, getState) => {
     const state = getState();
     const context = commonSelectors.context(state);
 
-    dispatch(resolveExerciseRequest({ courseId, guideId, exerciseId }));
+    dispatch(resolveExerciseRequest({ courseId, guideId, exerciseId, isPlayground }));
 
-    const result = await exercisesClient.resolveExercise({
-      context,
-      courseId,
-      guideId,
-      exerciseId,
-      currentExpression
-    });
+    let result
+    if (isPlayground) {
+      result = await exercisesClient.resolvePlaygroundExercise({
+        context,
+        exerciseId,
+        currentExpression
+      });
+    } else {
+      result = await exercisesClient.resolveExercise({
+        context,
+        courseId,
+        guideId,
+        exerciseId,
+        currentExpression
+      });
+    }
 
     if (result.exerciseStatus === 'valid') {
       dispatch(exerciseStepValid({
-        courseId, guideId, exerciseId, currentExpression
+        courseId, guideId, exerciseId, currentExpression, isPlayground
       }));
     } else if (result.exerciseStatus === 'resolved') {
       dispatch(exerciseResolved({
         courseId, guideId, exerciseId, currentExpression
       }));
     } else {
-      dispatch(exerciseStepIsValid({ courseId, guideId, exerciseId, result }));
+      dispatch(exerciseStepIsValid({ courseId, guideId, exerciseId, result, isPlayground }));
     }
   };
 }

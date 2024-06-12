@@ -24,11 +24,13 @@ const configs = {
     coursesSearch: '/courses/search',
     courseGuide: '/courses/:courseId/guides/:guideId',
     course: '/courses/:courseId',
-    statistics: '/statistics'
+    statistics: '/statistics',
+    playgroundNew: '/playground/exercises/new',
   },
   pathGenerators: {
     course: (courseId) => `/courses/${courseId}`,
     exercise: ({ courseId, guideId, exerciseId }) => `/courses/${courseId}/guides/${guideId}/exercises/${exerciseId}`,
+    playgroundExercise: ({ exerciseId }) => `/playground/exercises/${exerciseId}`,
     userExercise: ({ courseId, guideId, exerciseId, userId }) => `/courses/${courseId}/guides/${guideId}/exercises/${exerciseId}?userId=${userId}`,
     courseGuide: (courseId, guideId) => `/courses/${courseId}/guides/${guideId}`,
     createExerciseGuide: (courseId, guideId) => `/courses/${courseId}/guides/${guideId}/create-exercise`,

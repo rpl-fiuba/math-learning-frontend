@@ -13,6 +13,10 @@ export function solvedCreatingExercise(state) {
   return state.exercises.data.creation.solvedCreatingExercise;
 }
 
+export function isOnPlaygroundRoute(state) {
+  return state.router.location.pathname.includes("/playground")
+}
+
 export function creatingExerciseError(state) {
   return state.exercises.data.creation.creatingExerciseError;
 }
@@ -38,6 +42,18 @@ export const getExercises = (state, courseId, guideId, userId) => {
   }
   return state.exercises.data.list[courseGuideId];
 };
+
+export const getPlaygroundExercise = (state, { exerciseId }) => {
+  const playgroundExercises = state.exercises.data.detail.playground;
+  return playgroundExercises && playgroundExercises[exerciseId]?.exercise;
+};
+
+export const getFullPlaygroundExercise = (state, { exerciseId }) => {
+  const playgroundExercises = state.exercises.data.detail.playground;
+  return playgroundExercises && playgroundExercises[exerciseId];
+};
+
+
 
 const getBaseExerciseDetail = (state, {
   courseId, guideId, exerciseId, userId
@@ -100,26 +116,43 @@ export const isLoadingExercise = (state, {
   return baseExercise.isLoading;
 };
 
+export const isLoadingPlaygroundExercise = (state, { exerciseId }) => {
+  const exercise = getFullPlaygroundExercise(state, { exerciseId });
+  if (_.isNil(exercise && exercise.isLoading)) {
+    return true;
+  }
+  return exercise.isLoading;
+};
+
+
 export const currentExpression = (state, {
   courseId, guideId, exerciseId
 }) => {
-  const courseGuideId = idUtils.courseGuideId({ courseId, guideId });
-  const courseExercises = state.exercises.data.detail[courseGuideId];
-
-  return courseExercises
-    && courseExercises[exerciseId]
-    && courseExercises[exerciseId].currentExpression;
+  // TODO replace for variable instead of looking at router
+  if(isOnPlaygroundRoute(state)) {
+    return state?.exercises?.data?.detail?.playground?.[exerciseId]?.currentExpression;
+  } else {
+    const courseGuideId = idUtils.courseGuideId({ courseId, guideId });
+    const courseExercises = state.exercises.data.detail[courseGuideId];
+    return courseExercises
+      && courseExercises[exerciseId]
+      && courseExercises[exerciseId].currentExpression;
+  }
 };
 
 export const exerciseStatus = (state, {
   courseId, guideId, exerciseId
 }) => {
-  const courseGuideId = idUtils.courseGuideId({ courseId, guideId });
-  const courseExercises = state.exercises.data.detail[courseGuideId];
-
-  return courseExercises
-    && courseExercises[exerciseId]
-    && courseExercises[exerciseId].exerciseStatus;
+  if(isOnPlaygroundRoute(state)){
+    const playgroundExercises = state.exercises.data.detail.playground
+    return playgroundExercises && playgroundExercises[exerciseId] && playgroundExercises[exerciseId].exerciseStatus;
+  } else {
+    const courseGuideId = idUtils.courseGuideId({ courseId, guideId });
+    const courseExercises = state.exercises.data.detail[courseGuideId];
+    return courseExercises
+      && courseExercises[exerciseId]
+      && courseExercises[exerciseId].exerciseStatus;
+  }
 };
 
 export const isExerciseResolved = (state, {
