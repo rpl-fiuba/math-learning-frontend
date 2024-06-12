@@ -20,7 +20,7 @@ export default function ProfileLinkListItem(props) {
               : <AccountBoxIcon />}
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary={profile.name} />
+        <ListItemText primary={profile.name} secondary={(profile?.role && profile.role === "professor") ? "Profesor" : "Estudiante"}/>
       </ListItem>
     </div>
   );
