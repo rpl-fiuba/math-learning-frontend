@@ -260,6 +260,22 @@ const getExercises = async ({
   return requestUtils.processResponse(response);
 };
 
+const getPlaygroundExercises = async ({
+                              context,
+                              userId
+                            }) => {
+  const exercisesUrl = `${url}/playground/exercises`
+  const response = await fetch(exercisesUrl, {
+    headers: {
+      authorization: context.accessToken,
+      'Content-Type': 'application/json'
+    }
+  });
+
+  return requestUtils.processResponse(response);
+};
+
+
 const deleteExercise = async ({
   context, courseId, guideId, exerciseId
 }) => {
@@ -406,5 +422,6 @@ export default {
   getStudentProgress,
   generatePlaygroundExercise,
   getPlaygroundExercise,
-  resolvePlaygroundExercise
+  resolvePlaygroundExercise,
+  getPlaygroundExercises
 };

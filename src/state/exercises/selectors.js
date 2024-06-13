@@ -21,6 +21,11 @@ export function creatingExerciseError(state) {
   return state.exercises.data.creation.creatingExerciseError;
 }
 
+export function isLoadingPlaygroundExercises(state) {
+  const exercises = state.exercises.data.list.playground;
+  return _.isNil(exercises);
+}
+
 export function isLoadingExercises(state, courseId, guideId, userId) {
   const courseGuideId = idUtils.courseGuideId({ courseId, guideId });
 
@@ -42,6 +47,11 @@ export const getExercises = (state, courseId, guideId, userId) => {
   }
   return state.exercises.data.list[courseGuideId];
 };
+
+export const getPlaygroundExercises = (state) => {
+  return state.exercises.data.list.playground;
+};
+
 
 export const getPlaygroundExercise = (state, { exerciseId }) => {
   const playgroundExercises = state.exercises.data.detail.playground;

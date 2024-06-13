@@ -436,6 +436,20 @@ export default function reducers(state = initialState, action) {
       };
     }
 
+    case types.FETCH_PLAYGROUND_EXERCISE_LIST_SUCCESS: {
+
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          list: {
+            ...state.data.list,
+            playground: action.exercises
+          }
+        }
+      };
+    }
+
     case types.FETCH_PLAYGROUND_EXERCISE_SUCCESS: {
       const exercises = state.data.detail["playground"] || {};
       const newExercisesState = {

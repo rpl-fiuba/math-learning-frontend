@@ -7,7 +7,11 @@ import * as logger from '../../utils/logger';
 import configs from '../../configs/variables';
 import constants from '../../utils/constants';
 import exercisesClient from '../../clients/exercisesClient';
-import {FETCH_PLAYGROUND_EXERCISE_SUCCESS, GENERATE_PLAYGROUND_EXERCISE_SUCCESS} from "./actionTypes";
+import {
+  FETCH_PLAYGROUND_EXERCISE_LIST_SUCCESS,
+  FETCH_PLAYGROUND_EXERCISE_SUCCESS,
+  GENERATE_PLAYGROUND_EXERCISE_SUCCESS
+} from "./actionTypes";
 
 export function getExercisesSuccess({
   courseId, guideId, userId, exercises
@@ -227,6 +231,13 @@ export function fetchPlaygroundExerciseSuccess({ exercise }) {
   return {
     type: types.FETCH_PLAYGROUND_EXERCISE_SUCCESS,
     exercise,
+  };
+}
+
+export function fetchPlaygroundExerciseListSuccess({ exercises }) {
+  return {
+    type: types.FETCH_PLAYGROUND_EXERCISE_LIST_SUCCESS,
+    exercises,
   };
 }
 
@@ -451,6 +462,19 @@ export function getExercises({ courseId, guideId, userId }) {
     }));
   };
 }
+
+export function getPlaygroundExercises({ courseId, guideId, userId }) {
+  return async (dispatch, getState) => {
+    const state = getState();
+    const context = commonSelectors.context(state);
+
+    const exercises = await exercisesClient.getPlaygroundExercises({
+      context, userId
+    });
+    dispatch(fetchPlaygroundExerciseListSuccess({ userId, exercises}));
+  };
+}
+
 
 export function getAllResolutions({ courseId, guideId, exerciseId }) {
   return async (dispatch, getState) => {

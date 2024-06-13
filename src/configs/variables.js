@@ -26,6 +26,7 @@ const configs = {
     course: '/courses/:courseId',
     statistics: '/statistics',
     playgroundNew: '/playground/exercises/new',
+    playgroundList: '/playground/exercises',
   },
   pathGenerators: {
     course: (courseId) => `/courses/${courseId}`,

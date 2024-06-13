@@ -19,6 +19,7 @@ import ProfileLinkListItem from '../Drawers/ProfileLinkListItem';
 import LinkListItemWithIcon from '../common/components/LinkListItemWithIcon';
 import styles from './NavBar.module.sass';
 import SectionTitleItem from "../common/components/SectionTitleItem";
+import ListIcon from '@material-ui/icons/List';
 
 // Sets the color and elevation of the navbar
 const overrideTheme = createMuiTheme({
@@ -39,14 +40,13 @@ const overrideTheme = createMuiTheme({
 
 const courseDrawerItems = [
   {
-    path: variables.paths.courses,
-    text: 'Mis Cursos',
-    icon: (<CollectionsBookmarkRoundedIcon />)
-  },
-  {
     path: variables.paths.coursesSearch,
     text: 'Buscar Cursos',
     icon: (<SearchRoundedIcon />)
+  },{
+    path: variables.paths.courses,
+    text: 'Mis Cursos',
+    icon: (<CollectionsBookmarkRoundedIcon />)
   }
 ];
 
@@ -55,6 +55,11 @@ const playgroundDrawerItems = [
     path: variables.paths.playgroundNew,
     text: 'Generar Ejercicio',
     icon: (<CategoryRoundedIcon />)
+  },
+  {
+    path: variables.paths.playgroundList,
+    text: 'Mis Ejercicios',
+    icon: (<ListIcon />)
   }
 ];
 
@@ -84,6 +89,7 @@ class NavBar extends Component {
         {shouldShowPlayground && playgroundDrawerItems.map((item) => (
           <LinkListItemWithIcon key={item.path} path={item.path} text={item.text} icon={item.icon}/>
         ))}
+
       </TemporaryDrawer>
     );
   }

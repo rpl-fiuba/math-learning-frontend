@@ -6,7 +6,7 @@ import * as actions from '../../../../../../state/exercises/actions';
 import * as modalTypes from '../../../../../../state/modals/modalTypes';
 import * as modalActions from '../../../../../../state/modals/actions';
 
-const currentActions = (dispatch, { exercise, userId }) => ({
+const currentActions = (dispatch, { exercise, userId, isPlayground = false }) => ({
   onDeleteExercise: () => {
     dispatch(modalActions.loadModal(modalTypes.CONFIRM_ACTION_MODAL, {
       title: '¿ Realmente desea eliminar el ejercicio ?',
@@ -27,7 +27,9 @@ const currentActions = (dispatch, { exercise, userId }) => ({
     dispatch(actions.checkPipelineStatus(exercise));
   },
   onClickExercise: async () => {
-    if (userId) {
+    if (isPlayground) {
+      await dispatch(push(configs.pathGenerators.playgroundExercise({exerciseId: exercise.exerciseId})));
+    } else if (userId) {
       await dispatch(push(configs.pathGenerators.userExercise({ ...exercise, userId })));
     } else {
       await dispatch(push(configs.pathGenerators.exercise(exercise)));

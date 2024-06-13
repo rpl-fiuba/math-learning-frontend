@@ -10,6 +10,7 @@ export const RESOLVE_EXERCISE_REQUEST = 'Resolve exercise request';
 export const CREATE_EXERCISE_SUCCESS = 'Create exercise success';
 export const GENERATE_PLAYGROUND_EXERCISE_SUCCESS = 'Generate playground exercise success';
 export const FETCH_PLAYGROUND_EXERCISE_SUCCESS = 'Get playground exercise success';
+export const FETCH_PLAYGROUND_EXERCISE_LIST_SUCCESS = 'Get playground exercise list success';
 
 export const CREATE_EXERCISE_REQUEST = 'Create exercise request';
 export const CREATE_EXERCISE_FAIL = 'Create exercise fail';

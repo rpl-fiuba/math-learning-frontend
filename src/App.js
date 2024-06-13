@@ -6,6 +6,7 @@ import { Route, Router, Switch } from 'react-router-dom';
 
 import OwnCoursesPage from './components/scenes/courses/OwnCoursesPage';
 import PlaygroundCreateExercisePage from './components/scenes/courses/PlaygroundCreateExercisePage';
+import PlaygroundListExercisesPage from './components/scenes/courses/PlaygroundListExercisesPage';
 import PlaygroundExercisePage from './components/scenes/courses/PlaygroundExercisePage';
 import SearchCoursesPage from './components/scenes/courses/SearchCoursesPage';
 import ExercisePage from './components/scenes/exercises/ExercisePage';
@@ -44,6 +45,7 @@ const App = () => {
           <Route exact path="/courses/:courseId/guides/:guideId/create-exercise" component={CourseManagement} />
           <Route exact path="/courses/:courseId/guides/:guideId/exercises/:exerciseId" component={ExercisePage} />
           <Route exact path="/courses" component={OwnCoursesPage} />
+          <Route exact path="/playground/exercises" component={PlaygroundListExercisesPage} />
           <Route exact path="/playground/exercises/new" component={PlaygroundCreateExercisePage} />
           <Route exact path="/playground/exercises/:exerciseId" component={PlaygroundExercisePage} />
           <Route exact path="/" component={Main} />

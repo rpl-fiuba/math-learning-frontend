@@ -105,7 +105,7 @@ export default class Exercise extends Component {
   }
 
   render() {
-    const { exercise, onDeleteExercise, onEditExercise, isProfessor } = this.props;
+    const { exercise, onDeleteExercise, onEditExercise, isProfessor, isPlayground = false } = this.props;
 
     return (
       <Card onClick={this.handleClickExercise} className={classNames(styles.card, stateMap[exercise.state].className)}>
@@ -115,7 +115,7 @@ export default class Exercise extends Component {
               {exercise.name}
             </Typography>
             <Typography className={classNames(styles.item, styles.problemInputTitle)}>Enunciado: Resuelva paso a paso</Typography>
-            {this.renderTooltip()}
+            {!isPlayground && this.renderTooltip()}
           </Grid>
 
           <Grid item xs={6}>
@@ -130,9 +130,9 @@ export default class Exercise extends Component {
             <Typography className={classNames(styles.type, styles.exerciseInfo)}>
               Estado: {stateMap[exercise.state].text}
             </Typography>
-            <Typography className={classNames(difficultyMap[exercise.difficulty].className, styles.exerciseInfo)}>
+            {exercise.difficulty && <Typography className={classNames(difficultyMap[exercise.difficulty].className, styles.exerciseInfo)}>
               Dificultad: {difficultyMap[exercise.difficulty].text}
-            </Typography>
+            </Typography>}
             {exercise.calification && (
               <Typography className={styles.qualification}>
                 Calificación: {exercise.calification}
