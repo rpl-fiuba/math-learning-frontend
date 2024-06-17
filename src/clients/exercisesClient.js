@@ -276,9 +276,9 @@ const getPlaygroundExercises = async ({
 
 
 const deleteExercise = async ({
-  context, courseId, guideId, exerciseId
+  context, courseId, guideId, exerciseId, isPlayground = false
 }) => {
-  const exerciseUrl = `${url}/courses/${courseId}/guides/${guideId}/exercises/${exerciseId}`;
+  const exerciseUrl = isPlayground ? `${url}/playground/exercises/${exerciseId}` : `${url}/courses/${courseId}/guides/${guideId}/exercises/${exerciseId}`;
   const response = await fetch(exerciseUrl, {
     method: 'delete',
     headers: {

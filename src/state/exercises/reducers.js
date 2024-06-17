@@ -444,7 +444,7 @@ export default function reducers(state = initialState, action) {
           ...state.data,
           list: {
             ...state.data.list,
-            playground: action.exercises
+            playground: action.exercises.map(e => ({ ...e, isPlayground: true }))
           }
         }
       };
@@ -664,24 +664,42 @@ export default function reducers(state = initialState, action) {
     }
 
     case types.DELETE_EXERCISE_REQUEST: {
-      const courseGuideId = idUtils.courseGuideId(_.pick(action, 'courseId', 'guideId'));
-      const newDetail = _.omit(state.data.detail[courseGuideId], action.exerciseId);
-      const newList = state.data.list[courseGuideId].filter((exercise) => exercise.exerciseId !== action.exerciseId);
-
-      return {
-        ...state,
-        data: {
-          ...state.data,
-          detail: {
-            ...state.data.detail,
-            [courseGuideId]: newDetail
-          },
-          list: {
-            ...state.data.list,
-            [courseGuideId]: newList
+      if(action.isPlayground){
+        const newDetail = _.omit(state.data.detail.playground, action.exerciseId);
+        const newList = state.data.list["playground"].filter((exercise) => exercise.exerciseId !== action.exerciseId);
+        return {
+          ...state,
+          data: {
+            ...state.data,
+            detail: {
+              ...state.data.detail,
+              playground: newDetail
+            },
+            list: {
+              ...state.data.list,
+              playground: newList
+            }
           }
-        }
-      };
+        };
+      } else {
+        const courseGuideId = idUtils.courseGuideId(_.pick(action, 'courseId', 'guideId'));
+        const newDetail = _.omit(state.data.detail[courseGuideId], action.exerciseId);
+        const newList = state.data.list[courseGuideId].filter((exercise) => exercise.exerciseId !== action.exerciseId);
+        return {
+          ...state,
+          data: {
+            ...state.data,
+            detail: {
+              ...state.data.detail,
+              [courseGuideId]: newDetail
+            },
+            list: {
+              ...state.data.list,
+              [courseGuideId]: newList
+            }
+          }
+        };
+      }
     }
 
     case types.REMOVE_EXERCISE_DETAIL: {

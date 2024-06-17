@@ -15,7 +15,8 @@ const currentActions = (dispatch, { exercise, userId, isPlayground = false }) =>
       actionProps: {
         guideId: exercise.guideId,
         courseId: exercise.courseId,
-        exerciseId: exercise.exerciseId
+        exerciseId: exercise.exerciseId,
+        isPlayground: exercise.isPlayground
       },
       actionFunction: actions.deleteExercise
     }));

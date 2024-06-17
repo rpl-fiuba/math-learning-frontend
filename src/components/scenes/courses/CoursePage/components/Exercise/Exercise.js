@@ -86,7 +86,7 @@ export default class Exercise extends Component {
       return null;
     }
     const message = exercise.pipelineStatus === constants.WAITING_PIPELINE_STATUS
-      ? 'El ejercicio aún no se ha generado. Vuelve en uno rato'
+      ? 'El ejercicio aún no se ha generado. Vuelve en un rato'
       : 'El ejercicio ha fallado su generación. Vuelve a crearlo';
 
     const icon = exercise.pipelineStatus === constants.WAITING_PIPELINE_STATUS
@@ -105,12 +105,11 @@ export default class Exercise extends Component {
   }
 
   render() {
-    const { exercise, onDeleteExercise, onEditExercise, isProfessor, isPlayground = false } = this.props;
-
+    const { exercise, isProfessor, isPlayground = false } = this.props;
     return (
       <Card onClick={this.handleClickExercise} className={classNames(styles.card, stateMap[exercise.state].className)}>
         <Grid container>
-          <Grid item xs={isProfessor ? 3 : 4}>
+          <Grid item xs={isProfessor || isPlayground ? 3 : 4}>
             <Typography className={classNames(styles.item, styles.tcGray1)} variant="h6">
               {exercise.name}
             </Typography>
@@ -141,21 +140,10 @@ export default class Exercise extends Component {
           </Grid>
 
           <Grid item xs={1}>
-            { isProfessor && (
+            { (isProfessor || isPlayground) && (
               <div onClick={(event) => event.stopPropagation()}>
                 <MoreVertOptions
-                  options={[{
-                    text: 'Editar',
-                    onClick: () => onEditExercise({
-                      courseId: exercise.courseId,
-                      guideId: exercise.guideId,
-                      exerciseId: exercise.exerciseId,
-                      exercise
-                    })
-                  }, {
-                    text: 'Eliminar',
-                    onClick: onDeleteExercise
-                  }]}
+                  options={this.buildExerciseOptions()}
                 />
               </div>
             )}
@@ -163,5 +151,28 @@ export default class Exercise extends Component {
         </Grid>
       </Card>
     );
+  }
+
+  buildExerciseOptions() {
+    const { exercise, onDeleteExercise, onEditExercise, isProfessor, isPlayground = false } = this.props;
+    const options = []
+    if (isProfessor) {
+      options.push({
+        text: 'Editar',
+        onClick: () => onEditExercise({
+          courseId: exercise.courseId,
+          guideId: exercise.guideId,
+          exerciseId: exercise.exerciseId,
+          exercise
+        })
+      })
+    }
+    if (isProfessor || isPlayground) {
+      options.push({
+        text: 'Eliminar',
+        onClick: onDeleteExercise
+      })
+    }
+    return options;
   }
 }

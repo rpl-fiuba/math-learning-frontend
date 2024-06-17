@@ -280,12 +280,13 @@ export function evaluateExerciseSuccess({ courseId, guideId, solvedExercise }) {
   };
 }
 
-export function deleteExerciseRequest({ courseId, guideId, exerciseId }) {
+export function deleteExerciseRequest({ courseId, guideId, exerciseId, isPlayground = false }) {
   return {
     type: types.DELETE_EXERCISE_REQUEST,
     courseId,
     guideId,
     exerciseId,
+    isPlayground
   };
 }
 
@@ -595,17 +596,17 @@ export function resolveExercise({
   };
 }
 
-export function deleteExercise({ courseId, guideId, exerciseId }) {
+export function deleteExercise({ courseId, guideId, exerciseId, isPlayground = false }) {
   return async (dispatch, getState) => {
     const state = getState();
     const context = commonSelectors.context(state);
 
-    dispatch(deleteExerciseRequest({ courseId, guideId, exerciseId }));
+    dispatch(deleteExerciseRequest({ courseId, guideId, exerciseId, isPlayground }));
     dispatch(modalActions.hideModal());
 
     try {
       await exercisesClient.deleteExercise({
-        context, courseId, guideId, exerciseId
+        context, courseId, guideId, exerciseId, isPlayground
       });
     } catch (err) {
       if (err.status === 401) {
