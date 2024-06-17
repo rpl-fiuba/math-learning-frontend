@@ -43,7 +43,7 @@ const currentActions = (dispatch, { match, location }) => {
 
   return {
     onLoadExercise: () => dispatch(actions.getExercise({ courseId, guideId, exerciseId, userId })),
-    onReturnToCourse: async () => {
+    onReturnButtonCallback: async () => {
       await dispatch(push(configs.pathGenerators.courseUserGuide(courseId, guideId, userId)));
     },
     onGetAllResolutions: () => dispatch(actions.getAllResolutions({ courseId, guideId, exerciseId }))

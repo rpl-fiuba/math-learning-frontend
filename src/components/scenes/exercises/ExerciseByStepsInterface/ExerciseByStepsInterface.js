@@ -160,7 +160,8 @@ class ExerciseByStepsInterface extends Component {
       isResolved,
       isDelivered,
       isProfessor,
-      onReturnToCourse,
+      onReturnButtonText,
+      onReturnButtonCallback,
       allResolutions,
       onOpenHelpModal
     } = this.props;
@@ -173,7 +174,7 @@ class ExerciseByStepsInterface extends Component {
     return (
       <div className={styles.exercise}>
         <LeftPanel>
-          <LeftPanelLink text="Volver al curso" includeBack onClick={onReturnToCourse} />
+          <LeftPanelLink text={onReturnButtonText || "Volver al curso"} includeBack onClick={onReturnButtonCallback} />
 
           {!shouldStopEditing && (
             <MathTable

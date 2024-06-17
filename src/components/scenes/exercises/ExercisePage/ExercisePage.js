@@ -32,7 +32,7 @@ export default class ExercisePage extends Component {
 
   render = () => {
     const {
-      isLoadingExercise, exercise, userId, isProfessor, allResolutions, onReturnToCourse
+      isLoadingExercise, exercise, userId, isProfessor, allResolutions, onReturnButtonCallback
     } = this.props;
 
     if (isLoadingExercise) {
@@ -49,7 +49,7 @@ export default class ExercisePage extends Component {
           userId={userId}
           isProfessor={isProfessor}
           allResolutions={allResolutions}
-          onReturnToCourse={onReturnToCourse}
+          onReturnButtonCallback={onReturnButtonCallback}
         />
       );
     }
@@ -60,7 +60,7 @@ export default class ExercisePage extends Component {
           userId={userId}
           isProfessor={isProfessor}
           allResolutions={allResolutions}
-          onReturnToCourse={onReturnToCourse}
+          onReturnButtonCallback={onReturnButtonCallback}
         />
       );
     }
@@ -71,7 +71,7 @@ export default class ExercisePage extends Component {
           userId={userId}
           isProfessor={isProfessor}
           allResolutions={allResolutions}
-          onReturnToCourse={onReturnToCourse}
+          onReturnButtonCallback={onReturnButtonCallback}
         />
       );
     }
@@ -82,7 +82,7 @@ export default class ExercisePage extends Component {
           userId={userId}
           isProfessor={isProfessor}
           allResolutions={allResolutions}
-          onReturnToCourse={onReturnToCourse}
+          onReturnButtonCallback={onReturnButtonCallback}
         />
       );
     }
@@ -93,7 +93,7 @@ export default class ExercisePage extends Component {
               userId={userId}
               isProfessor={isProfessor}
               allResolutions={allResolutions}
-              onReturnToCourse={onReturnToCourse}
+              onReturnButtonCallback={onReturnButtonCallback}
           />
       );
     }
@@ -104,7 +104,7 @@ export default class ExercisePage extends Component {
           userId={userId}
           isProfessor={isProfessor}
           allResolutions={allResolutions}
-          onReturnToCourse={onReturnToCourse}
+          onReturnButtonCallback={onReturnButtonCallback}
         />
       );
     }
@@ -115,7 +115,7 @@ export default class ExercisePage extends Component {
               userId={userId}
               isProfessor={isProfessor}
               allResolutions={allResolutions}
-              onReturnToCourse={onReturnToCourse}
+              onReturnButtonCallback={onReturnButtonCallback}
           />
       );
     }
@@ -126,7 +126,7 @@ export default class ExercisePage extends Component {
               userId={userId}
               isProfessor={isProfessor}
               allResolutions={allResolutions}
-              onReturnToCourse={onReturnToCourse}
+              onReturnButtonCallback={onReturnButtonCallback}
           />
       );
     }

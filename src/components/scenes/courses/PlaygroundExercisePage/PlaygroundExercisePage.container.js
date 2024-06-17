@@ -6,6 +6,8 @@ import * as common from "../../../../state/common";
 import * as userUtils from "../../../../utils/userUtils";
 import {actions} from "../../../../state/exercises";
 import * as exercises from "../../../../state/exercises";
+import {push} from "connected-react-router";
+import configs from "../../../../configs/variables";
 
 const currentState = (state, { match, location }) => {
   const { exerciseId } = match.params;
@@ -28,11 +30,8 @@ const currentActions = (dispatch, { match, location }) => {
     onGetPlaygroundExercise: ({ exerciseId }) => {
       dispatch(actions.getPlaygroundExercise({ exerciseId }));
     },
-    onLoadExercise: () => {
-      console.log("TBD onLoadExercise", "dispatch(actions.getExercise({courseId, guideId, exerciseId, userId}))")
-    },
-    onReturnToCourse: async () => {
-      console.log("TBD onReturnToCourse")
+    onReturnButtonCallback: async () => {
+      await dispatch(push(configs.paths.playgroundList));
     }
   };
 };

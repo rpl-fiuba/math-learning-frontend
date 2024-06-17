@@ -27,14 +27,13 @@ export default class PlaygroundExercisePage extends Component {
 
   render() {
 
-    const { userId, isProfessor, exerciseId, exercise, isLoadingExercise } = this.props;
-    const onReturnToCourse = () => console.log("TBD onReturnToCourse")
+    const { userId, isProfessor, exerciseId, exercise, isLoadingExercise, onReturnButtonCallback } = this.props;
     const allResolutions = []
 
-    return this.renderExercise(isLoadingExercise, exercise, userId, isProfessor, allResolutions, onReturnToCourse);
+    return this.renderExercise(isLoadingExercise, exercise, userId, isProfessor, allResolutions, onReturnButtonCallback, "Volver a Mis Ejercicios");
   }
 
-  renderExercise(isLoadingExercise, exercise, userId, isProfessor, allResolutions, onReturnToCourse) {
+  renderExercise(isLoadingExercise, exercise, userId, isProfessor, allResolutions, onReturnButtonCallback, onReturnButtonText) {
     if (isLoadingExercise && !exercise) {
       return (
         <div className={styles.loading}>
@@ -49,7 +48,8 @@ export default class PlaygroundExercisePage extends Component {
           userId={userId}
           isProfessor={isProfessor}
           allResolutions={allResolutions}
-          onReturnToCourse={onReturnToCourse}
+          onReturnButtonCallback={onReturnButtonCallback}
+          onReturnButtonText={onReturnButtonText}
         />
       );
     }
@@ -60,7 +60,8 @@ export default class PlaygroundExercisePage extends Component {
           userId={userId}
           isProfessor={isProfessor}
           allResolutions={allResolutions}
-          onReturnToCourse={onReturnToCourse}
+          onReturnButtonCallback={onReturnButtonCallback}
+          onReturnButtonText={onReturnButtonText}
         />
       );
     }
@@ -71,7 +72,8 @@ export default class PlaygroundExercisePage extends Component {
           userId={userId}
           isProfessor={isProfessor}
           allResolutions={allResolutions}
-          onReturnToCourse={onReturnToCourse}
+          onReturnButtonCallback={onReturnButtonCallback}
+          onReturnButtonText={onReturnButtonText}
         />
       );
     }
@@ -82,7 +84,8 @@ export default class PlaygroundExercisePage extends Component {
           userId={userId}
           isProfessor={isProfessor}
           allResolutions={allResolutions}
-          onReturnToCourse={onReturnToCourse}
+          onReturnButtonCallback={onReturnButtonCallback}
+          onReturnButtonText={onReturnButtonText}
         />
       );
     }
@@ -93,7 +96,8 @@ export default class PlaygroundExercisePage extends Component {
           userId={userId}
           isProfessor={isProfessor}
           allResolutions={allResolutions}
-          onReturnToCourse={onReturnToCourse}
+          onReturnButtonCallback={onReturnButtonCallback}
+          onReturnButtonText={onReturnButtonText}
         />
       );
     }
@@ -104,7 +108,8 @@ export default class PlaygroundExercisePage extends Component {
           userId={userId}
           isProfessor={isProfessor}
           allResolutions={allResolutions}
-          onReturnToCourse={onReturnToCourse}
+          onReturnButtonCallback={onReturnButtonCallback}
+          onReturnButtonText={onReturnButtonText}
         />
       );
     }
@@ -115,7 +120,8 @@ export default class PlaygroundExercisePage extends Component {
           userId={userId}
           isProfessor={isProfessor}
           allResolutions={allResolutions}
-          onReturnToCourse={onReturnToCourse}
+          onReturnButtonCallback={onReturnButtonCallback}
+          onReturnButtonText={onReturnButtonText}
         />
       );
     }
@@ -126,7 +132,8 @@ export default class PlaygroundExercisePage extends Component {
           userId={userId}
           isProfessor={isProfessor}
           allResolutions={allResolutions}
-          onReturnToCourse={onReturnToCourse}
+          onReturnButtonCallback={onReturnButtonCallback}
+          onReturnButtonText={onReturnButtonText}
         />
       );
     }
