@@ -53,7 +53,8 @@ const currentActions = (dispatch, { exercise, userId }) => ({
       actionProps: {
         guideId: exercise.guideId,
         courseId: exercise.courseId,
-        exerciseId: exercise.exerciseId
+        exerciseId: exercise.exerciseId,
+        isPlayground: exercise.isPlayground,
       },
       actionFunction: actions.deleteExerciseStep
     }));

@@ -638,9 +638,13 @@ export default function reducers(state = initialState, action) {
     }
 
     case types.REMOVE_EXERCISE_STEP: {
-      const courseGuideId = idUtils.courseGuideId(_.pick(action, 'courseId', 'guideId'));
-      const currentExercise = state.data.detail[courseGuideId][action.exerciseId].exercise;
-
+      const currentExercise = getCurrentExercise({
+        courseId: action.courseId,
+        currentState: state,
+        exerciseId: action.exerciseId,
+        guideId: action.guideId,
+        isPlayground: action.isPlayground
+      })
       return updateExerciseState({
         state,
         courseId: action.courseId,
@@ -654,7 +658,8 @@ export default function reducers(state = initialState, action) {
             state: 'incompleted',
             stepList: currentExercise.stepList.slice(0, -1)
           }
-        }
+        },
+        isPlayground: action.isPlayground
       });
     }
 

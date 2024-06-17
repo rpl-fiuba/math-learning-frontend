@@ -151,18 +151,17 @@ const removeExerciseStep = async ({
   context,
   courseId,
   guideId,
-  exerciseId
+  exerciseId,
+  isPlayground
 }) => {
-  const profileUrl = `${url}/courses/${courseId}/guides/${guideId}/exercises/${exerciseId}/step`;
-
-  const response = await fetch(profileUrl, {
+  const removeStepUrl = isPlayground ? `${url}/playground/exercises/${exerciseId}/step` : `${url}/courses/${courseId}/guides/${guideId}/exercises/${exerciseId}/step`;
+  const response = await fetch(removeStepUrl, {
     method: 'delete',
     headers: {
       authorization: context.accessToken,
       'Content-Type': 'application/json'
     }
   });
-
   return requestUtils.processResponse(response);
 };
 

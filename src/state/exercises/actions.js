@@ -102,13 +102,14 @@ export function updatePipelineStatus({ courseId, guideId, exerciseId, pipelineSt
 }
 
 export function removeExerciseStep({
-  courseId, guideId, exerciseId
+  courseId, guideId, exerciseId, isPlayground
 }) {
   return {
     type: types.REMOVE_EXERCISE_STEP,
     courseId,
     guideId,
-    exerciseId
+    exerciseId,
+    isPlayground
   };
 }
 
@@ -423,18 +424,18 @@ export function deliverExercise({ courseId, guideId, exerciseId }) {
 }
 
 export function deleteExerciseStep({
-  guideId, courseId, exerciseId
+  guideId, courseId, exerciseId, isPlayground = false
 }) {
   return async (dispatch, getState) => {
     const state = getState();
     const context = commonSelectors.context(state);
-    const currentExercise = exerciseSelectors.getExercise(state, { courseId, guideId, exerciseId });
+    const currentExercise = isPlayground ? exerciseSelectors.getPlaygroundExercise(state, { exerciseId }) : exerciseSelectors.getExercise(state, { courseId, guideId, exerciseId });
 
-    dispatch(removeExerciseStep({ courseId, guideId, exerciseId }));
+    dispatch(removeExerciseStep({ courseId, guideId, exerciseId, isPlayground }));
     dispatch(modalActions.hideModal());
 
     try {
-      await exercisesClient.removeExerciseStep({ context, guideId, courseId, exerciseId });
+      await exercisesClient.removeExerciseStep({ context, guideId, courseId, exerciseId, isPlayground });
     } catch (err) {
       if (err.status === 401) {
         throw err;
