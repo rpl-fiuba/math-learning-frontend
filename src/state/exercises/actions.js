@@ -149,14 +149,15 @@ export function exerciseStepIsValid({ courseId, guideId, exerciseId, result, isP
 }
 
 export function exerciseResolved({
-  courseId, guideId, exerciseId, currentExpression
+  courseId, guideId, exerciseId, currentExpression, isPlayground = false
 }) {
   return {
     type: types.EXERCISE_RESOLVED,
     courseId,
     guideId,
     exerciseId,
-    currentExpression
+    currentExpression,
+    isPlayground
   };
 }
 
@@ -588,7 +589,7 @@ export function resolveExercise({
       }));
     } else if (result.exerciseStatus === 'resolved') {
       dispatch(exerciseResolved({
-        courseId, guideId, exerciseId, currentExpression
+        courseId, guideId, exerciseId, currentExpression, isPlayground
       }));
     } else {
       dispatch(exerciseStepIsValid({ courseId, guideId, exerciseId, result, isPlayground }));

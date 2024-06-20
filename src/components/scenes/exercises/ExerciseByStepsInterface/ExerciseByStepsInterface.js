@@ -252,7 +252,7 @@ class ExerciseByStepsInterface extends Component {
                     content={exercise.stepList[exercise.stepList.length - 1].expression}
                   />
                 </div>
-                {!isDelivered ? (
+                {!isDelivered && !exercise?.isPlayground ? (
                   <Button id="deliver-exercise" onClick={this.handleDeliverExercise} className={styles.deliverExerciseButton} variant="outlined">
                     Entregar ejercicio
                   </Button>

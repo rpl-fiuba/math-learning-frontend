@@ -521,8 +521,13 @@ export default function reducers(state = initialState, action) {
     }
 
     case types.EXERCISE_RESOLVED: {
-      const courseGuideId = idUtils.courseGuideId(_.pick(action, 'courseId', 'guideId'));
-      const currentExercise = state.data.detail[courseGuideId][action.exerciseId].exercise;
+      const currentExercise = getCurrentExercise({
+        courseId: action.courseId,
+        currentState: state,
+        exerciseId: action.exerciseId,
+        guideId: action.guideId,
+        isPlayground: action.isPlayground
+      })
 
       return updateExerciseState({
         state,
@@ -541,7 +546,8 @@ export default function reducers(state = initialState, action) {
             ],
             state: 'resolved'
           },
-        }
+        },
+        isPlayground: action.isPlayground
       });
     }
 
