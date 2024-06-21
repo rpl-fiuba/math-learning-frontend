@@ -51,7 +51,7 @@ class BaseStepsExerciseHelpModal extends Component {
 
         <div className={styles.buttonContainer}>
           <Button
-              color="grey"
+              color="default"
               variant="contained"
               id="create-exercise-button"
             onClick={this.onDowngradeHelpIndex}
