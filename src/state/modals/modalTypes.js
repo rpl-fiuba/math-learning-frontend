@@ -8,3 +8,4 @@ export const SESSION_EXPIRED_MODAL = 'SessionExpiredModal';
 export const COPY_COURSE_MODAL = 'CopyCourseModal';
 export const STEPS_EXERCISE_HELP_MODAL = 'StepsExerciseHelpModal';
 export const CUSTOMIZABLE_STEPS_EXERCISE_HELP_MODAL = 'BaseStepsExerciseHelpModal';
+export const STARTUP_EXERCISE_MODAL = 'StartupExerciseModal';

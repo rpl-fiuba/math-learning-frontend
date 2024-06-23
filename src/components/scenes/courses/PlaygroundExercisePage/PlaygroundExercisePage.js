@@ -9,6 +9,7 @@ import Image from "../../exercises/Image";
 import Inequality from "../../exercises/Inequality";
 import Trigonometry from "../../exercises/Trigonometry";
 import Exponential from "../../exercises/Exponential";
+import Intersection from "../../exercises/Intersection";
 import exercisesClient from "../../../../clients/exercisesClient";
 
 export default class PlaygroundExercisePage extends Component {
@@ -137,5 +138,18 @@ export default class PlaygroundExercisePage extends Component {
         />
       );
     }
+    if (exercise.type === 'intersection') {
+      return (
+        <Intersection
+          exercise={exercise}
+          userId={userId}
+          isProfessor={isProfessor}
+          allResolutions={allResolutions}
+          onReturnButtonCallback={onReturnButtonCallback}
+          onReturnButtonText={onReturnButtonText}
+        />
+      );
+    }
+
   }
 }

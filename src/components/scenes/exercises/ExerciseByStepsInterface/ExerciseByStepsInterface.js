@@ -22,6 +22,8 @@ import {ChallengeTriangle} from "../Trigonometry/Triangle";
 import {cleanProblemInput} from "../../../../utils/latexUtils";
 import {Close} from "@material-ui/icons";
 import {typeMap} from "../../courses/CoursePage/components/Exercise/TypeMap";
+import PlotFunction from "../../../common/components/Graphs/PlotFunction";
+import exercise from "../../courses/CoursePage/components/Exercise";
 
 class ExerciseByStepsInterface extends Component {
   constructor(props) {
@@ -68,6 +70,12 @@ class ExerciseByStepsInterface extends Component {
     onEditStudentExercise({
       exerciseProps: { calification: currentQualification }
     });
+  }
+
+  componentDidMount() {
+    if((this.props.exercise.stepList || []).length === 0 && this.props.openStartUpModal){
+      this.props.openStartUpModal()
+    }
   }
 
   handleDeliverExercise = () => {
@@ -163,7 +171,7 @@ class ExerciseByStepsInterface extends Component {
       onReturnButtonText,
       onReturnButtonCallback,
       allResolutions,
-      onOpenHelpModal
+      onOpenHelpModal,
     } = this.props;
     const {currentQualification, showHelpAlert} = this.state;
 
@@ -212,6 +220,7 @@ class ExerciseByStepsInterface extends Component {
                   this.setState({ showExerciseInput: true })
                 }}
             />}
+            {exercise.type === "intersection" && <PlotFunction functionsToDraw={exercise.problemInput.split("=")} />}
             {exercise.type !== "trigonometry" && <MathText
                 id="problem-input"
                 className={styles.problemInput}

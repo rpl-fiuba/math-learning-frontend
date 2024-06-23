@@ -9,6 +9,7 @@ import Domain from '../Domain';
 import Image from '../Image';
 import Trigonometry from "../Trigonometry";
 import Exponential from "../Exponential";
+import Intersection from "../Intersection";
 
 export default class ExercisePage extends Component {
   componentDidMount() {
@@ -130,7 +131,17 @@ export default class ExercisePage extends Component {
           />
       );
     }
-
+    if (exercise.type === 'intersection') {
+      return (
+        <Intersection
+          exercise={exercise}
+          userId={userId}
+          isProfessor={isProfessor}
+          allResolutions={allResolutions}
+          onReturnButtonCallback={onReturnButtonCallback}
+        />
+      );
+    }
     return (
       <span>
         Ejercicio cargado

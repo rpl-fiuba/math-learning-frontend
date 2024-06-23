@@ -22,5 +22,8 @@ export const typeMap = {
     },
     exponential: {
         text: 'Ecuaciones exponenciales y logaritmicas'
+    },
+    intersection: {
+        text: 'Interseccion de Funciones'
     }
 };

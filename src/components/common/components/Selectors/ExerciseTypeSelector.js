@@ -21,6 +21,7 @@ export default function ExerciseTypeSelector(props) {
 				<MenuItem value="inequality">Inecuaciones</MenuItem>
 				<MenuItem value="trigonometry">Trigonometria</MenuItem>
 				<MenuItem value="exponential">Ecuaciones exponenciales y logaritmicas</MenuItem>
+				<MenuItem value="intersection">Interseccion de Funciones</MenuItem>
 			</Select>
 	</>
 	);

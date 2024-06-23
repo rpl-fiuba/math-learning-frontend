@@ -14,6 +14,7 @@ import SessionExpiredModal from '../SessionExpiredModal';
 import CopyCourseModal from '../CopyCourseModal';
 import StepsExerciseHelpModal from '../StepsExerciseHelpModal';
 import BaseStepsExerciseHelpModal from "../BaseStepsExerciseHelpModal";
+import StartupExerciseModal from "../StartupExerciseModal"
 
 /** Modal Type Constants */
 import {
@@ -26,8 +27,10 @@ import {
   SESSION_EXPIRED_MODAL,
   COPY_COURSE_MODAL,
   STEPS_EXERCISE_HELP_MODAL,
-  CUSTOMIZABLE_STEPS_EXERCISE_HELP_MODAL
+  CUSTOMIZABLE_STEPS_EXERCISE_HELP_MODAL, STARTUP_EXERCISE_MODAL
 } from '../../../state/modals/modalTypes';
+import * as exerciseActions from "../../../state/exercises/actions";
+import * as modalActions from "../../../state/modals/actions";
 
 const MODAL_COMPONENTS = {
   [LOGIN_MODAL]: LoginModal,
@@ -39,7 +42,8 @@ const MODAL_COMPONENTS = {
   [SESSION_EXPIRED_MODAL]: SessionExpiredModal,
   [COPY_COURSE_MODAL]: CopyCourseModal,
   [STEPS_EXERCISE_HELP_MODAL]: StepsExerciseHelpModal,
-  [CUSTOMIZABLE_STEPS_EXERCISE_HELP_MODAL]: BaseStepsExerciseHelpModal
+  [CUSTOMIZABLE_STEPS_EXERCISE_HELP_MODAL]: BaseStepsExerciseHelpModal,
+  [STARTUP_EXERCISE_MODAL]: StartupExerciseModal
 };
 
 const ModalContainer = (props) => {

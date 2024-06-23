@@ -11,12 +11,13 @@ class Modal extends Component {
     super(props);
     this.onOverlayClick = this.onOverlayClick.bind(this);
     this.onDialogClick = this.onDialogClick.bind(this);
+    this.closable = this.props.closable !== false;
   }
 
   componentDidMount() {
     const { onClose } = this.props;
 
-    if (onClose) {
+    if (onClose && this.closable) {
       window.addEventListener('keydown', this.listenKeyboard.bind(this), true);
     }
   }
@@ -24,7 +25,7 @@ class Modal extends Component {
   componentWillUnmount() {
     const { onClose } = this.props;
 
-    if (onClose) {
+    if (onClose && this.closable) {
       window.removeEventListener('keydown', this.listenKeyboard.bind(this), true);
     }
   }
@@ -32,7 +33,9 @@ class Modal extends Component {
   onOverlayClick() {
     const { onClose } = this.props;
 
-    onClose();
+    if (this.closable) {
+      onClose();
+    }
   }
 
   onDialogClick(event) {
@@ -47,7 +50,7 @@ class Modal extends Component {
   listenKeyboard(event) {
     const { onClose } = this.props;
 
-    if (event.key === 'Escape' || event.keyCode === 27) {
+    if ((event.key === 'Escape' || event.keyCode === 27) && this.closable) {
       onClose();
     }
   }
