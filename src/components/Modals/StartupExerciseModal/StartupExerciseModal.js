@@ -76,7 +76,7 @@ class StartupExerciseModal extends Component {
 
 
     return (
-      <Modal className={styles.modal} closable={false}>
+      <Modal className={styles.modal} closable={false} blurOverlay>
         { screenIndex !== INITIAL_SCREEN_INDEX && !showIntraStepScreen && <div className={styles.modalContentContainer}>
           <Typography id="creation-label" color="textPrimary" variant="h6"
                       className={classNames(styles.textExplanation, styles.text)}>

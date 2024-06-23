@@ -56,12 +56,12 @@ class Modal extends Component {
   }
 
   render() {
-    const { children, className, isActionLoading, modalError } = this.props;
+    const { children, className, isActionLoading, modalError, blurOverlay = false } = this.props;
 
     return (
       <ThemeProvider theme={modalTheme}>
         <Container>
-          <div className={styles.overlay} />
+          <div className={blurOverlay ? styles.blurOverlay : styles.overlay} />
           <div className={styles.content} onClick={this.onOverlayClick}>
             <div className={className} onClick={this.onDialogClick}>
               {modalError ? (<span className={styles.error}>{modalError}</span>) : ''}

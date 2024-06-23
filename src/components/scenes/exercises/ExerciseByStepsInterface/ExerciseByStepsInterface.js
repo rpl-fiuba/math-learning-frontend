@@ -220,7 +220,7 @@ class ExerciseByStepsInterface extends Component {
                   this.setState({ showExerciseInput: true })
                 }}
             />}
-            {exercise.type === "intersection" && <PlotFunction functionsToDraw={exercise.problemInput.split("=")} />}
+            {this.shouldShowFunctionPlot(exercise, this.state) && <PlotFunction functionsToDraw={exercise.problemInput.split("=")} />}
             {exercise.type !== "trigonometry" && <MathText
                 id="problem-input"
                 className={styles.problemInput}
@@ -314,6 +314,10 @@ class ExerciseByStepsInterface extends Component {
         </div>
       </div>
     );
+  }
+
+  shouldShowFunctionPlot(exercise) {
+    return !this.props.startupModalOpen && exercise.type === "intersection";
   }
 }
 

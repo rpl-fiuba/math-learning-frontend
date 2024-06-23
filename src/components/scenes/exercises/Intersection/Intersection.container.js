@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../../../../state/exercises/actions';
 import * as selectors from '../../../../state/exercises/selectors';
+import * as modalSelectors from '../../../../state/modals/selectors';
 import * as modalTypes from '../../../../state/modals/modalTypes';
 import * as modalActions from '../../../../state/modals/actions';
 
@@ -23,13 +24,14 @@ const currentState = (state, { exercise }) => {
   const isInvalid = exerciseStatus === 'invalid';
   const isResolved = exercise.state === 'resolved';
   const isDelivered = exercise.state === 'delivered';
-
+  const startupModalOpen = modalSelectors.modalType(state) && modalSelectors.modalType(state) === modalTypes.STARTUP_EXERCISE_MODAL;
   return {
     currentExpression,
     isDelivered,
     isInvalid,
     isProcessing,
     isResolved,
+    startupModalOpen
   };
 };
 
