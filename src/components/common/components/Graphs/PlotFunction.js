@@ -1,10 +1,9 @@
-// src/PlotFunction.js
 import React, { useEffect, useRef } from 'react';
 import styles from '../../../Modals/StartupExerciseModal/StartupExerciseModal.module.sass';
+import {cleanExpressionForGeogebra} from "../../../../utils/latexUtils";
 
 export const sanitizeFunction = (functionToDraw) => {
-	const sanitizedFunction = functionToDraw.replace("\\sqrt{x}", "sqrt(x)")
-	return sanitizedFunction;
+	return cleanExpressionForGeogebra(functionToDraw);
 }
 
 export const buildLookalikeFunctions = ({functionToDraw, desiredAmount}) => {

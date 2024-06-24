@@ -11,6 +11,20 @@ const cleanProblemInput = (problemInput) => {
   return cleanedInput
 }
 
+const cleanExpressionForGeogebra = (expression) => {
+  let clean = replaceAll(expression, '\\left(', '(');
+  clean = replaceAll(clean, '\\right)', ')');
+  clean = replaceAll(clean, '\\left[', '[');
+  clean = replaceAll(clean, '\\right]', ']');
+  clean = replaceAll(clean, '\\right|', '|');
+  clean = replaceAll(clean, '\\left|', '|');
+  clean = clean.replace(/sqrt\{([^}]*)\}/g, function(match, p1) {
+    return `sqrt(${p1})`;
+  });
+  clean = replaceAll(clean, '\\', '')
+  return clean
+}
+
 const cleanLatex = (latex) => {
   if (!latex) {
     return latex;
@@ -52,5 +66,6 @@ module.exports = {
   cleanExpression,
   cleanLatex,
   replaceAll,
-  cleanProblemInput
+  cleanProblemInput,
+  cleanExpressionForGeogebra
 };
