@@ -90,9 +90,8 @@ const resolveExercise = async ({
   exerciseId,
   currentExpression
 }) => {
-  const profileUrl = `${url}/courses/${courseId}/guides/${guideId}/exercises/${exerciseId}/resolve`;
-
-  const response = await fetch(profileUrl, {
+  const exerciseUrl = `${url}/courses/${courseId}/guides/${guideId}/exercises/${exerciseId}/resolve`;
+  return fetch(exerciseUrl, {
     method: 'post',
     body: JSON.stringify({
       currentExpression
@@ -101,19 +100,22 @@ const resolveExercise = async ({
       authorization: context.accessToken,
       'Content-Type': 'application/json'
     }
+  }).then((response) => {
+    return requestUtils.processResponse(response)
+  }).catch((error) => {
+    console.error(error)
+    return Promise.resolve(DEFAULT_INVALID_STEP_RESPONSE)
   });
-
-  return requestUtils.processResponse(response);
 };
 
+const DEFAULT_INVALID_STEP_RESPONSE = { exerciseStatus :"invalid","hints":[]};
 const resolvePlaygroundExercise = async ({
                                  context,
                                  exerciseId,
                                  currentExpression
                                }) => {
   const exerciseUrl = `${url}/playground/exercises/${exerciseId}/resolve`;
-
-  const response = await fetch(exerciseUrl, {
+  return fetch(exerciseUrl, {
     method: 'post',
     body: JSON.stringify({
       currentExpression
@@ -122,9 +124,12 @@ const resolvePlaygroundExercise = async ({
       authorization: context.accessToken,
       'Content-Type': 'application/json'
     }
+  }).then((response) => {
+    return requestUtils.processResponse(response)
+  }).catch((error) => {
+    console.error(error)
+    return Promise.resolve(DEFAULT_INVALID_STEP_RESPONSE)
   });
-
-  return requestUtils.processResponse(response);
 };
 
 const evaluateExercise = async ({
