@@ -2,14 +2,8 @@ import React, { Component } from 'react';
 import { CircularProgress } from '@material-ui/core';
 import Derivative from '../Derivative';
 import Integrate from '../Integrate';
-import Factorisable from '../Factorisable';
-import Inequality from '../Inequality';
 import styles from './ExercisePage.module.sass';
-import Domain from '../Domain';
-import Image from '../Image';
-import Trigonometry from "../Trigonometry";
-import Exponential from "../Exponential";
-import Intersection from "../Intersection";
+import BaseExercise from "../BaseExercise";
 
 export default class ExercisePage extends Component {
   componentDidMount() {
@@ -65,75 +59,9 @@ export default class ExercisePage extends Component {
         />
       );
     }
-    if (exercise.type === 'factorisable') {
+    if (!!exercise.type){
       return (
-        <Factorisable
-          exercise={exercise}
-          userId={userId}
-          isProfessor={isProfessor}
-          allResolutions={allResolutions}
-          onReturnButtonCallback={onReturnButtonCallback}
-        />
-      );
-    }
-    if (exercise.type === 'domain') {
-      return (
-        <Domain
-          exercise={exercise}
-          userId={userId}
-          isProfessor={isProfessor}
-          allResolutions={allResolutions}
-          onReturnButtonCallback={onReturnButtonCallback}
-        />
-      );
-    }
-    if (exercise.type === 'image') {
-      return (
-          <Image
-              exercise={exercise}
-              userId={userId}
-              isProfessor={isProfessor}
-              allResolutions={allResolutions}
-              onReturnButtonCallback={onReturnButtonCallback}
-          />
-      );
-    }
-    if (exercise.type === 'inequality') {
-      return (
-        <Inequality
-          exercise={exercise}
-          userId={userId}
-          isProfessor={isProfessor}
-          allResolutions={allResolutions}
-          onReturnButtonCallback={onReturnButtonCallback}
-        />
-      );
-    }
-    if (exercise.type === 'trigonometry') {
-      return (
-          <Trigonometry
-              exercise={exercise}
-              userId={userId}
-              isProfessor={isProfessor}
-              allResolutions={allResolutions}
-              onReturnButtonCallback={onReturnButtonCallback}
-          />
-      );
-    }
-    if (exercise.type === 'exponential') {
-      return (
-          <Exponential
-              exercise={exercise}
-              userId={userId}
-              isProfessor={isProfessor}
-              allResolutions={allResolutions}
-              onReturnButtonCallback={onReturnButtonCallback}
-          />
-      );
-    }
-    if (exercise.type === 'intersection') {
-      return (
-        <Intersection
+        <BaseExercise
           exercise={exercise}
           userId={userId}
           isProfessor={isProfessor}

@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import MathTextBox from '../../../common/math/MathTextBox';
 import ExerciseByStepsInterface from '../ExerciseByStepsInterface';
 
-import styles from './Factorisable.module.sass';
+import styles from './BaseExercise.module.sass';
 
-class Factorisable extends ExerciseByStepsInterface {
+class BaseExercise extends ExerciseByStepsInterface {
   constructor(props) {
     super(props);
 
@@ -70,11 +70,11 @@ class Factorisable extends ExerciseByStepsInterface {
   }
 }
 
-Factorisable.propTypes = {
+BaseExercise.propTypes = {
   isProcessing: PropTypes.bool,
   currentExpression: PropTypes.object,
   onValidateStep: PropTypes.func,
   onContentChange: PropTypes.func
 };
 
-export default Factorisable;
+export default BaseExercise;

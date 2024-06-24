@@ -60,3 +60,24 @@ export const FACTOR_EXPLANATION =   {
     bottomText: "En este caso observamos un ejemplo de una diferencia de cuadrados.",
     image: "factor-exercise.png"
 }
+
+
+export const getScreensForExercise = (exerciseType) => {
+    if (exerciseType === 'domain') {
+        return [DOMAIN_EXPLANATION, INTERVAL_WITH_COMMA, INTERVAL_REAL_EXCEPTION, FRACTION_WRITING, MULTIPLY_SYMBOL_REQUIRED]
+    } else if (exerciseType === 'inequality') {
+        return [INEQUALITY_EXPLANATION, AND_OR_FOR_INEQUATIONS, INTERVAL_WITH_COMMA, MULTIPLY_SYMBOL_REQUIRED]
+    } else if (exerciseType === "intersection") {
+        return [FRACTION_WRITING, MULTIPLY_SYMBOL_REQUIRED] // TODO ADD SPECIFIC EXPLANATION
+    } else if (exerciseType === "exponential") {
+        return [EXPONENTIAL_EXPLANATION, FRACTION_WRITING, MULTIPLY_SYMBOL_REQUIRED]
+    } else if (exerciseType === "factorisable") {
+        return [FACTOR_EXPLANATION, MULTIPLY_SYMBOL_REQUIRED, FRACTION_WRITING]
+    } else if (exerciseType === 'image') {
+        return [FRACTION_WRITING, MULTIPLY_SYMBOL_REQUIRED] // TODO ADD SPECIFIC EXPLANATION
+    } else if (exerciseType === 'trigonometry') {
+        return [TRIANGLE_EXPLANATION]
+    } else {
+        return [FRACTION_WRITING]
+    }
+}
