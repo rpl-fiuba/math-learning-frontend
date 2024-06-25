@@ -6,6 +6,7 @@ import Modal from '../Modal';
 import styles from './StartupExerciseModal.module.sass';
 import MathText from "../../common/math/MathText";
 import PlotFunction, {buildLookalikeFunctions} from "../../common/components/Graphs/PlotFunction";
+import {cleanProblemInput} from "../../../utils/latexUtils";
 
 class SelectButton extends Component {
 	constructor(props) {
@@ -33,7 +34,7 @@ class SelectButton extends Component {
 					<MathText
 						id="problem-resolved"
 						className={styles.math}
-						content={ "f(x) = " + this.props.plottedFunction.functionDefinition}
+						content={ "f(x) = " + cleanProblemInput(this.props.plottedFunction.functionDefinition)}
 					/> </Typography>
 						<Typography color="textPrimary" variant="body2"> Intentalo de nuevo seleccionando otro gráfico </Typography>
 					</div>}

@@ -8,6 +8,7 @@ import MathText from "../../common/math/MathText";
 import PlotFunction, {buildLookalikeFunctions} from "../../common/components/Graphs/PlotFunction";
 import SelectButton from "./SelectButton";
 import CheckIcon from "@material-ui/icons/Check";
+import {cleanProblemInput} from "../../../utils/latexUtils";
 
 
 /* eslint-disable global-require */
@@ -89,7 +90,7 @@ class StartupExerciseModal extends Component {
           <MathText
             id="problem-resolved"
             className={styles.math}
-            content={ "f(x) = " + functions[screenIndex]}
+            content={ "f(x) = " + cleanProblemInput(functions[screenIndex])}
           />
           <div style={{display: "flex"}}> {this.buildPlotElements({originalFunction: functions[screenIndex], amountOfLookalikes: 2})} </div>
         </div> }
@@ -134,7 +135,7 @@ class StartupExerciseModal extends Component {
             <MathText
               id="problem-resolved"
               className={styles.math}
-              content={ "f(x) = " + functions[screenIndex]}
+              content={ "f(x) = " + cleanProblemInput(functions[screenIndex])}
             />
             <div className={classNames(styles.answerContainer)}>
               <PlotFunction functionsToDraw={[functions[screenIndex]]} downscaleFactor={1}/>
