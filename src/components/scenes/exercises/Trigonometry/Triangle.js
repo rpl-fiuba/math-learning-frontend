@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 import CompassCalibrationIcon from "@material-ui/icons/CompassCalibration";
 import SettingsEthernetIcon from "@material-ui/icons/SettingsEthernet";
-import styles from "../../courses/CoursePage/components/CreateExercisePage/CreateExercisePage.module.sass";
+import styles from "./Trigonometry.module.sass";
 import {Check} from "@material-ui/icons";
 import WarningIcon from "@material-ui/icons/Warning";
 
@@ -77,7 +77,7 @@ export const ChallengeTriangle = ({problemInput, showInput, showAllData}) => {
     useEffect(() => {
         if(completedElement.length >= 6){
             showInput()
-            setCompletedExercise(showAllData)
+            setCompletedExercise(true)
         }
     }, [completedElement]);
 
@@ -129,12 +129,12 @@ export const ChallengeTriangle = ({problemInput, showInput, showAllData}) => {
                     })
                 }
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={4}>
                 <Typography id="creation-label" color="textPrimary" variant="h6" className={styles.title}>
                     Incógnitas
                 </Typography>
                 <Typography id="creation-label" color="textPrimary" variant="subtitle2" className={styles.title}>
-                    Completá los datos faltantes, podes validarlos individualmente
+                    Completá los datos faltantes y validalos, para ingresar los lados recordá usar al menos dos decimales si redondeás el valor
                 </Typography>
                 {
                     missingElements.map(element => {
@@ -169,14 +169,18 @@ export const ChallengeTriangle = ({problemInput, showInput, showAllData}) => {
 const Item = ({itemKind, itemName, itemValue, provided, setCompletedFields, selected}) => {
 
     const [isCompleted, setIsCompleted] = useState(false)
+    const [isWrong, setIsWrong] = useState(false)
     const [userInput, setUserInput] = useState("")
     const secondaryText = itemKind === 'angle' ? itemValue.toString() + "°" : (itemValue.toFixed(2) + ` (${itemValue.toFixed(6)})`)
 
     const handleValidate = () => {
         if(!!userInput && !!parseFloat(userInput) && !isNaN(parseFloat(userInput)) && itemValue.toFixed(2) === parseFloat(userInput).toFixed(2)){
             setIsCompleted(true)
+            setIsWrong(false)
             setUserInput(itemValue)
             setCompletedFields((prev) => [...prev, itemName])
+        } else if (!!userInput) {
+            setIsWrong(true)
         }
     }
 
@@ -187,7 +191,10 @@ const Item = ({itemKind, itemName, itemValue, provided, setCompletedFields, sele
         </ListItemIcon>
         <ListItemText
             primary={itemName}
-            secondary={provided ? secondaryText : <Input value={userInput} onChange={(event) => setUserInput(event.target.value)}></Input>}
+            secondary={provided ? secondaryText : <div>
+                <Input value={userInput} error={isWrong} onChange={(event) => setUserInput(event.target.value)}/>
+                {!provided && isWrong && <div className={styles.errorClueInput}>Valor incorrecto, intentalo nuevamente</div>}
+            </div>}
         />
         {!provided && !isCompleted &&
             <Button
