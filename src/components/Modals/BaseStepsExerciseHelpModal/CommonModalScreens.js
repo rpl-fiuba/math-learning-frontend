@@ -65,8 +65,20 @@ export const IMAGE_EXPLANATION = {
     topText: "En estos ejercicios debes escribir el conjunto imagen de la función del enunciado",
     bottomText: "El resultado final será un intervalo",
     image: "helpImage.png"
-
 }
+
+export const INTERSECTION_EXPLANATION_BASIC = {
+    topText: "Para hallar la intersección debes resolver paso a paso la ecuación",
+    bottomText: "El resultado final serán las soluciones a dicha ecuación",
+    image: "helpIntersection.png"
+}
+
+export const INTERSECTION_RESULT_FORMAT = {
+    topText: "El resultado puede ser ninguna solución, una única solucion, un conjunto finito de soluciones o un intervalo de soluciones como en los siguientes ejemplos",
+    bottomText: "Usa el formato de respuesta apropiado según el caso a resolver",
+    image: "helpResponsesIntersection.png"
+}
+
 
 
 export const getScreensForExercise = (exerciseType) => {
@@ -75,7 +87,7 @@ export const getScreensForExercise = (exerciseType) => {
     } else if (exerciseType === 'inequality') {
         return [INEQUALITY_EXPLANATION, AND_OR_FOR_INEQUATIONS, INTERVAL_WITH_COMMA, MULTIPLY_SYMBOL_REQUIRED]
     } else if (exerciseType === "intersection") {
-        return [FRACTION_WRITING, MULTIPLY_SYMBOL_REQUIRED] // TODO ADD SPECIFIC EXPLANATION
+        return [INTERSECTION_EXPLANATION_BASIC, INTERSECTION_RESULT_FORMAT, INTERVAL_WITH_COMMA, FRACTION_WRITING, MULTIPLY_SYMBOL_REQUIRED] // TODO ADD SPECIFIC EXPLANATION
     } else if (exerciseType === "exponential") {
         return [EXPONENTIAL_EXPLANATION, FRACTION_WRITING, MULTIPLY_SYMBOL_REQUIRED]
     } else if (exerciseType === "factorisable") {
