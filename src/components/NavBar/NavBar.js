@@ -67,7 +67,7 @@ class NavBar extends Component {
   getDrawer = () => {
     const { profile } = this.props;
 
-    const shouldShowPlayground = profile?.email && (profile.email === "lgimenez@fi.uba.ar" || profile.email === "aimgarcia@fi.uba.ar")
+    const shouldShowPlayground = profile?.email && (profile.email === "lgimenez@fi.uba.ar" || profile.email === "aimgarcia@fi.uba.ar" || profile.email === "ppalacios@cbc.uba.ar")
     if (!profile) {
       return '';
     }
