@@ -67,6 +67,7 @@ export default class PlaygroundExercisePage extends Component {
           isProfessor={isProfessor}
           allResolutions={allResolutions}
           onReturnButtonCallback={onReturnButtonCallback}
+          onReturnButtonText={onReturnButtonText}
         />
       );
     }
