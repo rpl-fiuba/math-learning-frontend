@@ -61,6 +61,13 @@ export const FACTOR_EXPLANATION =   {
     image: "factor-exercise.png"
 }
 
+export const IMAGE_EXPLANATION = {
+    topText: "En estos ejercicios debes escribir el conjunto imagen de la función del enunciado",
+    bottomText: "El resultado final será un intervalo",
+    image: "helpImage.png"
+
+}
+
 
 export const getScreensForExercise = (exerciseType) => {
     if (exerciseType === 'domain') {
@@ -74,7 +81,7 @@ export const getScreensForExercise = (exerciseType) => {
     } else if (exerciseType === "factorisable") {
         return [FACTOR_EXPLANATION, MULTIPLY_SYMBOL_REQUIRED, FRACTION_WRITING]
     } else if (exerciseType === 'image') {
-        return [FRACTION_WRITING, MULTIPLY_SYMBOL_REQUIRED] // TODO ADD SPECIFIC EXPLANATION
+        return [IMAGE_EXPLANATION, INTERVAL_WITH_COMMA, FRACTION_WRITING, MULTIPLY_SYMBOL_REQUIRED]
     } else if (exerciseType === 'trigonometry') {
         return [TRIANGLE_EXPLANATION]
     } else {
