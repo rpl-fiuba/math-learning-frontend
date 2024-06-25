@@ -40,7 +40,7 @@ class SessionExpiredModal extends ConfirmActionModal {
 SessionExpiredModal.defaultProps = {
   title: 'Tu sesión ha expirado',
   actionType: 'warning',
-  explanation: 'Para continuar usando la plataforma, hacé click en el botón "Iniciar Sesión" debajo de este mensaje que renovará tu sesión con Google'
+  explanation: 'Si querés continuar usando la plataforma hacé click en el botón "Iniciar Sesión" debajo de este mensaje para renovar tu sesión con Google'
 };
 
 export default SessionExpiredModal;
