@@ -220,7 +220,9 @@ class ExerciseByStepsInterface extends Component {
                   this.setState({ showExerciseInput: true })
                 }}
             />}
-            {this.shouldShowFunctionPlot(exercise, this.state) && <PlotFunction functionsToDraw={exercise.problemInput.split("=")} />}
+            {this.shouldShowFunctionPlot(exercise, this.state) && <div> <PlotFunction functionsToDraw={exercise.problemInput.split("=")} /> <Typography variant="subtitle2" className={styles.exerciseDescription}>
+              En este grafico están representadas las funciones del enunciado, podés usarlo para guiarte en la resolucion del ejercicio
+            </Typography> </div>}
             {exercise.type !== "trigonometry" && <MathText
                 id="problem-input"
                 className={styles.problemInput}
