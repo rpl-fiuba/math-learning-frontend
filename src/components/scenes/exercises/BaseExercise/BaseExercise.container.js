@@ -48,8 +48,8 @@ const currentActions = (dispatch, { exercise, userId }) => {
       })),
     onDeleteStep: () => {
       dispatch(modalActions.loadModal(modalTypes.CONFIRM_ACTION_MODAL, {
-        title: '¿ Desea borrar el paso anterior ?',
-        explanation: 'Al borrar el paso anterior, no podrás recuperarlo',
+        title: '¿Desea borrar el paso anterior?',
+        explanation: 'Una vez eliminado no podrás restaurarlo',
         acceptButton: 'Borrar paso',
         actionProps: {
           guideId: exercise.guideId,
@@ -62,8 +62,8 @@ const currentActions = (dispatch, { exercise, userId }) => {
     },
     onDeliverExercise: () => {
       dispatch(modalActions.loadModal(modalTypes.CONFIRM_ACTION_MODAL, {
-        title: '¿ Desea entregar el ejercicio ?',
-        explanation: 'Al entregarlo no podrás volver a editarlo',
+        title: '¿Desea entregar el ejercicio?',
+        explanation: 'Una vez entregado no podrás agregar ni eliminar pasos',
         acceptButton: 'Entregar ejercicio',
         actionType: 'ask',
         actionProps: exercise,
