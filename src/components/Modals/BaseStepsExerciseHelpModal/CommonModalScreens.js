@@ -37,6 +37,13 @@ export const TRIANGLE_EXPLANATION =   {
     image: "triangle-solved.png"
 }
 
+export const TRIANGLE_HINTS_EXPLANATION =   {
+    topText: "Si al completar los datos faltantes ingresás un valor incorrecto, la plataforma te dará una pista para que puedas corregirlo",
+    bottomText: "Para revelarla hacé click en el icono de ayuda que aparecerá al lado del valor incorrecto",
+    image: "helpTrigonometryHint.png"
+}
+
+
 export const DOMAIN_EXPLANATION =   {
     topText: "En estos ejercicios debemos paso a paso analizar el dominio de la funcion hasta llevarlo a un intervalo o unión de intervalos",
     bottomText: "Si detectás mas de un limitante, podes escribir el dominio como una interseccion de dominios como en este ejemplo provisto",
@@ -95,7 +102,7 @@ export const getScreensForExercise = (exerciseType) => {
     } else if (exerciseType === 'image') {
         return [IMAGE_EXPLANATION, INTERVAL_WITH_COMMA, FRACTION_WRITING, MULTIPLY_SYMBOL_REQUIRED]
     } else if (exerciseType === 'trigonometry') {
-        return [TRIANGLE_EXPLANATION]
+        return [TRIANGLE_EXPLANATION, TRIANGLE_HINTS_EXPLANATION]
     } else {
         return [FRACTION_WRITING]
     }
