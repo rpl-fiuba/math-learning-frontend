@@ -14,6 +14,8 @@ import SettingsEthernetIcon from "@material-ui/icons/SettingsEthernet";
 import styles from "./Trigonometry.module.sass";
 import {Check} from "@material-ui/icons";
 import WarningIcon from "@material-ui/icons/Warning";
+import HelpIcon from "@material-ui/icons/Help";
+import HelpTooltip from "../HelpTooltip";
 
 function calculateAxisRange(vertices) {
     const minX = Math.min(...vertices.map(point => point.x));
@@ -40,14 +42,118 @@ const TriangleGraph = ({ angle1, angle2, baseLength }) => {
     );
 };
 
-export const tagFromLabel = {
-    "leftAngle": "Ang. Izquierdo",
-    "rightAngle": "Ang. Derecho",
-    "topAngle": "Ang. Superior",
-    "bottomSide": "Lado Inferior",
-    "rightSide": "Lado Derecho",
-    "leftSide": "Lado Izquierdo"
+const LEFT_ANGLE = "Ang. Izquierdo";
+const RIGHT_ANGLE = "Ang. Derecho";
+const TOP_ANGLE = "Ang. Superior";
+export const tagFromLabelForAngles = {
+    "leftAngle": LEFT_ANGLE,
+    "rightAngle": RIGHT_ANGLE,
+    "topAngle": TOP_ANGLE,
 }
+const BOTTOM_SIDE = "Lado Inferior";
+const RIGHT_SIDE = "Lado Derecho";
+const LEFT_SIDE = "Lado Izquierdo";
+export const tagFromLabel = {
+    ...tagFromLabelForAngles,
+    "bottomSide": BOTTOM_SIDE,
+    "rightSide": RIGHT_SIDE,
+    "leftSide": LEFT_SIDE
+}
+
+const getSineLawRequirements = (elementToCalculate) => {
+    switch (elementToCalculate) {
+        case LEFT_ANGLE:
+            return [[RIGHT_SIDE, RIGHT_ANGLE, LEFT_SIDE], [RIGHT_SIDE, TOP_ANGLE, BOTTOM_SIDE]]
+        case RIGHT_ANGLE:
+            return [[LEFT_SIDE, RIGHT_SIDE, LEFT_ANGLE], [LEFT_SIDE, TOP_ANGLE, BOTTOM_SIDE]]
+        case TOP_ANGLE:
+            return [[BOTTOM_SIDE, RIGHT_SIDE, LEFT_ANGLE], [BOTTOM_SIDE, LEFT_SIDE, RIGHT_ANGLE]]
+        case LEFT_SIDE:
+            return [[RIGHT_ANGLE, RIGHT_SIDE, LEFT_ANGLE], [RIGHT_ANGLE, TOP_ANGLE, BOTTOM_SIDE]]
+        case RIGHT_SIDE:
+            return [[LEFT_ANGLE, LEFT_SIDE, RIGHT_ANGLE], [LEFT_ANGLE, TOP_ANGLE, BOTTOM_SIDE]]
+        case BOTTOM_SIDE:
+            return [[TOP_ANGLE, RIGHT_SIDE, LEFT_ANGLE], [TOP_ANGLE, LEFT_SIDE, RIGHT_ANGLE]]
+        default:
+            return []
+    }
+}
+
+const getCosineLawRequirements = (elementToCalculate) => {
+    switch (elementToCalculate) {
+        case LEFT_SIDE:
+            return [[BOTTOM_SIDE, RIGHT_SIDE, RIGHT_ANGLE]]
+        case RIGHT_SIDE:
+            return [[BOTTOM_SIDE, LEFT_SIDE, LEFT_ANGLE]]
+        case BOTTOM_SIDE:
+            return [[LEFT_SIDE, RIGHT_SIDE, TOP_ANGLE]]
+        case LEFT_ANGLE:
+            return [[LEFT_SIDE, RIGHT_SIDE, BOTTOM_SIDE]]
+        case RIGHT_ANGLE:
+            return [[LEFT_SIDE, RIGHT_SIDE, BOTTOM_SIDE]]
+        case TOP_ANGLE:
+            return [[LEFT_SIDE, RIGHT_SIDE, BOTTOM_SIDE]]
+        default:
+            return []
+    }
+}
+
+const getSineLawClues = (elementToCalculate, completedElements) => {
+    const requirements = getSineLawRequirements(elementToCalculate)
+    let clues = []
+    for (const requirementSet of requirements) {
+        if(requirementSet.every(requirement => completedElements.includes(requirement))){
+            clues.push("Aplicá el teorema del seno con " + requirementSet.join(", "))
+        }
+    }
+    return clues
+}
+
+const getCosineLawClues = (elementToCalculate, completedElements) => {
+    const requirements = getCosineLawRequirements(elementToCalculate)
+    let clues = []
+    for (const requirementSet of requirements) {
+        if(requirementSet.every(requirement => completedElements.includes(requirement))){
+            clues.push("Aplicá el teorema del coseno con " + requirementSet.join(", "))
+        }
+    }
+    return clues
+}
+
+const getInnerAngleClues = (elementToCalculate, completedElements) => {
+    const elementToCalculateIsAngle = Object.values(tagFromLabelForAngles).includes(elementToCalculate)
+    if (!elementToCalculateIsAngle)
+      return []
+    const providedAngles = completedElements.filter(element => Object.values(tagFromLabelForAngles).includes(element))
+    if (providedAngles.length === 2) {
+        return ["Considerá que la suma de los ángulos internos de un triángulo es 180°"]
+    }
+    return []
+}
+
+const getCluesForElement = (itemName, completedElements) => {
+    const innerAngleClues = getInnerAngleClues(itemName, completedElements)
+    if (innerAngleClues.length > 0) {
+        return innerAngleClues[0]
+    }
+    const sineLawClues = getSineLawClues(itemName, completedElements)
+    if (sineLawClues.length > 0) {
+        return sineLawClues[0]
+    }
+    const cosineLawClues = getCosineLawClues(itemName, completedElements)
+    if (cosineLawClues.length > 0) {
+        return cosineLawClues[0]
+    }
+    return []
+}
+
+const getAvailableMissingElements = (completedElements, missingElements) => {
+    return missingElements
+      .filter(element => !completedElements.includes(element.tag) && getCluesForElement(element.tag, completedElements).length > 0)
+      .map(element => element.tag)
+}
+
+
 
 export const ChallengeTriangle = ({problemInput, showInput, showAllData}) => {
 
@@ -71,15 +177,28 @@ export const ChallengeTriangle = ({problemInput, showInput, showAllData}) => {
     const missingElements = elements.filter(element => !element.provided)
 
     const [clickedElement, setClickedElement] = useState(null);
-    const [completedElement, setCompletedElement] = useState(providedElements.map(element => element.tag));
+    const [completedElements, setCompletedElements] = useState(providedElements.map(element => element.tag));
     const [completedExercise, setCompletedExercise] = useState(showAllData);
 
     useEffect(() => {
-        if(completedElement.length >= 6){
+        if(completedElements.length >= 6){
             showInput()
             setCompletedExercise(true)
         }
-    }, [completedElement]);
+    }, [completedElements]);
+
+    const getHint = (itemKind, itemName) => {
+        const cluesForSelectedElement = getCluesForElement(itemName, completedElements)
+        if (cluesForSelectedElement.length > 0) {
+            return cluesForSelectedElement
+        }
+        const otherElementClues = getAvailableMissingElements(completedElements, missingElements)
+        if (otherElementClues.length > 0) {
+            return "Calculá primero otro elemento como " + otherElementClues.join(", ")
+        }
+        return ""
+    }
+
 
     return (<>
         <Grid container spacing={10} style={{marginTop: "5px"}}>
@@ -102,6 +221,17 @@ export const ChallengeTriangle = ({problemInput, showInput, showAllData}) => {
                                 onValueClick={(datapoint) => setClickedElement(vertex.angle)}
                             />)
                     }
+                    {
+                        vertices.slice(0,3).map((vertex, index) =>
+                          <MarkSeries
+                            key = {index}
+                            data={[vertex]}
+                            size={8}
+                            color={clickedElement === vertex.angle ? "#3ab6b2" : "#858585"} // Change color when hovered
+                            opacity={1}
+                            onValueClick={(datapoint) => setClickedElement(vertex.angle)}
+                          />)
+                    }
                     <XAxis />
                     <YAxis />
                     <LineSeries data={vertices.slice(0,2)} strokeWidth={8} color={clickedElement === "bottomSide" ? "#3ab6b2" : "#858585"} onSeriesClick={() => setClickedElement("bottomSide")}/>
@@ -123,7 +253,7 @@ export const ChallengeTriangle = ({problemInput, showInput, showAllData}) => {
                             itemName={element.tag}
                             itemValue={element.value}
                             provided={true}
-                            setCompletedFields={setCompletedElement}
+                            setCompletedFields={setCompletedElements}
                             selected={clickedElement === element.label}
                         />
                     })
@@ -143,8 +273,9 @@ export const ChallengeTriangle = ({problemInput, showInput, showAllData}) => {
                             itemName={element.tag}
                             itemValue={element.value}
                             provided={showAllData}
-                            setCompletedFields={setCompletedElement}
+                            setCompletedFields={setCompletedElements}
                             selected={clickedElement === element.label}
+                            getHint={getHint}
                         />
                     })
                 }
@@ -166,7 +297,7 @@ export const ChallengeTriangle = ({problemInput, showInput, showAllData}) => {
     );
 };
 
-const Item = ({itemKind, itemName, itemValue, provided, setCompletedFields, selected}) => {
+const Item = ({itemKind, itemName, itemValue, provided, setCompletedFields, selected, getHint}) => {
 
     const [isCompleted, setIsCompleted] = useState(false)
     const [isWrong, setIsWrong] = useState(false)
@@ -196,6 +327,9 @@ const Item = ({itemKind, itemName, itemValue, provided, setCompletedFields, sele
                 {!provided && isWrong && <div className={styles.errorClueInput}>Valor incorrecto, intentalo nuevamente</div>}
             </div>}
         />
+        {
+            !provided && isWrong && <HelpTooltip className={styles.help} help={getHint(itemKind, itemName)}/>
+        }
         {!provided && !isCompleted &&
             <Button
                 color={'primary'}
