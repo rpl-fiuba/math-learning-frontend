@@ -16,14 +16,15 @@ export default function HelpTooltip(props) {
     setAnchorEl(null);
   };
 
+  const shouldShowHelp = (help || "").trim() !== ""
+
   const open = Boolean(anchorEl);
 
-  const helps = help
+  const helps = (help || "")
     .split('\n')
     .map((i) => <div key={i} className={styles.helpLine}>{i}</div>);
 
-  return (
-    <div className={className}>
+  return (shouldShowHelp && <div className={className}>
       <HelpIcon
         id="help-icon"
         fontSize="small"
