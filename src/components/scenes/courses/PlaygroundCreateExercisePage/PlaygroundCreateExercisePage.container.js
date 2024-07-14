@@ -8,12 +8,15 @@ import {actions} from "../../../../state/exercises";
 
 const currentState = (state, { match, location }) => {
   const profile = common.selectors.profile(state);
+  const context = common.selectors.context(state);
   const isProfessor = userUtils.isProfessor(profile);
   const userId = profile.userId
+
 
   return {
     userId,
     isProfessor,
+    context
   };
 };
 

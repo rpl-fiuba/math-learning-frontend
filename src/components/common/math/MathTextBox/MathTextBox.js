@@ -89,6 +89,12 @@ class MathTextBox extends Component {
     }
   }
 
+  updateContent = (newContent) => {
+    if (this.mathQuillEl) {
+      this.mathQuillEl.latex(newContent);
+    }
+  }
+
   insertAtCursorPosition = (valueToInsert, ref) => {
     const cursorPosition = ref.selectionStart;
     const currentValue = ref.value;

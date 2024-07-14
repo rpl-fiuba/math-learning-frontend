@@ -6,6 +6,19 @@ import guide from "../components/scenes/courses/CoursePage/components/Guide";
 
 const { url } = confs.services.exercises;
 
+const generateProblemForExerciseType = async ({ context, exerciseType}) => {
+  const generateProblemUrl = `${url}/playground/problems/generate`;
+  const response = await fetch(generateProblemUrl, {
+    method: 'post',
+    body: JSON.stringify({type: exerciseType}),
+    headers: {
+      authorization: context.accessToken,
+      'Content-Type': 'application/json'
+    }
+  });
+  return requestUtils.processResponse(response);
+};
+
 const createExercise = async ({
   context,
   courseId,
@@ -427,5 +440,6 @@ export default {
   generatePlaygroundExercise,
   getPlaygroundExercise,
   resolvePlaygroundExercise,
-  getPlaygroundExercises
+  getPlaygroundExercises,
+  generateProblemForExerciseType
 };

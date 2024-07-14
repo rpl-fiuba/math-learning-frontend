@@ -4,6 +4,7 @@ import {Button, Divider, TextField, Typography} from "@material-ui/core";
 import ExerciseTypeSelector from "../../../common/components/Selectors/ExerciseTypeSelector";
 import ExerciseProblemInput from "../../../common/components/Inputs/ExerciseProblemInput";
 import Grid from "@material-ui/core/Grid";
+import exercisesClient from "../../../../clients/exercisesClient";
 
 export default class PlaygroundCreateExercisePage extends Component {
   constructor(props) {
@@ -74,10 +75,17 @@ export default class PlaygroundCreateExercisePage extends Component {
     </Button></div>;
   }
 
+  generateProblem ({problemType}) {
+    const context = this.props.context
+    return exercisesClient.generateProblemForExerciseType({context, exerciseType: problemType})
+  }
+
   renderProblemInput(exercise) {
     return <ExerciseProblemInput content={exercise.problemInput}
+                                 exerciseType={exercise.type}
                                  onChangeExercise={this.onChangeExercise}
                                  onClickSymbol={this.handleClickSymbol}
+                                 generateProblem={this.generateProblem.bind(this)}
                                  customTitle={"Función del Ejercicio"} mathBoxRef={this.MathBoxRef}/>;
   }
 
