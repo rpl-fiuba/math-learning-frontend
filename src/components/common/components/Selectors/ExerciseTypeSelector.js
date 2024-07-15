@@ -3,7 +3,7 @@ import React from 'react';
 import BootstrapDropdownInput from '../../../../bootstrap/dropdownInput';
 
 export default function ExerciseTypeSelector(props) {
-	const { type, onChangeType, customTitle, customStyle } = props;
+	const { type, onChangeType, customTitle, customStyle, excludeTrigonometry = false } = props;
 
 	return (<>
 			{customTitle || <InputLabel id="dropdown-input-label"> Tipo de ejercicio </InputLabel>}
@@ -19,7 +19,7 @@ export default function ExerciseTypeSelector(props) {
 				<MenuItem value="domain">Dominio</MenuItem>
 				<MenuItem value="image">Imagen</MenuItem>
 				<MenuItem value="inequality">Inecuaciones</MenuItem>
-				<MenuItem value="trigonometry">Trigonometria</MenuItem>
+				{!excludeTrigonometry && <MenuItem value="trigonometry">Trigonometria</MenuItem>}
 				<MenuItem value="exponential">Ecuaciones exponenciales y logaritmicas</MenuItem>
 				<MenuItem value="intersection">Interseccion de Funciones</MenuItem>
 			</Select>

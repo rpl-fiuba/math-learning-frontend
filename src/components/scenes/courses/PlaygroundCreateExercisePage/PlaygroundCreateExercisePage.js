@@ -115,6 +115,7 @@ export default class PlaygroundCreateExercisePage extends Component {
         Ejercicio </Typography>}
       customStyle={styles.stretchedInput}
       onChangeType={this.onChangeType}
+      excludeTrigonometry
       type={exercise.type}/>;
   }
 
