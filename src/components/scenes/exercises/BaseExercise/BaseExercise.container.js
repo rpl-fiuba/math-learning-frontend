@@ -8,6 +8,7 @@ import * as modalActions from '../../../../state/modals/actions';
 import BaseExercise from './BaseExercise';
 import {getScreensForExercise} from "../../../Modals/BaseStepsExerciseHelpModal/CommonModalScreens";
 import * as modalSelectors from "../../../../state/modals/selectors";
+import {ExerciseType} from "../../../../utils/exerciseType";
 
 const currentState = (state, { exercise }) => {
   const currentExpression = selectors.currentExpression(state, { ...exercise });
@@ -84,7 +85,7 @@ const currentActions = (dispatch, { exercise, userId }) => {
     }
   }
 
-  if(exercise?.type === "intersection") {
+  if(exercise?.type === ExerciseType.INTERSECTION) {
     actionsBlock.openStartUpModal = openStartUpModal;
   }
 

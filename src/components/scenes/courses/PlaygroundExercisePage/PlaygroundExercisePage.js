@@ -4,13 +4,14 @@ import { CircularProgress } from "@material-ui/core";
 import Derivative from "../../exercises/Derivative";
 import Integrate from "../../exercises/Integrate";
 import BaseExercise from "../../exercises/BaseExercise";
+import {ExerciseType} from "../../../../utils/exerciseType";
 
 export default class PlaygroundExercisePage extends Component {
   constructor(props) {
     super(props);
     this.MathBoxRef = React.createRef();
     this.state = {
-      exercise: {stepList: [], type: 'domain', name: null, problemInput: null, currentExpression: {expression: '', variables: [] }},
+      exercise: {stepList: [], type: ExerciseType.DOMAIN, name: null, problemInput: null, currentExpression: {expression: '', variables: [] }},
     };
   }
 

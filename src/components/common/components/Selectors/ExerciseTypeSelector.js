@@ -1,6 +1,7 @@
 import {InputLabel, MenuItem, Select} from '@material-ui/core';
 import React from 'react';
 import BootstrapDropdownInput from '../../../../bootstrap/dropdownInput';
+import {ExerciseType} from "../../../../utils/exerciseType";
 
 export default function ExerciseTypeSelector(props) {
 	const { type, onChangeType, customTitle, customStyle, excludeTrigonometry = false } = props;
@@ -15,13 +16,13 @@ export default function ExerciseTypeSelector(props) {
 				displayEmpty={true}
 				input={<BootstrapDropdownInput />}
 			>
-				<MenuItem value="factorisable">Factoreo</MenuItem>
-				<MenuItem value="domain">Dominio</MenuItem>
-				<MenuItem value="image">Imagen</MenuItem>
-				<MenuItem value="inequality">Inecuaciones</MenuItem>
-				{!excludeTrigonometry && <MenuItem value="trigonometry">Trigonometria</MenuItem>}
-				<MenuItem value="exponential">Ecuaciones exponenciales y logaritmicas</MenuItem>
-				<MenuItem value="intersection">Interseccion de Funciones</MenuItem>
+				<MenuItem value={ExerciseType.FACTORISABLE}>Factoreo</MenuItem>
+				<MenuItem value={ExerciseType.DOMAIN}>Dominio</MenuItem>
+				<MenuItem value={ExerciseType.IMAGE}>Imagen</MenuItem>
+				<MenuItem value={ExerciseType.INEQUALITY}>Inecuaciones</MenuItem>
+				{!excludeTrigonometry && <MenuItem value={ExerciseType.TRIGONOMETRY}>Trigonometria</MenuItem>}
+				<MenuItem value={ExerciseType.EXPONENTIAL}>Ecuaciones exponenciales y logaritmicas</MenuItem>
+				<MenuItem value={ExerciseType.INTERSECTION}>Interseccion de Funciones</MenuItem>
 			</Select>
 	</>
 	);

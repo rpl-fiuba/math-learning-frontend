@@ -7,6 +7,7 @@ import Modal from '../Modal';
 import MathTextBox from '../../common/math/MathTextBox';
 import BootstrapDropdownInput from '../../../bootstrap/dropdownInput';
 import styles from './ExerciseModal.module.sass';
+import {ExerciseType} from "../../../utils/exerciseType";
 
 class ExerciseModal extends Component {
   constructor(props) {
@@ -99,12 +100,12 @@ class ExerciseModal extends Component {
             onChange={this.onChangeType}
             input={<BootstrapDropdownInput />}
           >
-            <MenuItem value="factorisable">Factoreo</MenuItem>
-            <MenuItem value="domain">Dominio</MenuItem>
-            <MenuItem value="image">Imagen</MenuItem>
-            <MenuItem value="inequality">Inecuaciones</MenuItem>
-            <MenuItem value="trigonometry">Trigonometria</MenuItem>
-            <MenuItem value="exponential">Ecuaciones exponenciales y logaritmicas</MenuItem>
+            <MenuItem value={ExerciseType.FACTORISABLE}>Factoreo</MenuItem>
+            <MenuItem value={ExerciseType.DOMAIN}>Dominio</MenuItem>
+            <MenuItem value={ExerciseType.IMAGE}>Imagen</MenuItem>
+            <MenuItem value={ExerciseType.INEQUALITY}>Inecuaciones</MenuItem>
+            <MenuItem value={ExerciseType.EXPONENTIAL}>Ecuaciones exponenciales y logaritmicas</MenuItem>
+            <MenuItem value={ExerciseType.INTERSECTION}>Interseccion de Funciones</MenuItem>
           </Select>
         </FormControl>
 

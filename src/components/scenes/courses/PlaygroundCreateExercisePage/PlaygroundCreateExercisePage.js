@@ -5,13 +5,14 @@ import ExerciseTypeSelector from "../../../common/components/Selectors/ExerciseT
 import ExerciseProblemInput from "../../../common/components/Inputs/ExerciseProblemInput";
 import Grid from "@material-ui/core/Grid";
 import exercisesClient from "../../../../clients/exercisesClient";
+import {ExerciseType} from "../../../../utils/exerciseType";
 
 export default class PlaygroundCreateExercisePage extends Component {
   constructor(props) {
     super(props);
     this.MathBoxRef = React.createRef();
     this.state = {
-      exercise: {stepList: [], type: 'domain', name: null, problemInput: null, currentExpression: {expression: '', variables: [] }},
+      exercise: {stepList: [], type: ExerciseType.DOMAIN, name: null, problemInput: null, currentExpression: {expression: '', variables: [] }},
     };
   }
 

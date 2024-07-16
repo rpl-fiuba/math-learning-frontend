@@ -24,6 +24,7 @@ import {Close} from "@material-ui/icons";
 import {typeMap} from "../../courses/CoursePage/components/Exercise/TypeMap";
 import PlotFunction from "../../../common/components/Graphs/PlotFunction";
 import exercise from "../../courses/CoursePage/components/Exercise";
+import {ExerciseType} from "../../../../utils/exerciseType";
 
 class ExerciseByStepsInterface extends Component {
   constructor(props) {
@@ -319,7 +320,7 @@ class ExerciseByStepsInterface extends Component {
   }
 
   shouldShowFunctionPlot(exercise) {
-    return !this.props.startupModalOpen && exercise.type === "intersection";
+    return !this.props.startupModalOpen && exercise.type === ExerciseType.INTERSECTION;
   }
 }
 

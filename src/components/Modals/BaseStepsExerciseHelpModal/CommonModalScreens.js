@@ -1,5 +1,7 @@
 /* Las imagenes referenciadas deben agregarse al directorio math-learning-frontend/src/images */
 
+import {ExerciseType} from "../../../utils/exerciseType";
+
 export const MULTIPLY_SYMBOL_REQUIRED = {
     topText: "En los ejercicios debes escribir explícitamente los productos utilizando el símbolo de multiplicación \"*\" que se verá como un \"⋅\"",
         bottomText: "Nota: No es necesario para cuando multiplicamos escalares y variables (ej: \"3x\" es válido, no es necesario escribir \"3*x\")",
@@ -89,21 +91,22 @@ export const INTERSECTION_RESULT_FORMAT = {
 
 
 export const getScreensForExercise = (exerciseType) => {
-    if (exerciseType === 'domain') {
-        return [DOMAIN_EXPLANATION, INTERVAL_WITH_COMMA, INTERVAL_REAL_EXCEPTION, FRACTION_WRITING, MULTIPLY_SYMBOL_REQUIRED]
-    } else if (exerciseType === 'inequality') {
-        return [INEQUALITY_EXPLANATION, AND_OR_FOR_INEQUATIONS, INTERVAL_WITH_COMMA, MULTIPLY_SYMBOL_REQUIRED]
-    } else if (exerciseType === "intersection") {
-        return [INTERSECTION_EXPLANATION_BASIC, INTERSECTION_RESULT_FORMAT, INTERVAL_WITH_COMMA, FRACTION_WRITING, MULTIPLY_SYMBOL_REQUIRED] // TODO ADD SPECIFIC EXPLANATION
-    } else if (exerciseType === "exponential") {
-        return [EXPONENTIAL_EXPLANATION, FRACTION_WRITING, MULTIPLY_SYMBOL_REQUIRED]
-    } else if (exerciseType === "factorisable") {
-        return [FACTOR_EXPLANATION, MULTIPLY_SYMBOL_REQUIRED, FRACTION_WRITING]
-    } else if (exerciseType === 'image') {
-        return [IMAGE_EXPLANATION, INTERVAL_WITH_COMMA, FRACTION_WRITING, MULTIPLY_SYMBOL_REQUIRED]
-    } else if (exerciseType === 'trigonometry') {
-        return [TRIANGLE_EXPLANATION, TRIANGLE_HINTS_EXPLANATION]
-    } else {
-        return [FRACTION_WRITING]
+    switch (exerciseType) {
+        case ExerciseType.FACTORISABLE:
+            return [FACTOR_EXPLANATION, MULTIPLY_SYMBOL_REQUIRED, FRACTION_WRITING]
+        case ExerciseType.DOMAIN:
+            return [DOMAIN_EXPLANATION, INTERVAL_WITH_COMMA, INTERVAL_REAL_EXCEPTION, FRACTION_WRITING, MULTIPLY_SYMBOL_REQUIRED]
+        case ExerciseType.INEQUALITY:
+            return [INEQUALITY_EXPLANATION, AND_OR_FOR_INEQUATIONS, INTERVAL_WITH_COMMA, MULTIPLY_SYMBOL_REQUIRED]
+        case ExerciseType.IMAGE:
+            return [IMAGE_EXPLANATION, INTERVAL_WITH_COMMA, FRACTION_WRITING, MULTIPLY_SYMBOL_REQUIRED]
+        case ExerciseType.EXPONENTIAL:
+            return [EXPONENTIAL_EXPLANATION, FRACTION_WRITING, MULTIPLY_SYMBOL_REQUIRED]
+        case ExerciseType.INTERSECTION:
+            return [INTERSECTION_EXPLANATION_BASIC, INTERSECTION_RESULT_FORMAT, INTERVAL_WITH_COMMA, FRACTION_WRITING, MULTIPLY_SYMBOL_REQUIRED] // TODO ADD SPECIFIC EXPLANATION
+        case ExerciseType.TRIGONOMETRY:
+            return [TRIANGLE_EXPLANATION, TRIANGLE_HINTS_EXPLANATION]
+        default:
+            return [FRACTION_WRITING]
     }
 }

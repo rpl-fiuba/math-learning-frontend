@@ -21,6 +21,7 @@ import MathTable from "../../../../exercises/MathTable";
 import ExerciseTypeSelector from "../../../../../common/components/Selectors/ExerciseTypeSelector";
 import ExerciseProblemInput from "../../../../../common/components/Inputs/ExerciseProblemInput";
 import exercisesClient from "../../../../../../clients/exercisesClient";
+import {ExerciseType} from "../../../../../../utils/exerciseType";
 
 class CreateExercisePage extends Component {
   constructor(props) {
@@ -31,7 +32,7 @@ class CreateExercisePage extends Component {
     this.state = {
       name: null,
       initialHint: null,
-      type: 'domain',
+      type: ExerciseType.DOMAIN,
       problemInput: null,
       difficulty: 'easy',
       description: null,
