@@ -4,12 +4,14 @@ import { push } from 'connected-react-router';
 import configs from '../../../../../../configs/variables';
 import { actions, selectors } from '../../../../../../state/exercises';
 import CreateExercisePage from './CreateExercisePage';
+import * as common from "../../../../../../state/common";
 
 const currentState = (state, { courseId, guideId }) => ({
   isCreatingExercise: selectors.isCreatingExercise(state, courseId, guideId),
   isEvaluatingExercise: selectors.isEvaluatingExercise(state, courseId, guideId),
   solvedCreatingExercise: selectors.solvedCreatingExercise(state, courseId, guideId),
-  creatingExerciseError: selectors.creatingExerciseError(state, courseId, guideId)
+  creatingExerciseError: selectors.creatingExerciseError(state, courseId, guideId),
+  context: common.selectors.context(state)
 });
 
 const currentActions = (dispatch) => ({

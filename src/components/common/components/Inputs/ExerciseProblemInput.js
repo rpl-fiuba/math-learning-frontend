@@ -49,7 +49,7 @@ export default function ExerciseProblemInput(props) {
 						overrideMathBoxContext(cleanExpression(problemInput))
 					})
 				}}>
-					<BootstrapTooltip title="Haz clic para autogenerar una función y evitar escribirla manualmente" placement="top-center">
+					<BootstrapTooltip title="Haz clic para autogenerar una función y evitar escribirla manualmente" placement="top">
 						<img src={wandIcon} className={createExerciseStyles.svgIcon} alt=""/>
 					</BootstrapTooltip>
 				</span>

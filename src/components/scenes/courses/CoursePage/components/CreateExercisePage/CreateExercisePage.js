@@ -19,6 +19,8 @@ import styles from './CreateExercisePage.module.sass';
 import TrigonometryCreation from "../../../../exercises/Trigonometry/TrigonometryCreation";
 import MathTable from "../../../../exercises/MathTable";
 import ExerciseTypeSelector from "../../../../../common/components/Selectors/ExerciseTypeSelector";
+import ExerciseProblemInput from "../../../../../common/components/Inputs/ExerciseProblemInput";
+import exercisesClient from "../../../../../../clients/exercisesClient";
 
 class CreateExercisePage extends Component {
   constructor(props) {
@@ -102,6 +104,11 @@ class CreateExercisePage extends Component {
       exercise: { type, problemInput }
     });
   };
+
+  generateProblem ({problemType}) {
+    const context = this.props.context
+    return exercisesClient.generateProblemForExerciseType({context, exerciseType: problemType})
+  }
 
   onResetExerciseError = () => {
     const { resetExerciseError, creatingExerciseError } = this.props;
@@ -255,28 +262,13 @@ class CreateExercisePage extends Component {
               onContentChange={(context) => this.onChangeExercise({ target: { value: context } })}
           />}
 
-          {type !== 'trigonometry' && <div className={styles.exerciseContainer}>
-            <div className={styles.writeExerciseTitle}>
-              <Typography color="textSecondary" variant="body2">
-                Escriba el ejercicio
-              </Typography>
-              <BootstrapTooltip title="Solo escribir el contenido la integral, la derivada, o el polinomio a factorizar" placement="top-start">
-                <InfoIcon id="info-icon" fontSize="small" className={styles.icon} />
-              </BootstrapTooltip>
-            </div>
-            <MathTextBox
-              ref={this.MathBoxRef}
-              id="exercise-math-textbox"
-              content={problemInput}
-              className={styles.exercise}
-              onEnter={() => {}}
-              onContentChange={(context) => this.onChangeExercise({ target: { value: context } })}
-            />
-            <MathTable
-                onClickSymbol={this.handleClickSymbol}
-                creationMode
-            />
-          </div>
+          {type !== 'trigonometry' && <ExerciseProblemInput
+            content={problemInput}
+            exerciseType={type}
+            onChangeExercise={this.onChangeExercise}
+            onClickSymbol={this.handleClickSymbol}
+            generateProblem={this.generateProblem.bind(this)}
+            customTitle={"Función del Ejercicio"} mathBoxRef={this.MathBoxRef}/>
           }
 
           {this.shouldShowEvaluate(type) && <div className={styles.solvedContainer}>
