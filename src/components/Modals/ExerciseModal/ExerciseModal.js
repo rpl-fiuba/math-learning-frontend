@@ -142,7 +142,7 @@ class ExerciseModal extends Component {
           className={styles.description}
           fullWidth
           multiline
-          rowsMax="4"
+          maxRows="4"
           margin="normal"
           variant="outlined"
         />

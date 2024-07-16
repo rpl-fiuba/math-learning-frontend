@@ -52,7 +52,7 @@ export default class EditableText extends Editable {
           fullWidth={fieldSettings.fullWidth || false}
           className={textFieldClassNames}
           defaultValue={text}
-          rowsMax="3"
+          maxRows="3"
           onKeyPress={this.handlePressKeyDone}
           onChange={this.handleTextFieldChange}
         />

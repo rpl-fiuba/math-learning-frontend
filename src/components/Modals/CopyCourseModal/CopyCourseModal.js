@@ -80,7 +80,7 @@ class CopyCourseModal extends Component {
           className={styles.textField}
           fullWidth
           multiline
-          rowsMax="4"
+          maxRows="4"
           margin="normal"
           variant="outlined"
         />

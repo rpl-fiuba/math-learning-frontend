@@ -239,7 +239,7 @@ class CreateExercisePage extends Component {
           className={styles.optional}
           fullWidth
           multiline
-          rowsMax="4"
+          maxRows="4"
           margin="normal"
           variant="outlined"
         />
@@ -251,7 +251,7 @@ class CreateExercisePage extends Component {
           className={styles.optional}
           fullWidth
           multiline
-          rowsMax="1"
+          maxRows="1"
           margin="normal"
           variant="outlined"
         />
