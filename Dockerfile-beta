@@ -1,4 +1,4 @@
-FROM node:12.2.0-alpine
+FROM node:10.15.3
 
 ENV PATH /usr/src/app/node_modules/.bin:$PATH
 ADD ./ /usr/src/app
@@ -8,5 +8,5 @@ RUN npm install --only=dev
 RUN npm install --silent
 
 EXPOSE 3000
-
-CMD [ "npm", "start"]
+ENV CI=true
+CMD [ "npm", "run", "start" ]
