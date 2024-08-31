@@ -76,3 +76,4 @@ class RegistrationModal extends Component {
 }
 
 export default RegistrationModal;
+
